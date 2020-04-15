@@ -16,4 +16,11 @@ class TrickController extends AbstractController
             'controller_name' => 'TrickController',
         ]);
     }
+
+    /**
+     * @Route("/", name="home")
+     */
+    public function home(){
+        return $this->render('trick/home.html.twig');
+    }
 }
