@@ -8,43 +8,28 @@
 
     <h1>bienvenue dans ce blog</h1>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto commodi cupiditate esse est facere fugiat illo
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto commodi cupiditate esse est facere fugiat
+        illo
         incidunt inventore libero modi molestias mollitia neque nisi numquam placeat quas qui quibusdam quod ratione
-        reiciendis repellat reprehenderit, saepe totam unde voluptate voluptatibus!</p><p>Animi atque, beatae deleniti id
+        reiciendis repellat reprehenderit, saepe totam unde voluptate voluptatibus!</p><p>Animi atque, beatae deleniti
+    id
     inventore magni minus molestiae nemo nihil provident quae qui quibusdam ratione reiciendis sed! Culpa deserunt eos
     et nihil placeat quaerat, reiciendis? Architecto consequuntur eaque eius fugit natus non officia praesentium
     tempore. A ad modi temporibus!</p>
 
     <section class="article">
-        <article>
-            <h2>Titre de l'article</h2>
-            <div class="metadata">Ecrit le 10/04/2020 à 20h00 dans la categorie politique</div>
-            <div class="content"><img src="http://placehold.it/350x150" alt="">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis nobis, officiis quas quo quod
-                    sequi.</p>
-                <p>Corporis, enim, facere illum ipsum iure iusto magnam natus nihil porro qui rerum tempore
-                    voluptas.</p>
-                <a href="{{ path('trick_show') }}" class="btn btn-primary">Lire la suite</a></div>
-        </article>
-        <article>
-            <h2>Titre de l'article</h2>
-            <div class="metadata">Ecrit le 10/04/2020 à 20h00 dans la categorie politique</div>
-            <div class="content"><img src="http://placehold.it/350x150" alt="">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus consequatur ipsa ipsum. A,
-                    officia quidem.</p>
-                <p>A alias eaque facilis fugit pariatur quae qui suscipit. Delectus eius molestiae non nulla vero!</p>
-                <a href="{{ path('trick_show') }}" class="btn btn-primary">Lire la suite</a></div>
-        </article>
-        <article>
-            <h2>Titre de l'article</h2>
-            <div class="metadata">Ecrit le 10/04/2020 à 20h00 dans la categorie politique</div>
-            <div class="content"><img src="http://placehold.it/350x150" alt="">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cupiditate ipsam iste
-                    perferendis sapiente temporibus.</p>
-                <p>Delectus dicta iure iusto natus provident quam sequi tempore tenetur veritatis! Adipisci aperiam
-                    blanditiis pariatur?</p>
-                <a href="{{ path('trick_show') }}" class="btn btn-primary">Lire la suite</a></div>
-        </article>
+
+        {% for trick in tricks %}
+            <article>
+                <h2>{{ trick.name }}</h2>
+                <div class="metadata">Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans la categorie
+                    politique
+                </div>
+                <div class="content"><img src="{{ trick.image }}" alt="">
+                    {{ trick.description | raw }}
+                    <a href="{{ path('trick_show', {'id': trick.id}) }}" class="btn btn-primary">Lire la suite</a></div>
+            </article>
+        {% endfor %}
 
     </section>
 
