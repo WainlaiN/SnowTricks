@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2327f1e9-eab8-499d-a948-841d19f0f5dc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/trick/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/trick/home.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/trick/home.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TrickController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TrickController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/trick/home.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/trick/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/trick/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +161,7 @@
       <updated>1586875342005</updated>
       <workItem from="1586875345179" duration="3122000" />
       <workItem from="1586878826907" duration="1562000" />
-      <workItem from="1586953156109" duration="1497000" />
+      <workItem from="1586953156109" duration="2466000" />
     </task>
     <servers />
   </component>
