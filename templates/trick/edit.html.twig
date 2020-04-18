@@ -1,11 +1,25 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme formTrick 'bootstrap_4_layout.html.twig' %}
+
 {% block body %}
 
 
     <h1>creation d'un article</h1>
 
-    {{ form(formTrick) }}
+    {{ form_start(formTrick) }}
+
+    {{ form_row(formTrick.name, {'attr': {'placeholder': 'Titre de la figure'}}) }}
+    {{ form_row(formTrick.description, {'attr': {'placeholder': 'Description de la figure'}}) }}
+    {{ form_row(formTrick.category, {'attr': {'placeholder': 'Categorie de la figure'}}) }}
+    {{ form_row(formTrick.createdAt) }}
+    {{ form_row(formTrick.image) }}
+    {{ form_row(formTrick.video) }}
+
+
+    <button type="submit" class="btn btn-primary">Ajouter l'article</button>
+
+    {{ form_end(formTrick) }}
 
 {% endblock %}
 

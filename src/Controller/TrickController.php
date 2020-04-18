@@ -4,7 +4,12 @@ namespace App\Controller;
 
 
 use Doctrine\Common\Persistence\ObjectManager;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -32,21 +37,26 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/edit", name="trick_edit")
      */
-    public function edit(Request $request){
+    public function edit(Request $request)
+    {
         $trick = new Trick();
 
         $form = $this->createFormBuilder($trick)
-                    ->add('name')
-                    ->add('description')
-                    ->add('category')
-                    //->add('createdAt')
-                    ->add('image')
-                    ->add('video')
-                    ->getForm();
+            ->add('name')
+            ->add('description')
+            ->add('category')
+            ->add('createdAt',DateType::class)
+            ->add('image')
+            ->add('video')
 
-        return $this->render('trick/edit.html.twig', [
-            'formTrick' => $form->createView()
-        ]);
+            ->getForm();
+
+        return $this->render(
+            'trick/edit.html.twig',
+            [
+                'formTrick' => $form->createView(),
+            ]
+        );
 
     }
 
