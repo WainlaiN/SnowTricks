@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 
+use App\Form\TrickType;
 use Doctrine\ORM\EntityManagerInterface;
 use MongoDB\Driver\Manager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,15 +47,7 @@ class TrickController extends AbstractController
             $trick = new Trick();
         }
 
-        $form = $this->createFormBuilder($trick)
-            ->add('name')
-            ->add('description')
-            ->add('category')
-            ->add('createdAt')
-            ->add('image')
-            ->add('video')
-
-            ->getForm();
+        $form = $this->createForm(TrickType::class, $trick);
 
         $form->handleRequest($request);
 
