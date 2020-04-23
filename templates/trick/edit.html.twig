@@ -17,8 +17,13 @@
     {{ form_row(formTrick.video, {'attr': {'placeholder': 'URL Video de la figure'}}) }}
 
 
-    <button type="submit" class="btn btn-primary">Ajouter l'article</button>
-
+    <button type="submit" class="btn btn-primary">
+        {% if editMode %}
+            Editer l'article
+        {% else %}
+            Ajouter l'article
+        {% endif %}
+    </button>
     {{ form_end(formTrick) }}
 
 {% endblock %}
