@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 
-use Doctrine\Common\Persistence\ObjectManager;
 
+
+use Doctrine\ORM\EntityManagerInterface;
+use MongoDB\Driver\Manager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -35,26 +37,44 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/trick/edit", name="trick_edit")
+     * @Route("/trick/new", name="trick_create")
+     * @Route("/trick/{id}/edit", name="trick_edit")
      */
-    public function edit(Request $request)
+    public function form(Trick $trick = null, Request $request, EntityManagerInterface $manager)
     {
-        $trick = new Trick();
+        if (!$trick){
+            $trick = new Trick();
+        }
 
         $form = $this->createFormBuilder($trick)
             ->add('name')
             ->add('description')
             ->add('category')
-            ->add('createdAt',DateType::class)
+            ->add('createdAt')
             ->add('image')
             ->add('video')
 
             ->getForm();
 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            if (!$trick->getId()) {
+                $trick->setCreatedAt(new \DateTime());
+            }
+
+            $manager->persist($trick);
+            $manager->flush();
+
+            return $this->redirectToRoute('trick_show', ['id' => $trick->getId()]);
+
+        }
+
         return $this->render(
             'trick/edit.html.twig',
             [
                 'formTrick' => $form->createView(),
+                'editMode' => $trick->getId() !== null
             ]
         );
 
