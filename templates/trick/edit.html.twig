@@ -5,7 +5,13 @@
 {% block body %}
 
 
-    <h1>creation d'un article</h1>
+    <h1>
+        {% if editMode %}
+        Editer l'article
+        {% else %}
+        Ajouter un article
+        {% endif %}
+    </h1>
 
     {{ form_start(formTrick) }}
 
