@@ -19,13 +19,13 @@ class Trick
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min="10", max="255")
+     * @Assert\Length(min="10", max="255", minMessage="Au moins 10 caractères")
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\Length(min="10")
+     * @Assert\Length(min="10", minMessage="Au moins 10 caractères")
      */
     private $description;
 
