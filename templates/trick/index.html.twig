@@ -27,7 +27,9 @@
                 </div>
                 <div class="content"><img src="{{ trick.image }}" alt="">
                     {{ trick.description | raw }}
-                    <a href="{{ path('trick_show', {'id': trick.id}) }}" class="btn btn-primary">Lire la suite</a></div>
+                    <a href="{{ path('trick_show', {'id': trick.id}) }}" class="btn btn-primary">Lire la suite</a>
+                    <a href="{{ path('trick_edit', {'id': trick.id}) }}" class="btn btn-primary">Editer l'article</a>
+                </div>
             </article>
         {% endfor %}
 
