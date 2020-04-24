@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
@@ -18,11 +19,13 @@ class Trick
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="10", max="255")
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(min="10")
      */
     private $description;
 
@@ -38,11 +41,13 @@ class Trick
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Url()
      */
     private $image;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Url()
      */
     private $video;
 
