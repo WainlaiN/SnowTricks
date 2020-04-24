@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2327f1e9-eab8-499d-a948-841d19f0f5dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/trick/edit.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TrickController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TrickController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,6 +138,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.zend.framework.tool" />
   </component>
@@ -164,6 +162,9 @@
       <workItem from="1586878826907" duration="1562000" />
       <workItem from="1586953156109" duration="6385000" />
       <workItem from="1587041511735" duration="2586000" />
+      <workItem from="1587222035229" duration="4063000" />
+      <workItem from="1587368063580" duration="2828000" />
+      <workItem from="1587651405598" duration="6263000" />
     </task>
     <servers />
   </component>
@@ -171,10 +172,10 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="265" key="FileChooserDialogImpl" timestamp="1586878942552">
+    <state x="740" y="265" key="FileChooserDialogImpl" timestamp="1587375729844">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="740" y="265" key="FileChooserDialogImpl/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1586878942552" />
+    <state x="740" y="265" key="FileChooserDialogImpl/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1587375729844" />
     <state x="815" y="411" key="FrameworkEditDialogDimensionKey" timestamp="1586879331176">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -207,5 +208,9 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="616" y="243" width="672" height="677" key="run.anything.popup/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1586879420834" />
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1587651485311">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1587651485311" />
   </component>
 </project>
