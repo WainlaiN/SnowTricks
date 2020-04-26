@@ -124,6 +124,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/twig-bundle" />
       <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
       <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
     </include_path>
   </component>
   <component name="ProjectId" id="1aXI7CUK4XLg7kBnHaXJNv0p15I" />
@@ -165,7 +166,7 @@
       <workItem from="1587651405598" duration="6263000" />
       <workItem from="1587706052345" duration="6328000" />
       <workItem from="1587745077954" duration="59000" />
-      <workItem from="1587891141864" duration="1744000" />
+      <workItem from="1587891141864" duration="4554000" />
     </task>
     <servers />
   </component>
