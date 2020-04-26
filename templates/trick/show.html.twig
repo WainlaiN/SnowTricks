@@ -3,10 +3,27 @@
 {% block body %}
 
     <article>
-        <h2>{{ trick.name}}</h2>
-        <div class="metadata">Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i')}} dans la categorie politique</div>
+        <h2>{{ trick.name }}</h2>
+        <div class="metadata">Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans
+            la catégorie
+            {{ trick.category.title }}</div>
         <div class="content"><img src="{{ trick.image }}" alt="">
             {{ trick.description | raw }}
     </article>
+
+    <section id="commentaires">
+        {% for comment in trick.comments %}
+            <div class="comment">
+                <div class="row">
+                    <div class="col-3">
+                        {{ comment.author }} (<small>{{ comment.createdAt | date('d/m/Y') }}</small>)
+                    </div>
+                    <div class="col">
+                        {{ comment.content | raw }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
 
 {% endblock %}
