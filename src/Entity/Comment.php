@@ -16,20 +16,12 @@ class Comment
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $author;
 
     /**
      * @ORM\Column(type="text")
      */
     private $content;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $picture;
 
     /**
      * @ORM\Column(type="datetime")
@@ -41,6 +33,12 @@ class Comment
      * @ORM\JoinColumn(nullable=false)
      */
     private $trick;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="Comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -103,6 +101,18 @@ class Comment
     public function setTrick(?Trick $trick): self
     {
         $this->trick = $trick;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
