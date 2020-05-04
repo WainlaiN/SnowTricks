@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <h1>Inscription</h1>
+    <h1>Connexion</h1>
 
     {{ form_start(form) }}
     {{ form_row(form.username, {'label': 'Nom d\'utilisateur', 'attr': {'placeholder': 'Nom d\'utilisateur'}}) }}
@@ -13,9 +13,11 @@
     <button type="submit" class="btn btn-success">Inscription</button>
     {{ form_end(form) }}
 
+
 {% endblock %}
 
 {% block title %}
-    S'enregister
+    Connexion
+
 {% endblock %}
 
