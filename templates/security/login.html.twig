@@ -2,18 +2,33 @@
 
 {% block body %}
 
+    {% if error %}
+        <div class="alert alert-danger">
+            {{ error.messageKey }}
+        </div>
+    {% endif %}
+
+
     <h1>Connexion</h1>
+    <div class="container mt-4">
 
-    {{ form_start(form) }}
-    {{ form_row(form.username, {'label': 'Nom d\'utilisateur', 'attr': {'placeholder': 'Nom d\'utilisateur'}}) }}
-    {{ form_row(form.email, {'label': 'Email', 'attr': {'placeholder': 'email'}}) }}
-    {{ form_row(form.photo, {'label': 'Photo', 'attr': {'placeholder': 'choisissez votre photo'}}) }}
-    {{ form_row(form.password, {'label': 'Votre mot de passe', 'attr': {'placeholder': 'mot de passe'}}) }}
-    {{ form_row(form.confirm_password, {'label': 'Confirmer votre mot de passe', 'attr': {'placeholder': 'confirmer votre mot de passe'}}) }}
-    <button type="submit" class="btn btn-success">Inscription</button>
-    {{ form_end(form) }}
+        <form action="{{ path('security_login') }}" method="post">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" required name="_username" type="text" class="form-control"
+                       value="{{ last_username }}">
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input id="password" required name="_password" type="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Connexion</button>
+            </div>
 
+        </form>
 
+    </div>
 {% endblock %}
 
 {% block title %}
