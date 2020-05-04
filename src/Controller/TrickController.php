@@ -3,16 +3,12 @@
 namespace App\Controller;
 
 
-
-
+use App\Entity\Comment;
+use App\Form\CommentType;
 use App\Form\TrickType;
 use Doctrine\ORM\EntityManagerInterface;
-use MongoDB\Driver\Manager;
+//use MongoDB\Driver\Manager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -43,7 +39,7 @@ class TrickController extends AbstractController
      */
     public function form(Trick $trick = null, Request $request, EntityManagerInterface $manager)
     {
-        if (!$trick){
+        if (!$trick) {
             $trick = new Trick();
         }
 
@@ -51,7 +47,7 @@ class TrickController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             if (!$trick->getId()) {
                 $trick->setCreatedAt(new \DateTime());
             }
@@ -67,7 +63,7 @@ class TrickController extends AbstractController
             'trick/edit.html.twig',
             [
                 'formTrick' => $form->createView(),
-                'editMode' => $trick->getId() !== null
+                'editMode' => $trick->getId() !== null,
             ]
         );
 
@@ -78,10 +74,13 @@ class TrickController extends AbstractController
      */
     public function show(Trick $trick)
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+
         return $this->render(
-            'trick/show.html.twig',
-            [
+            'trick/show.html.twig', [
                 'trick' => $trick,
+                'commentForm' => $form->createView()
             ]
         );
     }

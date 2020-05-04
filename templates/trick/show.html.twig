@@ -12,6 +12,7 @@
     </article>
 
     <section id="commentaires">
+        <h1>{{ article.comments | length }}Commentaires</h1>
         {% for comment in trick.comments %}
             <div class="comment">
                 <div class="row">

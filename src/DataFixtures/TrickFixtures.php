@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -36,7 +37,7 @@ class TrickFixtures extends Fixture
 
                 $manager->persist($trick);
 
-                for ($k = 1; $k <= mt_rand(4, 10); $k++) {
+                /*for ($k = 1; $k <= mt_rand(4, 10); $k++) {
                     $comment = new Comment();
                     $content2 = '<p>'.join($faker->paragraphs(2), '</p><p>').'</p>';
 
@@ -48,8 +49,18 @@ class TrickFixtures extends Fixture
                         ->setTrick($trick);
 
                     $manager->persist($comment);
-                }
+                }*/
             }
+        }
+
+        for ($k = 1; $k <= 10; $k++) {
+            $user = new User();
+            $user->setEmail($faker->email)
+                ->setUsername($faker->userName)
+                ->setPassword('testtest');
+
+
+            $manager->persist($user);
         }
 
         $manager->flush();
