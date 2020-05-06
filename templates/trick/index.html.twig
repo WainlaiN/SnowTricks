@@ -26,12 +26,12 @@
                     <div class="card">
                         <img src="{#{{ trick.images }}#}" alt="" class="card-img-top">
                         <div class="card-body">
-                            <h5 class="card-title">{{ trick.name }}</h5>
+                            <h5 class="card-title">{{ trick.name | slice(0, 20) }}</h5>
                             <h2 class="card-subtitle mb-2 text-muted">
                                 {{ trick.createdAt | date('d/m/Y') }}
                             </h2>
                             <p class="card-text">
-                                {{ trick.description | raw | slice(0, 50) ~ '...' }}
+                                {#{{ trick.description | raw | slice(0, 50) ~ '...' }}#}
                                 <a href="{{ path('trick_show', {'id': trick.id}) }}" class="btn btn-primary">Lire la
                                     suite</a>
                                 <a href="{{ path('trick_edit', {'id': trick.id}) }}" class="btn btn-primary">Editer
