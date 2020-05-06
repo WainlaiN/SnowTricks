@@ -17,22 +17,13 @@
     et nihil placeat quaerat, reiciendis? Architecto consequuntur eaque eius fugit natus non officia praesentium
     tempore. A ad modi temporibus!</p>
 
-    <section class="article">
 
-        {% for trick in tricks %}
-            <article>
-                <h2>{{ trick.name }}</h2>
-                <div class="metadata">Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans la categorie
-                    politique
-                </div>
-                <div class="content"><img src="{#{{ trick.images }}#}" alt="">
-                    {{ trick.description | raw }}
-                    <a href="{{ path('trick_show', {'id': trick.id}) }}" class="btn btn-primary">Lire la suite</a>
-                    <a href="{{ path('trick_edit', {'id': trick.id}) }}" class="btn btn-primary">Editer l'article</a>
-                </div>
-            </article>
-        {% endfor %}
-
-    </section>
+    <div class="container">
+        <div class="row flex">
+            {% for trick in tricks %}
+                {% include 'trick/_trick.html.twig' %}
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}
