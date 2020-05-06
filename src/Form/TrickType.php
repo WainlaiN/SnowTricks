@@ -21,16 +21,7 @@ class TrickType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'title'
             ])
-            ->add('description')
-            ->add('images', EntityType::class, [
-                'class' => Image::class,
-                'choice_label' => 'imageFilename'
-            ])
-            ->add('videos', EntityType::class, [
-                'class' => Video::class,
-                'choice_label' => 'videoURL'
-            ])
-        ;
+            ->add('description');
     }
 
     public function configureOptions(OptionsResolver $resolver)
