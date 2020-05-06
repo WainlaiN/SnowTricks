@@ -5,7 +5,7 @@
 {% block body %}
 
 
-    <h1>Editer l'article</h1>
+    <h1>Ajouter l'article</h1>
 
     {{ form_start(formTrick) }}
 
@@ -13,10 +13,8 @@
     {{ form_row(formTrick.category) }}
     {{ form_row(formTrick.description, {'attr': {'placeholder': 'Description de la figure'}}) }}
 
-    <button type="submit" class="btn btn-primary">Editer l'article</button>
+    <button type="submit" class="btn btn-primary">Ajouter l'article</button>
 
     {{ form_end(formTrick) }}
 
 {% endblock %}
-
-
