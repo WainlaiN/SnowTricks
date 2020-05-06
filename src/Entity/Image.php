@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
@@ -47,6 +49,18 @@ class Image
     public function setImageFilename(string $imageFilename): self
     {
         $this->imageFilename = $imageFilename;
+
+        return $this;
+    }
+
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function setFile(UploadedFile $file): self
+    {
+        $this->file = $file;
 
         return $this;
     }
