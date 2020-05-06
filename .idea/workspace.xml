@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2327f1e9-eab8-499d-a948-841d19f0f5dc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CommentType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/CommentType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/trick/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/trick/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Trick.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Trick.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +181,7 @@
       <workItem from="1588593239429" duration="13075000" />
       <workItem from="1588607907483" duration="5426000" />
       <workItem from="1588618744791" duration="406000" />
-      <workItem from="1588749848566" duration="1057000" />
+      <workItem from="1588749848566" duration="2706000" />
     </task>
     <servers />
   </component>
@@ -198,6 +197,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="753" y="240" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1588600555352" />
+    <state x="690" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588751685058">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="690" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1588751685058" />
     <state x="740" y="265" key="FileChooserDialogImpl" timestamp="1587971372404">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -234,6 +237,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="92" y="92" width="1736" height="866" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1588619087439" />
+    <state x="667" y="88" width="585" height="873" key="find.popup" timestamp="1588751629939">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="667" y="88" width="585" height="873" key="find.popup/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1588751629939" />
     <state x="616" y="243" width="672" height="677" key="run.anything.popup" timestamp="1586879420834">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
