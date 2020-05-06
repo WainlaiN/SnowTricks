@@ -25,7 +25,7 @@
                 <div class="metadata">Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans la categorie
                     politique
                 </div>
-                <div class="content"><img src="{{ trick.image }}" alt="">
+                <div class="content"><img src="{#{{ trick.images }}#}" alt="">
                     {{ trick.description | raw }}
                     <a href="{{ path('trick_show', {'id': trick.id}) }}" class="btn btn-primary">Lire la suite</a>
                     <a href="{{ path('trick_edit', {'id': trick.id}) }}" class="btn btn-primary">Editer l'article</a>
