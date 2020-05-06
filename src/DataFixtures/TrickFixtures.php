@@ -23,15 +23,13 @@ class TrickFixtures extends Fixture
 
             $manager->persist($category);
 
-            for ($j = 1; $j <= mt_rand(4, 6); $j++) {
+            for ($j = 1; $j <= 40; $j++) {
                 $trick = new Trick();
 
                 $content = '<p>'.join($faker->paragraphs(5), '</p><p>').'</p>';
 
                 $trick->setName($faker->sentence())
                     ->setDescription($content)
-                    ->setImage($faker->imageUrl())
-                    ->setVideo($faker->imageUrl())
                     ->setCreatedAt($faker->dateTimeBetween('-6 months'))
                     ->setCategory($category);
 
