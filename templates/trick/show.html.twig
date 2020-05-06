@@ -7,7 +7,7 @@
         <div class="metadata">Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans
             la catégorie
             {{ trick.category.title }}</div>
-        <div class="content"><img src="{{ trick.images }}" alt="">
+        <div class="content"><img src="{#{{ trick.images }}#}" alt="">
             {{ trick.description | raw }}
     </article>
 
