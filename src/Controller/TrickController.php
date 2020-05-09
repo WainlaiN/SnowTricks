@@ -44,7 +44,6 @@ class TrickController extends AbstractController
             'trick/create.html.twig',
             [
                 'formTrick' => $form->createView(),
-                'editMode' => $trick->getId() !== null,
             ]
         );
 
