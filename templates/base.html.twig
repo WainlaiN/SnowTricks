@@ -22,20 +22,26 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('trick_create') }}">Créer un article</a>
             </li>
-            {% if not app.user %}
-                <li class="nav-item">
-                    <a href="{{ path('security_login') }}" class="nav-link">Connexion</a>
-                </li>
-            {% else %}
-            <li class="nav-item">
-                <a href="{{ path('security_logout') }}" class="nav-link">Deconnexion</a>
-            </li>
-            {% endif %}
+
 
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            <ul class="navbar-nav mr-auto">
+                {% if not app.user %}
+                    <li class="nav-item">
+                        <a href="{{ path('security_registration') }}" class="nav-link">S'enregistrer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('security_login') }}" class="nav-link">Connexion</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{{ path('security_logout') }}" class="nav-link">Deconnexion</a>
+                    </li>
+                {% endif %}
+
+            </ul>
+
         </form>
     </div>
 </nav>

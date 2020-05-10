@@ -59,6 +59,12 @@ class Trick
      */
     private $videos;
 
+    /**
+     * @ORM\Column(type="string"), unique=true
+     */
+    private $slug;
+
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -211,4 +217,27 @@ class Trick
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     * @return Trick
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+
+
+
 }

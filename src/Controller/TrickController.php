@@ -27,23 +27,27 @@ class TrickController extends AbstractController
     {
         $trick = new Trick();
 
-        // dummy code - add some example tags to the task
-        // (otherwise, the template will render an empty list of tags)
+        // dummy code - add some example images/videos to the task
+        // (otherwise, the template will render an empty list of images/videos)
         $image = new Image();
         $trick->getImages()->add($image);
-        $video = new Video();
-        $trick->getVideos()->add($video);
+        //$video = new Video();
+        //$trick->getVideos()->add($video);
         // end dummy code
 
         $form = $this->createForm(TrickType::class, $trick);
 
         $form->handleRequest($request);
 
-        dump($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $trick = $form->getData();
+
+
+            if ($form->get('images')) {
+                $image->setImageFilename('test.jpg');
+            }
 
             $trick->setCreatedAt(new \DateTime());
 
