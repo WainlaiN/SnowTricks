@@ -8,6 +8,7 @@ use App\Entity\Video;
 use App\Form\CommentType;
 use App\Form\TrickType;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Element;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +24,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/new", name="trick_create")
      */
-    public function create(Request $request, EntityManagerInterface $manager)
+    public function create(Request $request, EntityManagerInterface $manager,UploadedFile $uploadedFile)
     {
         $trick = new Trick();
 
@@ -39,22 +40,19 @@ class TrickController extends AbstractController
 
         $form->handleRequest($request);
 
+        $imageFile = $form->get('images')->getData();
+
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            dump($form['images']);
-            $trick->setCreatedAt(new \DateTime());
-            $trick = $form->getData();
+            if ($imageFile) {
 
+                $newFilename .= '-'.uniqid().'.'.$imageFile->guessExtension();
 
-            die();
-
-
-            if ($form->get('images')) {
-                $image->setImageFilename('test.jpg');
             }
 
-            $trick->setCreatedAt(new \DateTime());
+            dump($imageFile,$newFilename );
+            die();
 
             $manager->persist($trick);
             $manager->flush();
