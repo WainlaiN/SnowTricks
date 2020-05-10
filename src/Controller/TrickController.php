@@ -42,8 +42,12 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            dump($form['images']);
             $trick->setCreatedAt(new \DateTime());
             $trick = $form->getData();
+
+
+            die();
 
 
             if ($form->get('images')) {
