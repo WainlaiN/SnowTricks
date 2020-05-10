@@ -24,13 +24,14 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/new", name="trick_create")
      */
-    public function create(Request $request, EntityManagerInterface $manager,UploadedFile $uploadedFile)
+    public function create(Request $request, EntityManagerInterface $manager)
     {
         $trick = new Trick();
 
         // dummy code - add some example images/videos to the task
         // (otherwise, the template will render an empty list of images/videos)
         $image = new Image();
+
         $trick->getImages()->add($image);
         //$video = new Video();
         //$trick->getVideos()->add($video);
@@ -46,6 +47,7 @@ class TrickController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             if ($imageFile) {
+
 
                 $newFilename .= '-'.uniqid().'.'.$imageFile->guessExtension();
 
