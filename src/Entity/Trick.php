@@ -59,11 +59,6 @@ class Trick
      */
     private $videos;
 
-    /**
-     * @ORM\Column(type="string"), unique=true
-     */
-    private $slug;
-
 
     public function __construct()
     {
