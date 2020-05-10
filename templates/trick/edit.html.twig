@@ -13,6 +13,10 @@
     {{ form_row(formTrick.category) }}
     {{ form_row(formTrick.description, {'attr': {'placeholder': 'Description de la figure'}}) }}
 
+    {{ form_row(formTrick.images) }}
+    {{ form_row(formTrick.videos) }}
+    {{ form_errors(formTrick) }}
+
     <button type="submit" class="btn btn-primary">Editer l'article</button>
 
     {{ form_end(formTrick) }}

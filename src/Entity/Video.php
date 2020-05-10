@@ -23,7 +23,6 @@ class Video
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="videos")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $trick;
 
