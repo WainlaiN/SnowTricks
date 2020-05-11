@@ -43,12 +43,13 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $file = $request->files->get('images');
+            $trick = $form->getData();
+
+            $file = $trick->getImages();
 
             $trick->setCreatedAt(new \DateTime());
-            $filename = $trick->getImages()->getValues();
-            $trick = $form->getData();
-            dump($request->files);
+
+            dump($file);
             die();
 
             /**$image->setImageFilename(md5(uniqid())->guessExtension);
