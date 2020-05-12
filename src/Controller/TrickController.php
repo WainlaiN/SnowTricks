@@ -54,18 +54,11 @@ class TrickController extends AbstractController
                     $filename
                 );
 
-                dump($file);
-                die();
-
                 $image->setTrick($trick);
                 $image->setImageFilename($filename);
                 $trick->setCreatedAt(new \DateTime());
 
             }
-
-
-
-
 
             $manager->persist($trick);
             $manager->flush();
