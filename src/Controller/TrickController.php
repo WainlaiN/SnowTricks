@@ -44,15 +44,26 @@ class TrickController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             foreach($trick->getImages() as $image) {
-                $trick->getImages()->add($image);
-                $image->setImageFilename('test.jpg');
+
+                $file = $image->getFile();
+                $uploads_directory = $this->getParameter('uploads-directory');
+                $filename = md5(uniqid()) . '.' . $file->guessExtension();
+
+                $file->move(
+                    $uploads_directory,
+                    $filename
+                );
+
+                dump($file);
+                die();
 
                 $image->setTrick($trick);
+                $image->setImageFilename($filename);
                 $trick->setCreatedAt(new \DateTime());
 
             }
 
-            //$uploads_directory = $this->getParameter('uploads-directory');
+
 
 
 
