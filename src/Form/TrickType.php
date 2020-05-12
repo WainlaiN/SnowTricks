@@ -45,7 +45,8 @@ class TrickType extends AbstractType
                     'entry_type' => ImageType::class,
                     'allow_add'    => true,
                     'allow_delete' => true,
-                    'required' => false
+                    'required' => false,
+                    'prototype' => true
                 ]
 
             )

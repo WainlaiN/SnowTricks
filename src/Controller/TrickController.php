@@ -30,9 +30,9 @@ class TrickController extends AbstractController
 
         // dummy code - add some example images/videos to the task
         // (otherwise, the template will render an empty list of images/videos)
-        $image = new Image();
+        //$images = new Image();
 
-        $trick->getImages()->add($image);
+        //$trick->getImages()->add($image);
         //$video = new Video();
         //$trick->getVideos()->add($video);
         // end dummy code
@@ -43,18 +43,18 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $trick->getImages();
-            $trick = $form->getData();
+            foreach($trick->getImages() as $image) {
+                $trick->getImages()->add($image);
+                $image->setImageFilename('test.jpg');
+
+                $image->setTrick($trick);
+                $trick->setCreatedAt(new \DateTime());
+
+            }
+
+            //$uploads_directory = $this->getParameter('uploads-directory');
 
 
-            $trick->setCreatedAt(new \DateTime());
-
-            dump($trick);
-            die();
-
-            /**$image->setImageFilename(md5(uniqid())->guessExtension);
-            $trick->addImage($image)->setCreatedAt(new \DateTime());
-            $trick->addImage($image)->**/
 
             $manager->persist($trick);
             $manager->flush();
