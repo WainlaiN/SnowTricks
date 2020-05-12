@@ -26,35 +26,19 @@ class TrickController extends AbstractController
     {
         $trick = new Trick();
 
-        // dummy code - add some example images/videos to the task
-        // (otherwise, the template will render an empty list of images/videos)
-        //$images = new Image();
-
-        //$trick->getImages()->add($image);
-        //$video = new Video();
-        //$trick->getVideos()->add($video);
-        // end dummy code
-
         $form = $this->createForm(TrickType::class, $trick);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            foreach($trick->getImages() as $image) {
+            $trick->setCreatedAt(new \DateTime());
+            $uploads_directory = $this->getParameter('uploads-directory');
 
-                //$file = $image->getFile();
-                $uploads_directory = $this->getParameter('uploads-directory');
-                //$filename = md5(uniqid()) . '.' . $file->guessExtension();
+            foreach ($trick->getImages() as $image) {
 
-                /**$file->move(
-                    $uploads_directory,
-                    $filename
-                );**/
                 $image = $uploadImage->saveImage($image, $uploads_directory);
                 $image->setTrick($trick);
-                //$image->setImageFilename($filename);
-                $trick->setCreatedAt(new \DateTime());
 
             }
 
@@ -80,17 +64,35 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/{id}/edit", name="trick_edit")
      */
-    public
-    function edit(
-        Trick $trick,
-        Request $request,
-        EntityManagerInterface $manager
+    public function edit(Trick $trick,EntityManagerInterface $manager,UploadImage $uploadImage,TrickRepository $repo
     ) {
+        $trick = $repo->findBy($id);
+
         $form = $this->createForm(TrickType::class, $trick);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $trick->setUpdatedAt(new \DateTime());
+            $uploads_directory = $this->getParameter('uploads-directory');
+
+            foreach ($trick->getImages() as $image) {
+
+                $image = $uploadImage->saveImage($image, $uploads_directory);
+                $image->setTrick($trick);
+
+            }
+
+            $manager->persist($trick);
+            $manager->flush();
+
+            $this->addFlash(
+                'notice',
+                'Votre article a bien été ajouté !'
+            );
+
+            return $this->redirectToRoute('trick_show', ['id' => $trick->getId()]);
 
         }
 
@@ -98,19 +100,17 @@ class TrickController extends AbstractController
             'trick/edit.html.twig',
             [
                 'formTrick' => $form->createView(),
-                'editMode' => $trick->getId() !== null,
+
             ]
         );
-
     }
 
     /**
      * @Route("/trick/{id}", name="trick_show")
      */
-    public
-    function show(
-        Trick $trick
-    ) {
+    public function show(Trick $trick)
+    {
+
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
 
