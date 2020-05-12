@@ -64,9 +64,8 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/{id}/edit", name="trick_edit")
      */
-    public function edit(Trick $trick,EntityManagerInterface $manager,UploadImage $uploadImage,TrickRepository $repo
-    ) {
-        $trick = $repo->findBy($id);
+    public function edit(Trick $trick,Request $request,EntityManagerInterface $manager,UploadImage $uploadImage,TrickRepository $repo) {
+        //$trick = $repo->findBy($id);
 
         $form = $this->createForm(TrickType::class, $trick);
 
