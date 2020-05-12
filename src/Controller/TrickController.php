@@ -7,6 +7,7 @@ use App\Entity\Image;
 use App\Entity\Video;
 use App\Form\CommentType;
 use App\Form\TrickType;
+use App\Service\UploadImage;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Element;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,7 +38,7 @@ class TrickController extends AbstractController
         //$trick->getVideos()->add($video);
         // end dummy code
 
-        $form = $this->createForm(TrickType::class, $trick);
+        $form = $this->createForm(TrickType::class, $trick, UploadImage $uploadImage);
 
         $form->handleRequest($request);
 
@@ -45,15 +46,15 @@ class TrickController extends AbstractController
 
             foreach($trick->getImages() as $image) {
 
-                $file = $image->getFile();
-                $uploads_directory = $this->getParameter('uploads-directory');
-                $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                //$file = $image->getFile();
+                //$uploads_directory = $this->getParameter('uploads-directory');
+                //$filename = md5(uniqid()) . '.' . $file->guessExtension();
 
-                $file->move(
+                /**$file->move(
                     $uploads_directory,
                     $filename
-                );
-
+                );**/
+                $image->$uploadImage->saveImage($image);
                 $image->setTrick($trick);
                 $image->setImageFilename($filename);
                 $trick->setCreatedAt(new \DateTime());
