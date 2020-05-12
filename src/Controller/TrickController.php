@@ -3,15 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
-use App\Entity\Image;
-use App\Entity\Video;
 use App\Form\CommentType;
 use App\Form\TrickType;
-use App\Service\UploadImage;
+
+use App\Services\UploadImage;
 use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\Element;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -25,7 +22,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/new", name="trick_create")
      */
-    public function create(Request $request, EntityManagerInterface $manager)
+    public function create(Request $request, EntityManagerInterface $manager, UploadImage $uploadImage)
     {
         $trick = new Trick();
 
@@ -38,7 +35,7 @@ class TrickController extends AbstractController
         //$trick->getVideos()->add($video);
         // end dummy code
 
-        $form = $this->createForm(TrickType::class, $trick, UploadImage $uploadImage);
+        $form = $this->createForm(TrickType::class, $trick);
 
         $form->handleRequest($request);
 
@@ -47,16 +44,16 @@ class TrickController extends AbstractController
             foreach($trick->getImages() as $image) {
 
                 //$file = $image->getFile();
-                //$uploads_directory = $this->getParameter('uploads-directory');
+                $uploads_directory = $this->getParameter('uploads-directory');
                 //$filename = md5(uniqid()) . '.' . $file->guessExtension();
 
                 /**$file->move(
                     $uploads_directory,
                     $filename
                 );**/
-                $image->$uploadImage->saveImage($image);
+                $image = $uploadImage->saveImage($image, $uploads_directory);
                 $image->setTrick($trick);
-                $image->setImageFilename($filename);
+                //$image->setImageFilename($filename);
                 $trick->setCreatedAt(new \DateTime());
 
             }
