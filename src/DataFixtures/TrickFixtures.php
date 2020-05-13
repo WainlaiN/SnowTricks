@@ -3,12 +3,12 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Trick;
 
 
-class TrickFixtures extends BaseFixture
+class TrickFixtures extends BaseFixture implements DependentFixtureInterface
 {
     public function loadData(ObjectManager $manager)
     {
@@ -22,7 +22,7 @@ class TrickFixtures extends BaseFixture
             $trick->setName($this->faker->sentence())
                 ->setDescription($content)
                 ->setCreatedAt($faker->dateTimeBetween('-6 months'))
-                ->setCategory($this->getReference(Category::class.'-'.$this->faker->numberBetween(0,3)));
+                ->setCategory($this->getRandomReference(Category::class));
 
 
         });
@@ -30,4 +30,11 @@ class TrickFixtures extends BaseFixture
         $manager->flush();
 
     }
+
+    public function getDependencies()
+    {
+        return [CategoryFixtures::class];
+    }
+
+
 }
