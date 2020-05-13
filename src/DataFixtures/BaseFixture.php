@@ -54,6 +54,7 @@ abstract class BaseFixture extends Fixture
         if (empty($this->referenceIndex[$classname])) {
             throw new \Exception(sprintf('cannot find anu references for class "%s"', $classname));
         }
+
         $randomReferenceKey = $this->faker->randomElement($this->referenceIndex[$classname]);
 
         return $this->getReference($randomReferenceKey);

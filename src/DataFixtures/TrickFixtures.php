@@ -12,18 +12,16 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
 {
     public function loadData(ObjectManager $manager)
     {
-        //$faker = Factory::create('fr_FR');
 
-        $this->createMany(Trick::class, 50, function (Trick $trick, $count) use ($faker) {
+        //publish many tricks
+        $this->createMany(Trick::class, 50, function (Trick $trick, $count) {
 
-            //publish many tricks
-            $content = '<p>'.join($this->faker->paragraphs(5), '</p><p>').'</p>';
+            $content = '<p>'.join($this->faker->paragraphs(2), '</p><p>').'</p>';
 
             $trick->setName($this->faker->sentence())
                 ->setDescription($content)
-                ->setCreatedAt($faker->dateTimeBetween('-6 months'))
+                ->setCreatedAt($this->faker->dateTimeBetween('-6 months'))
                 ->setCategory($this->getRandomReference(Category::class));
-
 
         });
 

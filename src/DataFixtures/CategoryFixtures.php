@@ -10,15 +10,12 @@ class CategoryFixtures extends BaseFixture
 {
     public function loadData(ObjectManager $manager)
     {
-        //$faker = Factory::create('fr_FR');
 
+        //publish many categories
         $this->createMany(Category::class, 3, function (Category $category, $count) {
 
-            //publish many categories
             $category->setTitle($this->faker->sentence())
                 ->setDescription($this->faker->paragraph());
-
-
 
         });
 
