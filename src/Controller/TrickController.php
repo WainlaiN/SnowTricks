@@ -91,7 +91,7 @@ class TrickController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'Votre article a bien été ajouté !'
+                'Votre article a bien été modifié !'
             );
 
             return $this->redirectToRoute('trick_show', ['id' => $trick->getId()]);
