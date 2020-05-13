@@ -111,17 +111,18 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/{id}", name="trick_show")
      */
-    public function show(Trick $trick)
+    public function show($id, TrickRepository $repo)
     {
 
-        $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
+        $trick = $repo->find($id);
+        //$trickform = $this->createForm(TrickType::class, $trick);
+
 
         return $this->render(
             'trick/show.html.twig',
             [
                 'trick' => $trick,
-                'commentForm' => $form->createView(),
+
             ]
         );
     }
