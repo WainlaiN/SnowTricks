@@ -23,7 +23,7 @@
             <div class="comment">
                 <div class="row">
                     <div class="col-3">
-                        {{ comment.user }} (<small>{{ comment.createdAt | date('d/m/Y') }}</small>)
+                        {{ comment.user.username }} (<small>{{ comment.createdAt | date('d/m/Y') }}</small>)
                     </div>
                     <div class="col">
                         {{ comment.content | raw }}

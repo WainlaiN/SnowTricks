@@ -16,7 +16,7 @@ class CommentFixtures extends BaseFixture implements DependentFixtureInterface
     {
 
         //publish many comments
-        $this->createMany(Comment::class, 50, function (Comment $comment, $count) {
+        $this->createMany(Comment::class, 100, function (Comment $comment, $count) {
 
             $comment->setContent($this->faker->sentence())
                 ->setCreatedAt($this->faker->dateTimeBetween('-6 months'))

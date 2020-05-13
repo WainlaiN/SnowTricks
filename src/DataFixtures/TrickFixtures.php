@@ -14,7 +14,7 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
     {
 
         //publish many tricks
-        $this->createMany(Trick::class, 50, function (Trick $trick, $count) {
+        $this->createMany(Trick::class, 30, function (Trick $trick, $count) {
 
             $content = '<p>'.join($this->faker->paragraphs(2), '</p><p>').'</p>';
 
