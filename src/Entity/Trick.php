@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
  * @UniqueEntity("name", message="Nom de figure dejà utilisé")
+ * @UniqueEntity("slug", message= "slug deja utilisé")
  */
 class Trick
 {
@@ -64,6 +65,11 @@ class Trick
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
 
 
     public function __construct()

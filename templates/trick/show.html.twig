@@ -10,10 +10,11 @@
             la catégorie
             {{ trick.category.title }}</div>
         {% for image in trick.images %}
-
-        <div class="content"><img src="/uploads/images/{{ image.imageFilename }}" alt="">
-            {% endfor %}
-            {{ trick.description | raw }}
+            <div class="trickImage mx-auto col-sm-6 col-md-4 col-lg-4 col-xl-3 border border-dark">
+                <img src="/uploads/images/{{ image.imageFilename }}" alt="">
+            </div>
+        {% endfor %}
+        {{ trick.description | raw }}
     </article>
 
     <section id="commentaires">

@@ -53,6 +53,22 @@
             class="add-another-collection-widget"
             data-list-selector="#image-fields-list">Ajouter une image</button>
 
+    <ul id="video-fields-list"
+        data-prototype="{{ form_widget(formTrick.videos.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter="{{ formTrick.videos|length }}">
+        {% for video in formTrick.videos %}
+            <li>
+                {{ form_errors(video) }}
+                {{ form_widget(video) }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <button type="button"
+            class="add-another-collection-widget"
+            data-list-selector="#video-fields-list">Ajouter une video</button>
+
     <button type="submit" class="btn btn-primary">Ajouter l'article</button>
 
     {{ form_end(formTrick) }}
