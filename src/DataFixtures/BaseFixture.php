@@ -22,6 +22,7 @@ abstract class BaseFixture extends Fixture
     public function load(ObjectManager $manager)
     {
         $this->manager = $manager;
+        $this->faker = Factory::create('fr_FR');
 
         $this->loadData($manager);
     }
@@ -34,8 +35,28 @@ abstract class BaseFixture extends Fixture
 
             $this->manager->persist($entity);
             //store for usage later as App\Entity\ClassName_#COUNT#
-            $this->addReference($className . '_' . $i, $entity);
+            $this->addReference($className.'_'.$i, $entity);
         }
+    }
+
+    protected function getRandomReference(string $classname)
+    {
+        if (!isset($this->referenceIndex[$classname])) {
+            $this->referenceIndex[$classname] = [];
+
+            foreach ($this->referenceRepository->getReferences() as $key => $ref) {
+                if (strpos($key, $classname.'_') === 0) {
+                    $this->referenceIndex[$classname] = $key;
+                }
+            }
+        }
+
+        if (empty($this->referenceIndex[$classname])) {
+            throw new \Exception(sprintf('cannot find anu references for class "%s"', $classname));
+        }
+        $randomReferenceKey = $this->faker->randomElement($this->referenceIndex[$classname]);
+
+        return $this->getReference($randomReferenceKey);
     }
 
 
