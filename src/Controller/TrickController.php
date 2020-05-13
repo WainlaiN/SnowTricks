@@ -65,15 +65,18 @@ class TrickController extends AbstractController
      * @Route("/trick/{id}/edit", name="trick_edit")
      */
     public function edit(Trick $trick,Request $request,EntityManagerInterface $manager,UploadImage $uploadImage,TrickRepository $repo) {
-        //$trick = $repo->findBy($id);
+
+        $trick = $repo->find($trick);
+
 
         $form = $this->createForm(TrickType::class, $trick);
+
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $trick->setUpdatedAt(new \DateTime());
+            //$trick->setUpdatedAt(new \DateTime());
             $uploads_directory = $this->getParameter('uploads-directory');
 
             foreach ($trick->getImages() as $image) {
@@ -99,6 +102,7 @@ class TrickController extends AbstractController
             'trick/edit.html.twig',
             [
                 'formTrick' => $form->createView(),
+                'trick' => $trick
 
             ]
         );

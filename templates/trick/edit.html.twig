@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ dump(trick) }}
 
-    <article>
+
+    {#<article>
         <h1>Editer l'article</h1>
         <h2>{{ trick.name }}</h2>
         <div class="metadata">Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans
@@ -14,17 +14,20 @@
         <div class="content"><img src="/uploads/images/{{ image.imageFilename }}" alt="">
             {% endfor %}
             {{ trick.description | raw }}
-    </article>
+    </article>#}
+
+    {{ form_start(formTrick) }}
+
+    {{ form_widget(formTrick) }}
 
 
-
-    {{ form_row(formTrick.images) }}
-
-    {{ form_errors(formTrick) }}
 
     <button type="submit" class="btn btn-primary">Editer l'article</button>
-
     {{ form_end(formTrick) }}
+
+
+
+
 
 {% endblock %}
 
