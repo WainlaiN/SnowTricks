@@ -2,28 +2,33 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\User;
+use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-
-use App\Entity\Category;
-use App\Entity\Comment;
 use App\Entity\Trick;
-use Faker\Provider\Base;
+
 
 class TrickFixtures extends BaseFixture
 {
     public function loadData(ObjectManager $manager)
     {
+        //$faker = Factory::create('fr_FR');
 
-        $this->createMany(Category::class, 3, function (Category $category, $count) {
+        $this->createMany(Trick::class, 50, function (Trick $trick, $count) use ($faker) {
 
             //publish many tricks
-            $category->setTitle($faker->sentence())
-                ->
+            $content = '<p>'.join($this->faker->paragraphs(5), '</p><p>').'</p>';
+
+            $trick->setName($this->faker->sentence())
+                ->setDescription($content)
+                ->setCreatedAt($faker->dateTimeBetween('-6 months'))
+                ->setCategory($this->getReference(Category::class.'-'.$this->faker->numberBetween(0,3)));
+
 
 
         });
+
+        $manager->flush();
 
 
         /**$faker = \Faker\Factory::create('fr_FR');
