@@ -2,21 +2,21 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Image;
+use App\Entity\Video;
 use App\Entity\Trick;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class ImageFixtures extends BaseFixture implements DependentFixtureInterface
+class VideoFixtures extends BaseFixture implements DependentFixtureInterface
 {
     public function loadData(ObjectManager $manager)
     {
 
-        //publish many Images
-        $this->createMany(Image::class,100,function (Image $image, $count) {
+        //publish many videos
+        $this->createMany(Video::class,100,function (Video $video, $count) {
 
-                $image->setImageFilename("http://via.placeholder.com/300x150")
-                    ->setTrick($this->getRandomReference(Trick::class));
+            $video->setVideoURL("https://www.youtube.com/embed/1TJ08caetkw")
+                ->setTrick($this->getRandomReference(Trick::class));
 
 
         });

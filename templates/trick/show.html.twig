@@ -14,8 +14,14 @@
                 <img src="{{ image.imageFilename }}" alt="">
             </div>
         {% endfor %}
+        {% for video in trick.videos %}
+        <div class="trickVideo">
+            <iframe width="540" height="480" src="{{ video.videoUrl }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        {% endfor %}
         {{ trick.description | raw }}
     </article>
+
 
     <section id="commentaires">
         <h1>{{ trick.comments | length }} Commentaires</h1>
