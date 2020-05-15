@@ -23,7 +23,12 @@
             <div class="comment">
                 <div class="row">
                     <div class="col-3">
+                        <div class="row">
                         {{ comment.user.username }} (<small>{{ comment.createdAt | date('d/m/Y') }}</small>)
+                        </div>
+                        <div class="row">
+                            <img src="{{ comment.user.photo }}" alt="" class="img-thumbnail">
+                        </div>
                     </div>
                     <div class="col">
                         {{ comment.content | raw }}
