@@ -11,7 +11,7 @@
             {{ trick.category.title }}</div>
         {% for image in trick.images %}
             <div class="trickImage mx-auto col-sm-6 col-md-4 col-lg-4 col-xl-3 border border-dark">
-                <img src="/uploads/images/{{ image.imageFilename }}" alt="">
+                <img src="{{ image.imageFilename }}" alt="">
             </div>
         {% endfor %}
         {{ trick.description | raw }}
