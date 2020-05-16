@@ -44,14 +44,19 @@
         {% for image in formTrick.images %}
             <li>
                 {{ form_errors(image) }}
-                {{ form_widget(image) }}
+                {{ form_row(image, {
+                    attr: {
+                        'placeholder': 'Selectionner une image'
+                    }
+                }) }}
             </li>
         {% endfor %}
     </ul>
 
     <button type="button"
             class="add-another-collection-widget"
-            data-list-selector="#image-fields-list">Ajouter une image</button>
+            data-list-selector="#image-fields-list">Ajouter une image
+    </button>
 
     <ul id="video-fields-list"
         data-prototype="{{ form_widget(formTrick.videos.vars.prototype)|e }}"
@@ -67,7 +72,8 @@
 
     <button type="button"
             class="add-another-collection-widget"
-            data-list-selector="#video-fields-list">Ajouter une video</button>
+            data-list-selector="#video-fields-list">Ajouter une video
+    </button>
 
     <button type="submit" class="btn btn-primary">Ajouter l'article</button>
 
