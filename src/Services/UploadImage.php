@@ -9,8 +9,22 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UploadImage
 {
-    public function saveImage(Image $image, $path): Image
+    /**
+     * @var string
+     */
+    private $uploadPath;
+
+    public function __construct(string $uploadPath)
     {
+        $this->uploadPath = $uploadPath;
+
+    }
+
+    public function saveImage(Image $image): Image
+    {
+        //récupère le repertoire image
+        $destination = $this->uploadPath;
+
         // Récupère le fichier de l'image uploadée
         $file = $image->getFile();
 
@@ -19,12 +33,10 @@ class UploadImage
 
         // Déplace le fichier
         $file->move(
-            $path,
+            $destination,
             $filename
         );
 
-        //$image->set($uploads_directory);
-        //$image->setFile($filename);
         $image->setImageFilename($filename);
 
         return $image;
