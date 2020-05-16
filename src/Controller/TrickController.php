@@ -33,7 +33,6 @@ class TrickController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $trick->setCreatedAt(new \DateTime());
-            //$uploads_directory = $this->getParameter('uploads-directory');
 
             foreach ($trick->getImages() as $image) {
 
@@ -76,8 +75,7 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //$trick->setUpdatedAt(new \DateTime());
-            //$uploads_directory = $this->getParameter('uploads-directory');
+            $trick->setUpdatedAt(new \DateTime());
 
             foreach ($trick->getImages() as $image) {
 
@@ -116,8 +114,6 @@ class TrickController extends AbstractController
 
         $uploads_directory = $this->getParameter('uploads-directory');
         $trick = $repo->find($id);
-        //$trickform = $this->createForm(TrickType::class, $trick);
-
 
         return $this->render(
             'trick/show.html.twig',
