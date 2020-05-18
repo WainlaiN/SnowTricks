@@ -2,6 +2,7 @@
     <div class="card mb-4">
         <img src="{#{{ trick.images }}#}" alt="" class="card-img-top">
         <div class="card-body">
+            <img class="card-img-top" src="{{ UploadDirectory ~ trick.mainImage }}" alt="Card image cap">
             <h5 class="card-title">{{ trick.name | slice(0, 20) }}</h5>
             <h2 class="card-subtitle mb-2 text-muted">
                 {{ trick.createdAt | date('d/m/Y') }}

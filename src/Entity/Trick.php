@@ -73,7 +73,7 @@ class Trick
     private $slug;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Image",orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\Column(type="string", length=255)
      * @Assert\Valid()
      */
     private $mainImage;

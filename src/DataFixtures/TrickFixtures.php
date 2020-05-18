@@ -22,7 +22,8 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
             $trick->setName($this->faker->sentence())
                 ->setDescription($content)
                 ->setCreatedAt($this->faker->dateTimeBetween('-6 months'))
-                ->setCategory($this->getRandomReference(Category::class));
+                ->setCategory($this->getRandomReference(Category::class))
+                ->setMainImage('1f4b10ecfb1273691b1d0a7c2ca32f38.jpeg');
 
         });
 
