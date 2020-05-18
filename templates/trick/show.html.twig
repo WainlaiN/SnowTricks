@@ -10,11 +10,11 @@
         <div class="metadata">Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans
             la catégorie
             {{ trick.category.title }}</div>
-        <img src="{{ imagesdirectory }}/{{ trick.mainImage.imageFilename }}">
+        <img src="{{ UploadDirectory }}/{{ trick.mainImage.imageFilename }}" alt="">
 
         {% for image in trick.images %}
 
-            <img src="{{ imagesdirectory }}/{{ image.imageFilename }}">
+            <img src="{{ UploadDirectory }}/{{ image.imageFilename }}" alt="">
 
         {% endfor %}
 

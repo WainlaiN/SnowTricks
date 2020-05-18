@@ -18,6 +18,7 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
 
             $content = '<p>'.join($this->faker->paragraphs(2), '</p><p>').'</p>';
 
+
             $trick->setName($this->faker->sentence())
                 ->setDescription($content)
                 ->setCreatedAt($this->faker->dateTimeBetween('-6 months'))
