@@ -19,7 +19,6 @@ use App\Entity\Trick;
 
 class TrickController extends AbstractController
 {
-
     /**
      * @Route("/trick/new", name="trick_create")
      * @param Request $request
@@ -29,8 +28,8 @@ class TrickController extends AbstractController
      */
     public function create(Request $request, EntityManagerInterface $manager, UploadImage $uploadImage)
     {
-        $trick = new Trick();
 
+        $trick = new Trick();
 
         $form = $this->createForm(TrickType::class, $trick);
 
@@ -38,7 +37,19 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+
             $trick->setCreatedAt(new \DateTime());
+
+            //get MainImage in form
+            $UploadedMain = $form["mainImage"]->getData();
+
+            //save MainImage in directory
+            $mainImage = $uploadImage->saveImage($UploadedMain);
+
+            //set MainImage to Trick
+            $trick->setMainImage($mainImage);
+
+            $manager->persist($mainImage);
 
             foreach ($trick->getImages() as $image) {
 
@@ -69,7 +80,13 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/{id}/edit", name="trick_edit")
      */
-    public function edit(Trick $trick,Request $request,EntityManagerInterface $manager,UploadImage $uploadImage,TrickRepository $repo) {
+    public function edit(
+        Trick $trick,
+        Request $request,
+        EntityManagerInterface $manager,
+        UploadImage $uploadImage,
+        TrickRepository $repo
+    ) {
 
         $trick = $repo->find($trick);
 
@@ -106,7 +123,7 @@ class TrickController extends AbstractController
             'trick/edit.html.twig',
             [
                 'formTrick' => $form->createView(),
-                'trick' => $trick
+                'trick' => $trick,
 
             ]
         );
@@ -118,15 +135,12 @@ class TrickController extends AbstractController
     public function show($id, TrickRepository $repo)
     {
 
-        $uploads_directory = $this->getParameter('uploads-directory');
         $trick = $repo->find($id);
 
         return $this->render(
             'trick/show.html.twig',
             [
                 'trick' => $trick,
-                'imagedir' =>$uploads_directory
-
             ]
         );
     }
