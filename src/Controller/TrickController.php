@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use App\Entity\Image;
 use App\Form\CommentType;
 use App\Form\TrickType;
 
@@ -25,6 +26,7 @@ class TrickController extends AbstractController
     public function create(Request $request, EntityManagerInterface $manager, UploadImage $uploadImage)
     {
         $trick = new Trick();
+
 
         $form = $this->createForm(TrickType::class, $trick);
 

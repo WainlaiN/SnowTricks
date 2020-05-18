@@ -4,3 +4,4 @@ twig:
     globals:
         images-directory: '%kernel.project_dir%/public/uploads/images'
 
+
