@@ -22,6 +22,10 @@ class TrickController extends AbstractController
 
     /**
      * @Route("/trick/new", name="trick_create")
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param UploadImage $uploadImage
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function create(Request $request, EntityManagerInterface $manager, UploadImage $uploadImage)
     {
