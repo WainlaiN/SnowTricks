@@ -2,6 +2,6 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     form_theme: ['bootstrap_4_layout.html.twig']
     globals:
-        UploadDirectory: '%kernel.project_dir%\public\uploads\images\'
+        UploadDirectory: '%kernel.project_dir%/public/uploads/images/'
 
 
