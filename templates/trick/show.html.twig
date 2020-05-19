@@ -11,33 +11,31 @@
             la catégorie
             {{ trick.category.title }}</div>
 
-        <img src="{{ UploadDirectory ~ trick.mainImage }}" alt="">
+        {#<img src="{{ UploadDirectory ~ trick.mainImage }}" alt="">#}
 
-        {% for image in trick.images %}
-            <div>
-                <img src="{{ UploadDirectory ~ image.imageFilename }}" alt="">
-            </div>
-        {% endfor %}
+        <!-- display trick images -->
+        <section id="images">
+            {% for image in trick.images %}
+                <div>
+                    <img src="{{ image.imageFilename }}" alt="">
+                </div>
+            {% endfor %}
+        </section>
 
-        {#<a class="carousel-control-prev" href="" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>#}
-        {% for video in trick.videos %}
-            <div class="trickVideo">
-                <iframe width="540" height="480" src="{{ video.videoUrl }}" frameborder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-            </div>
-        {% endfor %}
+        <!-- display trick videos -->
+        <section id="videos">
+            {% for video in trick.videos %}
+                <div class="trickVideo">
+                    <iframe width="540" height="480" src="{{ video.videoUrl }}" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                </div>
+            {% endfor %}
+        </section>
 
     </article>
 
-
+    <!-- display trick comments -->
     <section id="commentaires">
         <h1>{{ trick.comments | length }} Commentaires</h1>
         {% for comment in trick.comments %}
@@ -58,5 +56,10 @@
             </div>
         {% endfor %}
     </section>
+
+    {{ form_start(formComment) }}
+
+    {{ form_end(formComment) }}
+
 
 {% endblock %}

@@ -19,7 +19,6 @@ class CommentType extends AbstractType
             ->add('user', EntityType::class, [
                 'class' => user::class,
                 'choice_label' => 'username'])
-            //->add('user')
             ->add('content')
         ;
     }
