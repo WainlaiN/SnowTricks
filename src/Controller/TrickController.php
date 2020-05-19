@@ -41,11 +41,9 @@ class TrickController extends AbstractController
             $trick->setCreatedAt(new \DateTime());
 
             //get MainImage in form
-            $UploadedMain = $form["mainImage"]->getData();
-
+            $UploadedMain = $form->get('mainImage')->getData();
             //save MainImage in directory
             $mainImage = $uploadImage->saveImage($UploadedMain);
-
             //set MainImage to Trick
             $trick->setMainImage($mainImage);
 
@@ -67,7 +65,6 @@ class TrickController extends AbstractController
             );
 
             return $this->redirectToRoute('trick_show', ['id' => $trick->getId()]);
-
         }
 
         return $this->render(
@@ -90,9 +87,7 @@ class TrickController extends AbstractController
 
         $trick = $repo->find($trick);
 
-
         $form = $this->createForm(TrickType::class, $trick);
-
 
         $form->handleRequest($request);
 
