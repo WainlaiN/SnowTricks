@@ -73,10 +73,11 @@ class Trick
     private $slug;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Valid()
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
      */
     private $mainImage;
+
+
 
 
     public function __construct()
@@ -263,25 +264,16 @@ class Trick
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMainImage()
+    public function getMainImage(): ?Image
     {
         return $this->mainImage;
     }
 
-    /**
-     * @param mixed $mainImage
-     * @return Trick
-     */
-    public function setMainImage($mainImage)
+    public function setMainImage(?Image $mainImage): self
     {
         $this->mainImage = $mainImage;
 
         return $this;
     }
-
-
 
 }

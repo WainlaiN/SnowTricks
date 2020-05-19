@@ -56,10 +56,10 @@
             </div>
         {% endfor %}
     </section>
-
+{%  if app.user %}
     {{ form_start(formComment) }}
 
     {{ form_end(formComment) }}
-
+{% endif %}
 
 {% endblock %}

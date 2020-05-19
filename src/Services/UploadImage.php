@@ -22,6 +22,7 @@ class UploadImage
 
     public function saveImage(Image $image): Image
     {
+
         //récupère le repertoire image
         $destination = $this->uploadPath;
 

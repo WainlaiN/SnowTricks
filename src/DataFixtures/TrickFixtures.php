@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
+use App\Entity\Image;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Trick;
@@ -14,7 +15,7 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
     {
 
         //publish many tricks
-        $this->createMany(Trick::class, 30, function (Trick $trick, $count) {
+        $this->createMany(Trick::class, 10, function (Trick $trick, $count) {
 
             $content = '<p>'.join($this->faker->paragraphs(2), '</p><p>').'</p>';
 
@@ -22,8 +23,8 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
             $trick->setName($this->faker->sentence())
                 ->setDescription($content)
                 ->setCreatedAt($this->faker->dateTimeBetween('-6 months'))
-                ->setCategory($this->getRandomReference(Category::class))
-                ->setMainImage('1f4b10ecfb1273691b1d0a7c2ca32f38.jpeg');
+                ->setCategory($this->getRandomReference(Category::class));
+
 
         });
 

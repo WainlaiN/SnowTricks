@@ -23,16 +23,20 @@
 
     {{ form_row(formTrick.category) }}
     {#{{ form_row(formTrick.mainImage) }}#}
+    <div class="container">
+        <div class="d-flex align-content-start flex-wrap">
+            {% for image in trick.images %}
 
-    {% for image in trick.images%}
+                <div class="p-2">
+                    <img src="{{ image.imageFilename }}" alt="" width="150">
+                </div>
 
-        <div>
-            <img src="{{ image.imageFilename }}" alt="" width="150">
+            {% endfor %}
+
         </div>
+    </div>
 
-    {% endfor %}
-
-{#{{ form_row(formTrick.images) }}#}
+    {#{{ form_row(formTrick.images) }}#}
 
     {{ form_widget(formTrick) }}
 
