@@ -11,16 +11,26 @@
             la catégorie
             {{ trick.category.title }}</div>
 
-        {#<img src="{{ UploadDirectory ~ trick.mainImage }}" alt="">#}
+        <img src="{{ trick.mainImage.imageFilename }}" alt="" class="mb-5">
+
+        <br>
 
         <!-- display trick images -->
         <section id="images">
-            {% for image in trick.images %}
-                <div>
-                    <img src="{{ image.imageFilename }}" alt="">
-                </div>
-            {% endfor %}
+        <div class="container">
+            <div class="d-flex align-content-start flex-wrap">
+                {% for image in trick.images %}
+
+                    <div class="p-2">
+                        <img src="{{ image.imageFilename }}" alt="" width="150">
+                    </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
         </section>
+
 
         <!-- display trick videos -->
         <section id="videos">
