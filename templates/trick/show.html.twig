@@ -17,18 +17,18 @@
 
         <!-- display trick images -->
         <section id="images">
-        <div class="container">
-            <div class="d-flex align-content-start flex-wrap">
-                {% for image in trick.images %}
+            <div class="container">
+                <div class="d-flex align-content-start flex-wrap">
+                    {% for image in trick.images %}
 
-                    <div class="p-2">
-                        <img src="{{ image.imageFilename }}" alt="" width="150">
-                    </div>
+                        <div class="p-2">
+                            <img src="{{ image.imageFilename }}" alt="" width="150">
+                        </div>
 
-                {% endfor %}
+                    {% endfor %}
 
+                </div>
             </div>
-        </div>
         </section>
 
 
@@ -36,13 +36,13 @@
         <section id="videos">
             <div class="container">
                 <div class="d-flex align-content-start flex-wrap">
-            {% for video in trick.videos %}
-                <div class="trickVideo m-3">
-                    <iframe width="320" height="280" src="{{ video.videoUrl }}" frameborder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                </div>
-            {% endfor %}
+                    {% for video in trick.videos %}
+                        <div class="trickVideo m-3">
+                            <iframe width="320" height="280" src="{{ video.videoUrl }}" frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                        </div>
+                    {% endfor %}
                 </div>
         </section>
 
@@ -54,26 +54,28 @@
         {% for comment in trick.comments %}
             <div class="comment">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-lg-5">
                         <div class="row">
                             {{ comment.user.username }} (<small>{{ comment.createdAt | date('d/m/Y') }}</small>)
                         </div>
                         <div class="row">
-                            <img src="{{ UploadPicture ~ comment.user.photo }}" alt="" class="img-thumbnail">
+                            <div class="col-5">
+                                <img src="{{ UploadPicture ~ comment.user.photo }}" alt="" class="img-thumbnail">
+                            </div class="col-5">
+                            <div class="col align-items-center">
+                                {{ comment.content | raw }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="col align-items-center">
-                        {{ comment.content | raw }}
                     </div>
                 </div>
             </div>
         {% endfor %}
     </section>
-{%  if app.user %}
-    {{ form_start(formComment) }}
+    {% if app.user %}
+        {{ form_start(formComment) }}
 
 
-    {{ form_end(formComment) }}
-{% endif %}
+        {{ form_end(formComment) }}
+    {% endif %}
 
 {% endblock %}
