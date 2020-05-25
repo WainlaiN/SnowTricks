@@ -2,28 +2,15 @@
 
 {% block body %}
 
-
-    {#<article>
-        <h1>Editer l'article</h1>
-        <h2>{{ trick.name }}</h2>
-        <div class="metadata">Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans
-            la catégorie
-            {{ trick.category.title }}</div>
-        {% for image in trick.images %}
-
-        <div class="content"><img src="/uploads/images/{{ image.imageFilename }}" alt="">
-            {% endfor %}
-            {{ trick.description | raw }}
-    </article>#}
-
     {{ form_start(formTrick) }}
 
     {{ form_row(formTrick.name) }}
     {{ form_row(formTrick.description) }}
-
+    {{ formTrick.vars.value.mainImage.imageFilename }}
+    {{ form_widget(formTrick.mainImage, {'value': formTrick.vars.value.mainImage.imageFilename}) }}
     {{ form_row(formTrick.category) }}
-    {{ form_row(formTrick.mainImage) }}
-    <div class="container">
+
+    <section id="images">
         <div class="d-flex align-content-start flex-wrap">
             {% for image in trick.images %}
 
@@ -32,22 +19,28 @@
                 </div>
 
             {% endfor %}
-
         </div>
-    </div>
+    </section>
 
-    {#{{ form_row(formTrick.images) }}#}
-
-    {{ form_widget(formTrick) }}
-
-
+    <section id="videos">
+        <div class="container">
+            <div class="d-flex align-content-start flex-wrap">
+                {% for video in trick.videos %}
+                    <div class="trickVideo m-3">
+                        <iframe width="240" height="180" src="{{ video.videoUrl }}" frameborder="0"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                {% endfor %}
+            </div>
+    </section>
 
     <button type="submit" class="btn btn-primary">Editer l'article</button>
-    {{ form_end(formTrick) }}
+    {{ form_end(formTrick, {'render_rest': false}) }}
 
+{% endblock %}
 
-
-
+{% block javascripts %}
 
 {% endblock %}
 
