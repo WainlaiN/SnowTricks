@@ -60,7 +60,7 @@ class TrickController extends AbstractController
             $manager->flush();
 
             $this->addFlash(
-                'notice',
+                'success',
                 'Votre article a bien été ajouté !'
             );
 
@@ -106,7 +106,7 @@ class TrickController extends AbstractController
             $manager->flush();
 
             $this->addFlash(
-                'notice',
+                'success',
                 'Votre article a bien été modifié !'
             );
 
