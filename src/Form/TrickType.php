@@ -53,10 +53,11 @@ class TrickType extends AbstractType
                 CollectionType::class,
                 [
                     'entry_type' => ImageType::class,
+                    'entry_options' => ['label' => false],
                     'allow_add' => true,
                     'allow_delete' => true,
                     'required' => false,
-                    'prototype' => true
+                    'prototype' => true,
                 ]
             )
             ->add(
@@ -64,6 +65,7 @@ class TrickType extends AbstractType
                 CollectionType::class,
                 [
                     'entry_type' => VideoType::class,
+                    'entry_options' => ['label' => false],
                     'allow_add' => true,
                     'allow_delete' => true,
                     'required' => false,

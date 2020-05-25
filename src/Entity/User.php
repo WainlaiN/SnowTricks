@@ -46,6 +46,13 @@ class User implements UserInterface
     private $photo;
 
     /**
+     * @Assert\Image(
+     *  mimeTypes= {"image/jpeg", "image/jpg", "image/png"},
+     *  mimeTypesMessage = "Le fichier ne possède pas une extension valide ! Veuillez insérer une image en .jpg, .jpeg ou .png")
+     */
+    private $file;
+
+    /**
      * @Assert\EqualTo(propertyPath="password", message="Mot de passe différent")
      */
     private $confirm_password;
@@ -174,4 +181,25 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param mixed $file
+     * @return User
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+
 }

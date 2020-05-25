@@ -4,6 +4,7 @@ namespace App\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,6 +21,9 @@ class CommentType extends AbstractType
                 'class' => user::class,
                 'choice_label' => 'username'])
             ->add('content')
+            ->add('Validez', SubmitType::class, [
+                'attr' => ['class' => 'save']
+            ])
         ;
     }
 

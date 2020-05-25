@@ -13,6 +13,7 @@
     {{ form_row(formTrick.mainImage) }}
 
 
+
     <ul id="image-fields-list"
         data-prototype="{{ form_widget(formTrick.images.vars.prototype)|e }}"
         data-widget-tags="{{ '<li></li>'|e }}"
@@ -49,7 +50,7 @@
     <br>
     <button type="submit" class="btn btn-primary">Ajouter l'article</button>
 
-    {{ form_end(formTrick) }}
+    {{ form_end(formTrick, {'render_rest': false}) }}
 
 
 {% endblock %}
@@ -58,7 +59,8 @@
 
 <script type="text/javascript">
 
-    $('.custom-file-input').on('change', function(event) {
+    //$('.custom-file-input').on('change', function(event) {
+    $(document).on('change', '.custom-file-input', function(event) {
         var inputFile = event.currentTarget;
         $(inputFile).parent()
             .find('.custom-file-label')

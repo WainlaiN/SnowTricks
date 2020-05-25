@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Entity\Image;
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -20,7 +21,7 @@ class UploadImage
 
     }
 
-    public function saveImage(Image $image): Image
+    public function saveImage($image)
     {
 
         //récupère le repertoire image

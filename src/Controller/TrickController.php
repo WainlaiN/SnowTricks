@@ -37,9 +37,7 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
             $trick->setCreatedAt(new \DateTime());
-
 
             //get MainImage in form
             $UploadedMain = $form->get('mainImage')->getData();
@@ -129,13 +127,28 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/{id}", name="trick_show")
      */
-    public function show($id, TrickRepository $repo)
+    public function show($id, TrickRepository $repo, Request $request, EntityManagerInterface $manager)
     {
-
+        $trick = $repo->find($id);
         $comment = new Comment();
         $formComment = $this->createForm(CommentType::class, $comment);
 
-        $trick = $repo->find($id);
+        $formComment->handleRequest($request);
+
+        if ($formComment->isSubmitted() && $formComment->isValid()) {
+            $comment->setCreatedAt(new \DateTime());
+            $comment->setTrick($trick);
+            $comment->setUser($request->getUser());
+
+            $manager->persist($comment);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Votre commentaire a bien été enregistré !'
+            );
+
+        }
 
         return $this->render(
             'trick/show.html.twig',

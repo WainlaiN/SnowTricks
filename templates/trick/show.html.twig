@@ -34,13 +34,16 @@
 
         <!-- display trick videos -->
         <section id="videos">
+            <div class="container">
+                <div class="d-flex align-content-start flex-wrap">
             {% for video in trick.videos %}
-                <div class="trickVideo">
-                    <iframe width="540" height="480" src="{{ video.videoUrl }}" frameborder="0"
+                <div class="trickVideo m-3">
+                    <iframe width="320" height="280" src="{{ video.videoUrl }}" frameborder="0"
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe>
                 </div>
             {% endfor %}
+                </div>
         </section>
 
     </article>
@@ -56,7 +59,7 @@
                             {{ comment.user.username }} (<small>{{ comment.createdAt | date('d/m/Y') }}</small>)
                         </div>
                         <div class="row">
-                            <img src="{{ comment.user.photo }}" alt="" class="img-thumbnail">
+                            <img src="{{ UploadPicture ~ comment.user.photo }}" alt="" class="img-thumbnail">
                         </div>
                     </div>
                     <div class="col align-items-center">
@@ -68,6 +71,7 @@
     </section>
 {%  if app.user %}
     {{ form_start(formComment) }}
+
 
     {{ form_end(formComment) }}
 {% endif %}
