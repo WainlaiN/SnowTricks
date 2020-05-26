@@ -90,17 +90,29 @@ class TrickController extends AbstractController
         $form = $this->createForm(TrickType::class, $trick);
 
         $form->handleRequest($request);
+        //dump($request);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $trick->setUpdatedAt(new \DateTime());
-
             foreach ($trick->getImages() as $image) {
 
-                $image = $uploadImage->saveImage($image);
                 $image->setTrick($trick);
+                $manager->persist($image);
+                //$image = $uploadImage->saveImage($image);
+                //$image->setTrick($trick);
 
             }
+            $trick->setUpdatedAt(new \DateTime());
+
+            //get MainImage in form
+            $UploadedMain = $form->get('mainImage')->getData();
+            //save MainImage in directory
+            $mainImage = $uploadImage->saveImage($UploadedMain);
+            //set MainImage to Trick
+            $trick->setMainImage($mainImage);
+            $mainImage->setTrick($trick);
+
 
             $manager->persist($trick);
             $manager->flush();
