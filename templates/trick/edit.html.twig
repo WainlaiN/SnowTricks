@@ -43,6 +43,18 @@
 
 {% block javascripts %}
 
+<script type="text/javascript">
+
+    //$('.custom-file-input').on('change', function(event) {
+    $(document).on('change', '.custom-file-input', function(event) {
+        var inputFile = event.currentTarget;
+        $(inputFile).parent()
+            .find('.custom-file-label')
+            .html(inputFile.files[0].name);
+    });
+
+    </script>
+
 {% endblock %}
 
 
