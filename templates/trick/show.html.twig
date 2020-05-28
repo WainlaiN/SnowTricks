@@ -11,7 +11,7 @@
             la catégorie
             {{ trick.category.title }}</div>
 
-        <img src="{{ UploadDirectory ~ trick.mainImage.imageFilename }}" alt="" class="mb-5">
+        <img src="{{ UploadDirectory ~ trick.mainImage.imageFilename }}" alt="" class="mb-5" style="width: 100%">
 
         <br>
 
@@ -22,7 +22,7 @@
                     {% for image in trick.images %}
 
                         <div class="p-2">
-                            <img src="{{ image.imageFilename }}" alt="" width="150">
+                            <img src="{{ UploadDirectory ~ image.imageFilename }}" alt="" width="150">
                         </div>
 
                     {% endfor %}

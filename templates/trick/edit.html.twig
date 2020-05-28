@@ -7,8 +7,47 @@
     {{ form_row(formTrick.name) }}
     {{ form_row(formTrick.description) }}
     {{ formTrick.vars.value.mainImage.imageFilename }}
-    {{ form_widget(formTrick.mainImage, {'value': formTrick.vars.value.mainImage.imageFilename}) }}
+{#{{ form_widget(formTrick.mainImage, {'value': formTrick.vars.value.mainImage.imageFilename}) }}#}
+
+    {{ form_label(formTrick.mainImage) }}
+    {{ form_errors(formTrick.mainImage.imageFilename) }}
+    {{ form_help(formTrick.mainImage.imageFilename) }}
+
+
     {{ form_row(formTrick.category) }}
+    <ul id="image-fields-list"
+        data-prototype="{{ form_widget(formTrick.images.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter="{{ formTrick.images|length }}">
+        {% for image in formTrick.images %}
+            <li>
+                {{ form_errors(image) }}
+                {{ form_label(image) }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <button type="button"
+            class="add-another-collection-widget"
+            data-list-selector="#image-fields-list">Ajouter une image
+    </button>
+    <br>
+    <ul id="video-fields-list"
+        data-prototype="{{ form_widget(formTrick.videos.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter="{{ formTrick.videos|length }}">
+        {% for video in formTrick.videos %}
+            <li>
+                {{ form_errors(video) }}
+                {{ form_widget(video) }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <button type="button"
+            class="add-another-collection-widget"
+            data-list-selector="#video-fields-list">Ajouter une video
+    </button>
 
     <section id="images">
         <div class="d-flex align-content-start flex-wrap">

@@ -49,6 +49,8 @@ class TrickController extends AbstractController
 
             //$manager->persist($mainImage);
 
+            dump($trick);
+
             foreach ($trick->getImages() as $image) {
 
                 $image = $uploadHelper->saveImage($image);
@@ -94,20 +96,22 @@ class TrickController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $uploadedFiles = $form->get('images')->getData();
 
-            foreach ($trick->getImages() as $image) {
+            if ($uploadedFiles) {
 
-                $image->setTrick($trick);
-                $manager->persist($image);
-                //$image = $uploadHelper->saveImage($image);
-                //$image->setTrick($trick);
+                foreach ($trick->getImages() as $image) {
 
+                    $image->setTrick($trick);
+                    $image = $uploadHelper->saveImage($image);
+                    $image->setTrick($trick);
+                    $manager->persist($image);
+                }
             }
             $trick->setUpdatedAt(new \DateTime());
 
             //get MainImage in form
             $uploadedMain = $form->get('mainImage')->getData();
-            dump($uploadedMain);
 
             if ($uploadedMain) {
                 //save MainImage in directory
