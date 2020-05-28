@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
-use App\Services\UploadImage;
+use App\Services\UploadHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +23,7 @@ class SecurityController extends AbstractController
         Request $request,
         EntityManagerInterface $manager,
         UserPasswordEncoderInterface $encoder,
-        UploadImage $uploadImage
+        UploadHelper $uploadImage
     ) {
 
         $user = new User();

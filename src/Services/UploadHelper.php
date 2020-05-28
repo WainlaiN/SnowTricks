@@ -8,7 +8,7 @@ use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 
 
-class UploadImage
+class UploadHelper
 {
     /**
      * @var string
@@ -24,21 +24,22 @@ class UploadImage
     public function saveImage($image)
     {
 
-        //récupère le repertoire image
+        //get the image directory
         $destination = $this->uploadPath;
 
-        // Récupère le fichier de l'image uploadée
+        // get the uploaded file
         $file = $image->getFile();
 
-        // Créer un nom unique pour le fichier
+        // set a filename
         $filename = md5(uniqid()) . '.' . $file->guessExtension();
 
-        // Déplace le fichier
+        // move the file
         $file->move(
             $destination,
             $filename
         );
 
+        //set the new filename to image
         $image->setImageFilename($filename);
 
         return $image;

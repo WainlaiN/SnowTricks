@@ -51,16 +51,11 @@
     <button type="submit" class="btn btn-primary">Ajouter l'article</button>
 
     {{ form_end(formTrick, {'render_rest': false}) }}
-
-
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('create') }}
-
-
-
 {% endblock %}
 
 

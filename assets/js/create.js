@@ -1,3 +1,4 @@
+import $ from 'jquery';
 
 $(document).on('change', '.custom-file-input', function(event) {
     var inputFile = event.currentTarget;

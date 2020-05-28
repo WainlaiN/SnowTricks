@@ -7,7 +7,7 @@ use App\Entity\Image;
 use App\Form\CommentType;
 use App\Form\TrickType;
 
-use App\Services\UploadImage;
+use App\Services\UploadHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,10 +23,10 @@ class TrickController extends AbstractController
      * @Route("/trick/new", name="trick_create")
      * @param Request $request
      * @param EntityManagerInterface $manager
-     * @param UploadImage $uploadImage
+     * @param UploadHelper $uploadHelper
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function create(Request $request, EntityManagerInterface $manager, UploadImage $uploadImage)
+    public function create(Request $request, EntityManagerInterface $manager, UploadHelper $uploadHelper)
     {
 
         $trick = new Trick();
@@ -42,16 +42,16 @@ class TrickController extends AbstractController
             //get MainImage in form
             $UploadedMain = $form->get('mainImage')->getData();
             //save MainImage in directory
-            $mainImage = $uploadImage->saveImage($UploadedMain);
+            $mainImage = $uploadHelper->saveImage($UploadedMain);
             //set MainImage to Trick
             $trick->setMainImage($mainImage);
-            $mainImage->setTrick($trick);
+            //$mainImage->setTrick($trick);
 
-            $manager->persist($mainImage);
+            //$manager->persist($mainImage);
 
             foreach ($trick->getImages() as $image) {
 
-                $image = $uploadImage->saveImage($image);
+                $image = $uploadHelper->saveImage($image);
                 $image->setTrick($trick);
 
             }
@@ -81,7 +81,7 @@ class TrickController extends AbstractController
         Trick $trick,
         Request $request,
         EntityManagerInterface $manager,
-        UploadImage $uploadImage,
+        UploadHelper $uploadHelper,
         TrickRepository $repo
     ) {
 
@@ -99,7 +99,7 @@ class TrickController extends AbstractController
 
                 $image->setTrick($trick);
                 $manager->persist($image);
-                //$image = $uploadImage->saveImage($image);
+                //$image = $uploadHelper->saveImage($image);
                 //$image->setTrick($trick);
 
             }
@@ -111,7 +111,7 @@ class TrickController extends AbstractController
 
             if ($uploadedMain) {
                 //save MainImage in directory
-                $mainImage = $uploadImage->saveImage($uploadedMain);
+                $mainImage = $uploadHelper->saveImage($uploadedMain);
                 //set MainImage to Trick
                 $trick->setMainImage($mainImage);
                 $mainImage->setTrick($trick);
