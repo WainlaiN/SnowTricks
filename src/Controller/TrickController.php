@@ -92,13 +92,12 @@ class TrickController extends AbstractController
         $form = $this->createForm(TrickType::class, $trick);
 
         $form->handleRequest($request);
-        //dump($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $uploadedFiles = $form->get('images')->getData();
 
             if ($uploadedFiles) {
+                //dd($uploadedFiles);
 
                 foreach ($trick->getImages() as $image) {
 
@@ -178,6 +177,10 @@ class TrickController extends AbstractController
                 'formComment' => $formComment->createView(),
             ]
         );
+    }
+
+    public function delete() {
+
     }
 
 }

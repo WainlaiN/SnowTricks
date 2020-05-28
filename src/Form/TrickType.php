@@ -45,9 +45,13 @@ class TrickType extends AbstractType
                     ],
                 ]
             )
-            ->add('mainImage', ImageType::class,[
-                'required' => false
-            ])
+            ->add(
+                'mainImage',
+                ImageType::class,
+                [
+                    'required' => false,
+                ]
+            )
             ->add(
                 'images',
                 CollectionType::class,
