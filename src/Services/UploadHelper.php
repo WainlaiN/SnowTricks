@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadHelper
 {
+    const IMAGEDIR = '/uploads/images';
+    const PICTUREDIR = '/uploads/pictures';
     /**
      * @var string
      */
@@ -22,8 +24,8 @@ class UploadHelper
     {
 
         //get the image directory
-        $destination = $this->uploadPath;
-        // get the uploaded file
+        $destination = $this->uploadPath.self::IMAGEDIR;
+        // get the uploaded file from the Image object
         $file = $image->getFile();
         // set a filename
         $filename = md5(uniqid()) . '.' . $file->guessExtension();
@@ -41,7 +43,7 @@ class UploadHelper
     public function saveMainFile(UploadedFile $uploadedFile)
     {
         //get the image directory
-        $destination = $this->uploadPath;
+        $destination = $this->uploadPath.self::IMAGEDIR;
         // set a filename
         $filename = md5(uniqid()) . '.' . $uploadedFile->guessExtension();
         // move the file
@@ -55,8 +57,8 @@ class UploadHelper
 
     public function savePicture(UploadedFile $uploadedFile)
     {
-        //get the image directory
-        $destination = $this->uplo;
+        //get the Picture directory
+        $destination = $this->uploadPath.self::PICTUREDIR;
         // set a filename
         $filename = md5(uniqid()) . '.' . $uploadedFile->guessExtension();
         // move the file
