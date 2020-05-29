@@ -47,11 +47,6 @@ class TrickController extends AbstractController
             $mainImage = $uploadHelper->saveMainFile($UploadedMain);
             //set MainImage to Trick
             $trick->setMainImage($mainImage);
-            //$mainImage->setTrick($trick);
-
-            //$manager->persist($mainImage);
-
-            dump($trick);
 
             foreach ($trick->getImages() as $image) {
 
