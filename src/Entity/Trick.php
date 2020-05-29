@@ -73,11 +73,16 @@ class Trick
     private $slug;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
+     * @ORM\Column(type="string", length=255)
      */
     private $mainImage;
 
-
+    /**
+     * @Assert\Image(
+     *  mimeTypes= {"image/jpeg", "image/jpg", "image/png"},
+     *  mimeTypesMessage = "Le fichier ne possède pas une extension valide ! Veuillez insérer une image en .jpg, .jpeg ou .png")
+     */
+    private $file;
 
 
     public function __construct()
@@ -264,16 +269,46 @@ class Trick
         return $this;
     }
 
-    public function getMainImage(): ?Image
+    /**
+     * @return mixed
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param mixed $file
+     * @return Trick
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMainImage()
     {
         return $this->mainImage;
     }
 
-    public function setMainImage(?Image $mainImage): self
+    /**
+     * @param mixed $mainImage
+     * @return Trick
+     */
+    public function setMainImage($mainImage)
     {
         $this->mainImage = $mainImage;
 
         return $this;
     }
+
+
+
+
 
 }

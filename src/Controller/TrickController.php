@@ -55,7 +55,6 @@ class TrickController extends AbstractController
 
                 $image = $uploadHelper->saveImage($image);
                 $image->setTrick($trick);
-
             }
 
             $manager->persist($trick);
@@ -88,7 +87,6 @@ class TrickController extends AbstractController
     ) {
 
         $trick = $repo->find($trick);
-
         $form = $this->createForm(TrickType::class, $trick);
 
         $form->handleRequest($request);
@@ -105,21 +103,17 @@ class TrickController extends AbstractController
                     $manager->persist($image);
                 }
             }
-
             $trick->setUpdatedAt(new \DateTime());
 
             //get MainImage in form
-            $uploadedMain = $form->get('mainImage')->getData();
-            $mainName = $trick->getMainImage()->getFile();
-
+            $uploadedMain = $form->get('file')->getData();
             //check if it's a new uploaded Main file
-            if ($mainName) {
 
+            if ($uploadedMain) {
                 //save MainImage in directory
-                $mainImage = $uploadHelper->saveImage($uploadedMain);
+                $mainImage = $uploadHelper->saveMainFile($uploadedMain);
                 //set MainImage to Trick
                 $trick->setMainImage($mainImage);
-                $mainImage->setTrick($trick);
             }
 
             $manager->persist($trick);
@@ -131,7 +125,6 @@ class TrickController extends AbstractController
             );
 
             return $this->redirectToRoute('trick_show', ['id' => $trick->getId()]);
-
         }
 
         return $this->render(
@@ -158,7 +151,7 @@ class TrickController extends AbstractController
         if ($formComment->isSubmitted() && $formComment->isValid()) {
             $comment->setCreatedAt(new \DateTime());
             $comment->setTrick($trick);
-            $comment->setUser($request->getUser());
+            $comment->setUser($this->getUser());
 
             $manager->persist($comment);
             $manager->flush();
@@ -167,7 +160,6 @@ class TrickController extends AbstractController
                 'success',
                 'Votre commentaire a bien été enregistré !'
             );
-
         }
 
         return $this->render(
