@@ -4,49 +4,43 @@
 
 {% block body %}
 
-    <article class="mt-5">
-        <h2>{{ trick.name }}</h2>
-        <h5>{{ trick.description | raw }}</h5>
-        <div class="metadata">Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans
-            la catégorie
-            {{ trick.category.title }}</div>
 
-        <img src="{{ UploadDirectory ~ trick.mainImage }}" alt="" class="mb-5" style="width: 100%">
+    <h2>{{ trick.name }}</h2>
+    <h5>{{ trick.description | raw }}</h5>
+    <div class="metadata">Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans
+        la catégorie
+        {{ trick.category.title }}</div>
 
-        <br>
+    <img src="{{ UploadDirectory ~ trick.mainImage }}" alt="" class="mb-5" style="width: 100%">
 
-        <!-- display trick images -->
-        <section id="images">
-            <div class="container">
-                <div class="d-flex align-content-start flex-wrap">
-                    {% for image in trick.images %}
-
-                        <div class="p-2">
-                            <img src="{{ UploadDirectory ~ image.imageFilename }}" alt="" width="150">
-                        </div>
-
-                    {% endfor %}
-
-                </div>
+    <!-- display trick images -->
+    <section id="images">
+        <div class="container">
+            <div class="d-flex align-content-start flex-wrap">
+                {% for image in trick.images %}
+                    <div class="p-2">
+                        <img src="{{ UploadDirectory ~ image.imageFilename }}" alt="" width="150">
+                    </div>
+                {% endfor %}
             </div>
-        </section>
+        </div>
+    </section>
+
+    <!-- display trick videos -->
+    <section id="videos">
+        <div class="container">
+            <div class="d-flex align-content-start flex-wrap">
+                {% for video in trick.videos %}
+                    <div class="trickVideo m-1">
+                        <iframe width="320" height="280" src="{{ video.videoUrl }}" frameborder="0"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                {% endfor %}
+            </div>
+    </section>
 
 
-        <!-- display trick videos -->
-        <section id="videos">
-            <div class="container">
-                <div class="d-flex align-content-start flex-wrap">
-                    {% for video in trick.videos %}
-                        <div class="trickVideo m-3">
-                            <iframe width="320" height="280" src="{{ video.videoUrl }}" frameborder="0"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
-                        </div>
-                    {% endfor %}
-                </div>
-        </section>
-
-    </article>
 
     <!-- display trick comments -->
     <section id="commentaires">
