@@ -9,6 +9,7 @@ use App\Form\TrickType;
 
 use App\Services\UploadHelper;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,6 +22,7 @@ class TrickController extends AbstractController
 {
     /**
      * @Route("/trick/new", name="trick_create")
+     * @IsGranted("ROLE_ADMIN")
      * @param Request $request
      * @param EntityManagerInterface $manager
      * @param UploadHelper $uploadHelper
@@ -77,6 +79,7 @@ class TrickController extends AbstractController
 
     /**
      * @Route("/trick/{id}/edit", name="trick_edit")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(
         Trick $trick,
@@ -171,6 +174,9 @@ class TrickController extends AbstractController
         );
     }
 
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     */
     public function delete()
     {
 
