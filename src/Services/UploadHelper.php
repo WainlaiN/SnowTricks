@@ -52,4 +52,19 @@ class UploadHelper
 
         return $filename;
     }
+
+    public function savePicture(UploadedFile $uploadedFile)
+    {
+        //get the image directory
+        $destination = $this->uplo;
+        // set a filename
+        $filename = md5(uniqid()) . '.' . $uploadedFile->guessExtension();
+        // move the file
+        $uploadedFile->move(
+            $destination,
+            $filename
+        );
+
+        return $filename;
+    }
 }
