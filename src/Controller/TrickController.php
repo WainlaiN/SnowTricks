@@ -109,17 +109,17 @@ class TrickController extends AbstractController
             $trick->setUpdatedAt(new \DateTime());
 
             //get MainImage in form
-            $uploadedMain = $form->get('mainImage')->getData();
-            $mainName = $trick->getMainImage()->getFile();
+            $uploadedMain = $form->get('file')->getData();
 
             //check if it's a new uploaded Main file
-            if ($mainName) {
+            if ($uploadedMain) {
 
                 //save MainImage in directory
-                $mainImage = $uploadHelper->saveImage($uploadedMain);
+                $mainImage = $uploadHelper->saveMainFile($uploadedMain);
+
                 //set MainImage to Trick
                 $trick->setMainImage($mainImage);
-                $mainImage->setTrick($trick);
+
             }
 
             $manager->persist($trick);

@@ -6,8 +6,8 @@
 
     {{ form_row(formTrick.name) }}
     {{ form_row(formTrick.description) }}
-    {{ formTrick.vars.value.mainImage.imageFilename }}
-    {{ form_widget(formTrick.mainImage, {'value': formTrick.vars.value.mainImage.imageFilename}) }}
+{#{{ formTrick.vars.value.mainImage }}#}
+    {{ form_widget(formTrick.file) }}
 
 
 
