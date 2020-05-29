@@ -88,7 +88,6 @@ class TrickController extends AbstractController
     ) {
 
         $trick = $repo->find($trick);
-
         $form = $this->createForm(TrickType::class, $trick);
 
         $form->handleRequest($request);
@@ -105,21 +104,17 @@ class TrickController extends AbstractController
                     $manager->persist($image);
                 }
             }
-
             $trick->setUpdatedAt(new \DateTime());
 
             //get MainImage in form
             $uploadedMain = $form->get('file')->getData();
-
             //check if it's a new uploaded Main file
-            if ($uploadedMain) {
 
+            if ($uploadedMain) {
                 //save MainImage in directory
                 $mainImage = $uploadHelper->saveMainFile($uploadedMain);
-
                 //set MainImage to Trick
                 $trick->setMainImage($mainImage);
-
             }
 
             $manager->persist($trick);
@@ -131,7 +126,6 @@ class TrickController extends AbstractController
             );
 
             return $this->redirectToRoute('trick_show', ['id' => $trick->getId()]);
-
         }
 
         return $this->render(
