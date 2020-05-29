@@ -55,7 +55,6 @@ class TrickController extends AbstractController
 
                 $image = $uploadHelper->saveImage($image);
                 $image->setTrick($trick);
-
             }
 
             $manager->persist($trick);
@@ -161,7 +160,6 @@ class TrickController extends AbstractController
                 'success',
                 'Votre commentaire a bien été enregistré !'
             );
-
         }
 
         return $this->render(
