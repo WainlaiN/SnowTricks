@@ -3,11 +3,6 @@
 
 namespace App\Services;
 
-use App\Entity\Image;
-use App\Entity\User;
-use Symfony\Component\HttpFoundation\Request;
-
-
 class UploadHelper
 {
     /**

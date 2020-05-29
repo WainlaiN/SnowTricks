@@ -94,33 +94,33 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $uploadedFiles = $form->get('images')->getData();
 
-            if ($uploadedFiles) {
-                //dd($uploadedFiles);
+            foreach ($trick->getImages() as $image) {
 
-                foreach ($trick->getImages() as $image) {
+                //check if it's a new uploaded file
+                if ($image->getFile()) {
 
-                    $image->setTrick($trick);
                     $image = $uploadHelper->saveImage($image);
                     $image->setTrick($trick);
                     $manager->persist($image);
                 }
             }
+
             $trick->setUpdatedAt(new \DateTime());
 
             //get MainImage in form
             $uploadedMain = $form->get('mainImage')->getData();
+            $mainName = $trick->getMainImage()->getFile();
 
-            if ($uploadedMain) {
+            //check if it's a new uploaded Main file
+            if ($mainName) {
+
                 //save MainImage in directory
                 $mainImage = $uploadHelper->saveImage($uploadedMain);
                 //set MainImage to Trick
                 $trick->setMainImage($mainImage);
                 $mainImage->setTrick($trick);
-
             }
-
 
             $manager->persist($trick);
             $manager->flush();
@@ -179,7 +179,8 @@ class TrickController extends AbstractController
         );
     }
 
-    public function delete() {
+    public function delete()
+    {
 
     }
 
