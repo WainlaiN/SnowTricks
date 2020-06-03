@@ -40,6 +40,22 @@
             </div>
     </section>
 
+    <!-- display add comments -->
+    <div class="row text-center">
+        {% if app.user %}
+            <div class="col-sm-10 col-md-8 mx-auto">
+                {{ form_start(formComment) }}
+                {{ form_widget(formComment) }}
+                <button type="submit" class="btn btn-success col-sm-s8 mx-auto">Laisser un commentaire</button>
+                {{ form_end(formComment) }}
+            </div>
+        {% else %}
+            <div class="col-sm-10 col-md-8 mx-auto">
+                <h3>Veuillez vous connecter pour laisser un commentaire</h3>
+            </div>
+        {% endif %}
+    </div>
+
 
 
     <!-- display trick comments -->
@@ -65,11 +81,7 @@
             </div>
         {% endfor %}
     </section>
-    {% if app.user %}
-        {{ form_start(formComment) }}
 
 
-        {{ form_end(formComment) }}
-    {% endif %}
 
 {% endblock %}
