@@ -1,5 +1,12 @@
 {% extends'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    {{ encore_entry_link_tags('comment') }}
+
+{% endblock %}
+
 {% block body %}
 
     <h2>{{ trick.name }}</h2>
@@ -12,7 +19,7 @@
     <h5>{{ trick.description | raw }}</h5>
     <div class="metadata">Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans
         la catégorie
-        {{ trick.category.title }}</div>
+        <strong>{{ trick.category.title }}</strong></div>
 
     <img src="{{ UploadDirectory ~ trick.mainImage }}" alt="" class="mb-5" style="width: 100%">
 

@@ -1,19 +1,22 @@
-<div class="jumbotron">
-<div class="comment">
+
+<div class="container">
     <div class="row">
-        <div class="col-lg-5">
-            <div class="row">
-                {{ comment.user.username }} (<small>{{ comment.createdAt | date('d/m/Y') }}</small>)
+        <div class="col-sm-1">
+            <div class="thumbnail">
+                <img class="img-responsive user-photo" src="{{ UploadPicture ~ comment.user.photo }}" alt="" width="30%">
             </div>
-            <div class="row">
-                <div class="col-5">
-                    <img src="{{ UploadPicture ~ comment.user.photo }}" alt="" class="img-thumbnail" style="width: 30%">
-                </div class="col-5">
-                <div class="col align-items-center">
+        </div>
+        <div class="col-sm-5">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>{{ comment.user.username }}</strong>
+                    <span class="text-muted">commenté le 5 days ago{{ comment.createdAt | date('d/m/Y') }}</span>
+                </div>
+                <div class="panel-body">
                     {{ comment.content | raw }}
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+
+
