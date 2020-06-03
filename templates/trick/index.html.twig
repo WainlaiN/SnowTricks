@@ -18,7 +18,7 @@
     tempore. A ad modi temporibus!</p>
 
 
-    <div class="container">
+    <div class="container" id="trick">
         <div class="row flex">
             {% for trick in tricks %}
                 {% include 'trick/_trick.html.twig' %}
@@ -30,9 +30,8 @@
     <div class="row">
         <div class="col-12 text-center">
             <button id="loadMoreTricks" class="btn btn-primary">Voir plus de tricks</button>
+            <a href="#trick"><i id="arrow-up" class="fas fa-arrow-up fa-3x float-right"></i></a>
         </div>
     </div>
-    <a href="#tricks"><i id="arrow-up" class="fas fa-arrow-up fa-3x float-right"></i></a></div>
-
 
 {% endblock %}
