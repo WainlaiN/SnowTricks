@@ -23,7 +23,7 @@ class SecurityController extends AbstractController
         Request $request,
         EntityManagerInterface $manager,
         UserPasswordEncoderInterface $encoder,
-        UploadHelper $uploadImage
+        UploadHelper $uploadHelper
     ) {
 
         $user = new User();
@@ -38,14 +38,11 @@ class SecurityController extends AbstractController
             $user->setPassword($hash);
 
             //get Picture in form
-            $file = $user->getFile();
-            //save Picture in directory
-            $name = md5(uniqid()) . '.' . $file->guessExtension();
-            //set Path to User picture
-            $path = 'uploads/pictures';
-            $file->move($path, $name);
-            // Set Picture to User
-            $user->setPhoto($name);
+            $pictureFile = $user->getFile();
+            //save MainImage in directory
+            $PictureImage = $uploadHelper->savePicture($pictureFile);
+            //set Picture to User
+            $user->setPhoto($PictureImage);
 
             $manager->persist($user);
             $manager->flush();
