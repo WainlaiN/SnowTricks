@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Image;
 
+
 class TrickType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -53,7 +54,9 @@ class TrickType extends AbstractType
                 [
                     'required' => false,
                     'mapped' => false,
-
+                    'constraints' => [
+                        new Image()
+                    ]
                 ]
             )
             ->add(
