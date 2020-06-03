@@ -1,0 +1,19 @@
+<div class="jumbotron">
+<div class="comment">
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="row">
+                {{ comment.user.username }} (<small>{{ comment.createdAt | date('d/m/Y') }}</small>)
+            </div>
+            <div class="row">
+                <div class="col-5">
+                    <img src="{{ UploadPicture ~ comment.user.photo }}" alt="" class="img-thumbnail" style="width: 30%">
+                </div class="col-5">
+                <div class="col align-items-center">
+                    {{ comment.content | raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

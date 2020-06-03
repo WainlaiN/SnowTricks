@@ -1,10 +1,6 @@
 {% extends'base.html.twig' %}
 
-
-
 {% block body %}
-
-
 
     <h2>{{ trick.name }}</h2>
     {% if app.user %}
@@ -63,32 +59,12 @@
         {% endif %}
     </div>
 
-
-
     <!-- display trick comments -->
     <section id="commentaires">
         <h1>{{ trick.comments | length }} Commentaires</h1>
         {% for comment in trick.comments %}
-            <div class="comment">
-                <div class="row">
-                    <div class="col-lg-5">
-                        <div class="row">
-                            {{ comment.user.username }} (<small>{{ comment.createdAt | date('d/m/Y') }}</small>)
-                        </div>
-                        <div class="row">
-                            <div class="col-5">
-                                <img src="{{ UploadPicture ~ comment.user.photo }}" alt="" class="img-thumbnail" style="width: 30%">
-                            </div class="col-5">
-                            <div class="col align-items-center">
-                                {{ comment.content | raw }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% include 'trick/_comment.html.twig' %}
         {% endfor %}
     </section>
-
-
 
 {% endblock %}
