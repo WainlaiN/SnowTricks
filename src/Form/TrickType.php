@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
 
 class TrickType extends AbstractType
 {
@@ -51,7 +52,10 @@ class TrickType extends AbstractType
                 FileType::class,
                 [
                     'required' => false,
-                    'mapped' => false
+                    'mapped' => false,
+                    'constraints' => [
+                        New Image()
+                    ]
                 ]
             )
             ->add(
