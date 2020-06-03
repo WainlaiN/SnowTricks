@@ -53,9 +53,7 @@ class TrickType extends AbstractType
                 [
                     'required' => false,
                     'mapped' => false,
-                    'constraints' => [
-                        New Image()
-                    ]
+
                 ]
             )
             ->add(
