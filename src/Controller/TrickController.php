@@ -170,6 +170,7 @@ class TrickController extends AbstractController
     }
 
     /**
+     * @Route("/trick/{id}/delete", name="trick_delete")
      * @IsGranted("ROLE_ADMIN")
      */
     public function delete()
