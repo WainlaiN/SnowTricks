@@ -3,12 +3,13 @@
 
 namespace App\Services;
 
+use App\Entity\Image;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadHelper
 {
-    const IMAGEDIR = '/uploads/images';
-    const PICTUREDIR = '/uploads/pictures';
+    const IMAGE_DIR = '/uploads/images';
+    const PICTURE_DIR = '/uploads/pictures';
     /**
      * @var string
      */
@@ -20,11 +21,11 @@ class UploadHelper
 
     }
 
-    public function saveImage($image)
+    public function saveImage($image): Image
     {
 
         //get the image directory
-        $destination = $this->uploadPath.self::IMAGEDIR;
+        $destination = $this->uploadPath.self::IMAGE_DIR;
         // get the uploaded file from the Image object
         $file = $image->getFile();
         // set a filename
@@ -43,7 +44,7 @@ class UploadHelper
     public function saveMainFile(UploadedFile $uploadedFile)
     {
         //get the image directory
-        $destination = $this->uploadPath.self::IMAGEDIR;
+        $destination = $this->uploadPath.self::IMAGE_DIR;
         // set a filename
         $filename = md5(uniqid()) . '.' . $uploadedFile->guessExtension();
         // move the file
@@ -58,7 +59,7 @@ class UploadHelper
     public function savePicture(UploadedFile $uploadedFile)
     {
         //get the Picture directory
-        $destination = $this->uploadPath.self::PICTUREDIR;
+        $destination = $this->uploadPath.self::PICTURE_DIR;
         // set a filename
         $filename = md5(uniqid()) . '.' . $uploadedFile->guessExtension();
         // move the file
