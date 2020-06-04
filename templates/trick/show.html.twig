@@ -8,74 +8,75 @@
 
 
 {% block body %}
-
-    <h2>{{ trick.name }}</h2>
-    {% if app.user %}
-        <div class="operations">
-            <a href="{{ path('trick_edit', {'id': trick.id}) }}"><i class="fa fa-pencil">edit</i></a>
-            <a href="{{ path('trick_delete', {'id': trick.id}) }}"
-               onclick="return confirm(`Êtes-vous sûr de vouloir supprimer le trick : {{ trick.name }} ?`)"><i
-                        class="fas fa-trash-alt">delete</i></a>
-        </div>
-    {% endif %}
-    <h5>{{ trick.description | raw }}</h5>
-    <div class="metadata">Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans
-        la catégorie
-        <strong>{{ trick.category.title }}</strong></div>
-
-    <img src="{{ UploadDirectory ~ trick.mainImage }}" alt="" class="mb-5" style="width: 50%">
-
-    <!-- display trick images -->
-    <section id="images">
-        <div class="container">
-            <div class="d-flex align-content-start flex-wrap">
-                {% for image in trick.images %}
-                    <div class="p-2">
-                        <img src="{{ UploadDirectory ~ image.imageFilename }}" alt="" width="150">
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    <!-- display trick videos -->
-    <section id="videos">
-        <div class="container">
-            <div class="d-flex align-content-start flex-wrap">
-                {% for video in trick.videos %}
-                    <div class="trickVideo m-1">
-                        <iframe width="320" height="280" src="{{ video.videoUrl }}" frameborder="0"
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                    </div>
-                {% endfor %}
-            </div>
-    </section>
-
-    <!-- display add comments -->
-    <div class="row text-center">
+    <div class="container">
+        <h2>{{ trick.name }}</h2>
         {% if app.user %}
-            <div class="col-sm-10 col-md-8 mx-auto">
-                {{ form_start(formComment) }}
-                {{ form_widget(formComment) }}
-                <button type="submit" class="btn btn-success col-sm-s8 mx-auto">Laisser un commentaire</button>
-                {{ form_end(formComment) }}
-            </div>
-        {% else %}
-            <div class="col-sm-10 col-md-8 mx-auto">
-                <h3>Veuillez vous connecter pour laisser un commentaire</h3>
+            <div class="operations">
+                <a href="{{ path('trick_edit', {'slug': trick.slug}) }}"><i class="fa fa-pencil">edit</i></a>
+                <a href="{{ path('trick_delete', {'id': trick.id}) }}"
+                   onclick="return confirm(`Êtes-vous sûr de vouloir supprimer le trick : {{ trick.name }} ?`)"><i
+                            class="fas fa-trash-alt">delete</i></a>
             </div>
         {% endif %}
-    </div>
+        <h5>{{ trick.description | raw }}</h5>
+        <div class="metadata">Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans
+            la catégorie
+            <strong>{{ trick.category.title }}</strong></div>
 
-    <!-- display trick comments -->
-    <section id="commentaires">
-        <h1>{{ trick.comments | length }} Commentaires</h1>
-        <div class="container">
-            {% for comment in trick.comments %}
-                {% include 'trick/_comment.html.twig' %}
-            {% endfor %}
+        <img src="{{ UploadDirectory ~ trick.mainImage }}" alt="" class="mb-5" style="width: 50%">
+
+        <!-- display trick images -->
+        <section id="images">
+            <div class="container">
+                <div class="d-flex align-content-start flex-wrap">
+                    {% for image in trick.images %}
+                        <div class="p-2">
+                            <img src="{{ UploadDirectory ~ image.imageFilename }}" alt="" width="150">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- display trick videos -->
+        <section id="videos">
+            <div class="container">
+                <div class="d-flex align-content-start flex-wrap">
+                    {% for video in trick.videos %}
+                        <div class="trickVideo m-1">
+                            <iframe width="320" height="280" src="{{ video.videoUrl }}" frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                        </div>
+                    {% endfor %}
+                </div>
+        </section>
+
+        <!-- display add comments -->
+        <div class="row text-center">
+            {% if app.user %}
+                <div class="col-sm-10 col-md-8 mx-auto">
+                    {{ form_start(formComment) }}
+                    {{ form_widget(formComment) }}
+                    <button type="submit" class="btn btn-success col-sm-s8 mx-auto">Laisser un commentaire</button>
+                    {{ form_end(formComment) }}
+                </div>
+            {% else %}
+                <div class="col-sm-10 col-md-8 mx-auto">
+                    <h3>Veuillez vous connecter pour laisser un commentaire</h3>
+                </div>
+            {% endif %}
         </div>
-    </section>
+
+        <!-- display trick comments -->
+        <section id="commentaires">
+            <h1>{{ trick.comments | length }} Commentaires</h1>
+            <div class="container">
+                {% for comment in trick.comments %}
+                    {% include 'trick/_comment.html.twig' %}
+                {% endfor %}
+            </div>
+        </section>
+    </div>
 
 {% endblock %}

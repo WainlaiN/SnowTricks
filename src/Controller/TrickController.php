@@ -62,7 +62,7 @@ class TrickController extends AbstractController
                 'Votre article a bien été ajouté !'
             );
 
-            return $this->redirectToRoute('trick_show', ['id' => $trick->getId()]);
+            return $this->redirectToRoute('trick_show', ['slug' => $trick->getSlug()]);
         }
 
         return $this->render(
@@ -73,7 +73,7 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/trick/{id}/edit", name="trick_edit")
+     * @Route("/trick/{slug}/edit", name="trick_edit")
      * @IsGranted("ROLE_ADMIN")
      */
     public function edit(
@@ -122,7 +122,7 @@ class TrickController extends AbstractController
                 'Votre article a bien été modifié !'
             );
 
-            return $this->redirectToRoute('trick_show', ['id' => $trick->getId()]);
+            return $this->redirectToRoute('trick_show', ['slug' => $trick->getSlug()]);
         }
 
         return $this->render(
@@ -136,11 +136,11 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/trick/{id}", name="trick_show")
+     * @Route("/trick/{slug}", name="trick_show")
      */
-    public function show($id, TrickRepository $repo, Request $request, EntityManagerInterface $manager)
+    public function show($slug, TrickRepository $repo, Request $request, EntityManagerInterface $manager)
     {
-        $trick = $repo->find($id);
+        $trick = $repo->findOneBySlug($slug);
         $comment = new Comment();
         $formComment = $this->createForm(CommentType::class, $comment);
 
@@ -170,7 +170,7 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/trick/{id}/delete", name="trick_delete")
+     * @Route("/trick/{slug}/delete", name="trick_delete")
      * @IsGranted("ROLE_ADMIN")
      */
     public function delete()

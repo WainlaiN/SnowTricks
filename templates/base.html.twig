@@ -11,44 +11,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">SnowTricks</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
-            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarColor02">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('trick') }}">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('trick_create') }}">Créer un article</a>
-            </li>
-
-
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <ul class="navbar-nav mr-auto">
-                {% if not app.user %}
-                    <li class="nav-item">
-                        <a href="{{ path('security_registration') }}" class="nav-link">S'enregistrer</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ path('security_login') }}" class="nav-link">Connexion</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a href="{{ path('security_logout') }}" class="nav-link">Deconnexion</a>
-                    </li>
-                {% endif %}
-
-            </ul>
-
-        </form>
-    </div>
-</nav>
+{{ include('trick/_menu.html.twig') }}
 
 {% for message in app.flashes('notice') %}
     <div class="alert alert-success">
@@ -61,7 +24,9 @@
     </div>
 {% endfor %}
 
-    {% block body %}{% endblock %}
+{% block body %}{% endblock %}
+
+<footer></footer>
 
 {% block javascripts %}
     <script
