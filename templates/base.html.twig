@@ -60,9 +60,10 @@
         {{ message }}
     </div>
 {% endfor %}
-<div class="bg" id="bg"></div>
+<div class="bg" id="bg"><img src="{{ asset('build/home.jpg') }}" alt=""></div>
 
 <div class="container">
+
     {% block body %}{% endblock %}
 </div>
 
