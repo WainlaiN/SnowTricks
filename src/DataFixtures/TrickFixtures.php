@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use App\Entity\Image;
 use App\Services\Slugify;
 use App\Services\UploadHelper;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -60,7 +59,7 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
 
             $fs = new Filesystem();
             $targetPath = sys_get_temp_dir().'/'.$image;
-            $fs->copy(__DIR__.'/images/'.$image, $targetPath, true);
+            $fs->copy(__DIR__.'/mainImage/'.$image, $targetPath, true);
 
             $imageFileName = $this->uploadHelper->saveMainFile(new File($targetPath));
             $trick->setMainImage($imageFileName);

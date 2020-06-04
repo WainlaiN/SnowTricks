@@ -26,7 +26,6 @@ class VideoFixtures extends BaseFixture implements DependentFixtureInterface
         'https://www.youtube.com/embed/vZhf03Prvec',
         'https://www.youtube.com/embed/7b_o94_Xw0o',
         'https://www.youtube.com/embed/kb1WRcEn6FQ',
-
     ];
 
 
