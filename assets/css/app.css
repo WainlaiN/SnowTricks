@@ -5,7 +5,7 @@ body, html {
 
 .bg {
     /* The image used */
-    background-image: url("/public/uploads/home/snowboarding-wallpaper-background-hd-62843-64844-hd-wallpapers.jpg");
+    background-image: url("/public/uploads/home/home.jpg");
 
     /* Full height */
     height: 100%;
@@ -15,3 +15,4 @@ body, html {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
