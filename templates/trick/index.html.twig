@@ -3,33 +3,38 @@
 {% block title %}Bienvenue!{% endblock %}
 
 {% block body %}
+    <img class="bg" id="bg" src="{{ asset('build/images/home/home.jpg') }}" alt="">
+        <div class="container">
+        <h1>bienvenue dans ce blog</h1>
 
-    <h1>bienvenue dans ce blog</h1>
-
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto commodi cupiditate esse est facere fugiat
-        illo
-        incidunt inventore libero modi molestias mollitia neque nisi numquam placeat quas qui quibusdam quod ratione
-        reiciendis repellat reprehenderit, saepe totam unde voluptate voluptatibus!</p><p>Animi atque, beatae deleniti
-    id
-    inventore magni minus molestiae nemo nihil provident quae qui quibusdam ratione reiciendis sed! Culpa deserunt eos
-    et nihil placeat quaerat, reiciendis? Architecto consequuntur eaque eius fugit natus non officia praesentium
-    tempore. A ad modi temporibus!</p>
-
-
-    <div class="container" id="trick">
-        <div class="row flex">
-            {% for trick in tricks %}
-                {% include 'trick/_trick.html.twig' %}
-            {% endfor %}
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto commodi cupiditate esse est facere
+            fugiat
+            illo
+            incidunt inventore libero modi molestias mollitia neque nisi numquam placeat quas qui quibusdam quod ratione
+            reiciendis repellat reprehenderit, saepe totam unde voluptate voluptatibus!</p>
+        <p>Animi atque, beatae deleniti
+            id
+            inventore magni minus molestiae nemo nihil provident quae qui quibusdam ratione reiciendis sed! Culpa
+            deserunt eos
+            et nihil placeat quaerat, reiciendis? Architecto consequuntur eaque eius fugit natus non officia praesentium
+            tempore. A ad modi temporibus!</p>
         </div>
-    </div>
 
-
-    <div class="row">
-        <div class="col-12 text-center">
-            <button id="loadMoreTricks" class="btn btn-primary">Voir plus de tricks</button>
-            <a href="#trick"><i id="arrow-up" class="fas fa-arrow-up fa-3x float-right"></i></a>
+        <div class="container" id="trick">
+            <h1 style="text-align: center">Voici la liste des Tricks</h1>
+            <div class="row flex row-cols-lg-4 row-cols-sm-2 mb-4">
+                {% for trick in tricks %}
+                    {% include 'trick/_trick.html.twig' %}
+                {% endfor %}
+            </div>
         </div>
-    </div>
+
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <button id="loadMoreTricks" class="btn btn-primary">Voir plus de tricks</button>
+                <a href="#trick"><i id="arrow-up" class="fas fa-arrow-up fa-3x float-right"></i></a>
+            </div>
+        </div>
 
 {% endblock %}
