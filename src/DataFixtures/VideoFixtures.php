@@ -13,7 +13,7 @@ class VideoFixtures extends BaseFixture implements DependentFixtureInterface
     {
 
         //publish many videos
-        $this->createMany(Video::class,100,function (Video $video, $count) {
+        $this->createMany(Video::class,30,function (Video $video, $count) {
 
             $video->setVideoURL("https://www.youtube.com/embed/1TJ08caetkw")
                 ->setTrick($this->getRandomReference(Trick::class));

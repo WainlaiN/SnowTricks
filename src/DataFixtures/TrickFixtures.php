@@ -69,19 +69,7 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
             //store for usage later as App\Entity\ClassName_#COUNT#
             $this->addReference(Trick::class.'_'.$i, $trick);
         }
-
-        /**$this->createMany(Trick::class, 10, function (Trick $trick, $count) {
-         *
-         * $content = '<p>'.join($this->faker->paragraphs(2), '</p><p>').'</p>';
-         * $trick->setName($this->faker->sentence())
-         * ->setDescription($content)
-         * ->setCreatedAt($this->faker->dateTimeBetween('-6 months'))
-         * ->setCategory($this->getRandomReference(Category::class));
-         *
-         *
-         * });**/
         $manager->flush();
-
     }
 
     public function getDependencies()

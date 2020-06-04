@@ -3,26 +3,70 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use App\Services\UploadHelper;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 
 class UserFixtures extends BaseFixture
 {
-    private $users = [];
+    private static $picture = [
+        '1.jpg',
+        '2.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg',
+        '6.jpg',
+        '7.jpg',
+        '8.jpg',
+        '9.jpg',
+        '10.jpg',
+    ];
+
+    private $uploadHelper;
+
+    public function __construct(UploadHelper $uploadHelper)
+    {
+        $this->uploadHelper = $uploadHelper;
+    }
 
     public function loadData(ObjectManager $manager)
     {
 
-        //publish many users
-        $this->createMany(User::class, 10, function (User $user, $count) {
-
+        //publish many tricks
+        for ($i = 0; $i <= 9; $i++) {
+            $user = new user();
             $user->setEmail($this->faker->email)
                 ->setUsername($this->faker->userName)
-                ->setPassword($this->faker->password)
-                ->setPhoto("https://www.lepetitlitteraire.fr/uploads/images/author/anonyme.jpeg");
+                ->setPassword($this->faker->password);
 
-        });
+            $picture = self::$picture[$i];
+
+            $fs = new Filesystem();
+            $targetPath = sys_get_temp_dir().'/'.$picture;
+            $fs->copy(__DIR__.'/pictures/'.$picture, $targetPath, true);
+
+            $photo = $this->uploadHelper->savePicture(new File($targetPath));
+            $user->setPhoto($photo);
+
+            $this->manager->persist($user);
+            //store for usage later as App\Entity\ClassName_#COUNT#
+            $this->addReference(User::class.'_'.$i, $user);
+        }
 
         $manager->flush();
     }
 }
+
+
+
+//publish many users
+/**$this->createMany(User::class, 10, function (User $user, $count) {
+ *
+ * $user->setEmail($this->faker->email)
+ * ->setUsername($this->faker->userName)
+ * ->setPassword($this->faker->password)
+ * ->setPhoto("https://www.lepetitlitteraire.fr/uploads/images/author/anonyme.jpeg");
+ *
+ * });**/

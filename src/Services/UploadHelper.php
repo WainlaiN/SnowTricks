@@ -56,14 +56,14 @@ class UploadHelper
         return $filename;
     }
 
-    public function savePicture(UploadedFile $uploadedFile)
+    public function savePicture(File $file)
     {
         //get the Picture directory
         $destination = $this->uploadPath.self::PICTURE_DIR;
         // set a filename
-        $filename = md5(uniqid()) . '.' . $uploadedFile->guessExtension();
+        $filename = md5(uniqid()) . '.' . $file->guessExtension();
         // move the file
-        $uploadedFile->move(
+        $file->move(
             $destination,
             $filename
         );
