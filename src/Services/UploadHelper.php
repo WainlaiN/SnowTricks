@@ -1,9 +1,9 @@
 <?php
 
-
 namespace App\Services;
 
 use App\Entity\Image;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadHelper
@@ -41,14 +41,14 @@ class UploadHelper
         return $image;
     }
 
-    public function saveMainFile(UploadedFile $uploadedFile)
+    public function saveMainFile(File $file)
     {
         //get the image directory
         $destination = $this->uploadPath.self::IMAGE_DIR;
         // set a filename
-        $filename = md5(uniqid()) . '.' . $uploadedFile->guessExtension();
+        $filename = md5(uniqid()) . '.' . $file->guessExtension();
         // move the file
-        $uploadedFile->move(
+        $file->move(
             $destination,
             $filename
         );

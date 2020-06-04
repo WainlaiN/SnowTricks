@@ -2,10 +2,10 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    {{ encore_entry_link_tags('comment') }}
 
+    {{ encore_entry_link_tags('comment') }}
 {% endblock %}
+
 
 {% block body %}
 
@@ -13,7 +13,9 @@
     {% if app.user %}
         <div class="operations">
             <a href="{{ path('trick_edit', {'id': trick.id}) }}"><i class="fa fa-pencil">edit</i></a>
-            <a href="{{ path('trick_delete', {'id': trick.id}) }}" onclick="return confirm(`Êtes-vous sûr de vouloir supprimer le trick : {{trick.name}} ?`)"><i class="fas fa-trash-alt">delete</i></a>
+            <a href="{{ path('trick_delete', {'id': trick.id}) }}"
+               onclick="return confirm(`Êtes-vous sûr de vouloir supprimer le trick : {{ trick.name }} ?`)"><i
+                        class="fas fa-trash-alt">delete</i></a>
         </div>
     {% endif %}
     <h5>{{ trick.description | raw }}</h5>
@@ -21,7 +23,7 @@
         la catégorie
         <strong>{{ trick.category.title }}</strong></div>
 
-    <img src="{{ UploadDirectory ~ trick.mainImage }}" alt="" class="mb-5" style="width: 100%">
+    <img src="{{ UploadDirectory ~ trick.mainImage }}" alt="" class="mb-5" style="width: 50%">
 
     <!-- display trick images -->
     <section id="images">
@@ -69,9 +71,11 @@
     <!-- display trick comments -->
     <section id="commentaires">
         <h1>{{ trick.comments | length }} Commentaires</h1>
-        {% for comment in trick.comments %}
-            {% include 'trick/_comment.html.twig' %}
-        {% endfor %}
+        <div class="container">
+            {% for comment in trick.comments %}
+                {% include 'trick/_comment.html.twig' %}
+            {% endfor %}
+        </div>
     </section>
 
 {% endblock %}

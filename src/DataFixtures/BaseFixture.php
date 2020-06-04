@@ -6,11 +6,12 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
+use App\Services\UploadHelper;
 
 abstract class BaseFixture extends Fixture
 {
     /** @var ObjectManager */
-    private $manager;
+    protected $manager;
 
     /** @var Generator */
     protected $faker;
@@ -23,7 +24,6 @@ abstract class BaseFixture extends Fixture
     {
         $this->manager = $manager;
         $this->faker = Factory::create('fr_FR');
-
         $this->loadData($manager);
     }
 

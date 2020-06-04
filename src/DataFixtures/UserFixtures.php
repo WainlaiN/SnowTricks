@@ -8,6 +8,8 @@ use Doctrine\Persistence\ObjectManager;
 
 class UserFixtures extends BaseFixture
 {
+    private $users = [];
+
     public function loadData(ObjectManager $manager)
     {
 
