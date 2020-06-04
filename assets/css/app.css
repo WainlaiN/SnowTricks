@@ -1,3 +1,17 @@
-body {
-    background-color: #2B3E50;
+
+body, html {
+    height: 100%;
+}
+
+.bg {
+    /* The image used */
+    background-image: url("/public/uploads/home/snowboarding-wallpaper-background-hd-62843-64844-hd-wallpapers.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

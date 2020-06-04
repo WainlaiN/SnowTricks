@@ -36,7 +36,7 @@ class UserFixtures extends BaseFixture
 
         //publish many tricks
         for ($i = 0; $i <= 9; $i++) {
-            $user = new user();
+            $user = new User();
             $user->setEmail($this->faker->email)
                 ->setUsername($this->faker->userName)
                 ->setPassword($this->faker->password);
@@ -59,14 +59,3 @@ class UserFixtures extends BaseFixture
     }
 }
 
-
-
-//publish many users
-/**$this->createMany(User::class, 10, function (User $user, $count) {
- *
- * $user->setEmail($this->faker->email)
- * ->setUsername($this->faker->userName)
- * ->setPassword($this->faker->password)
- * ->setPhoto("https://www.lepetitlitteraire.fr/uploads/images/author/anonyme.jpeg");
- *
- * });**/

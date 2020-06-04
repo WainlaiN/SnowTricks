@@ -2,10 +2,9 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}Bienvenue!{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
-
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
 
@@ -61,6 +60,8 @@
         {{ message }}
     </div>
 {% endfor %}
+<div class="bg" id="bg"></div>
+
 <div class="container">
     {% block body %}{% endblock %}
 </div>
