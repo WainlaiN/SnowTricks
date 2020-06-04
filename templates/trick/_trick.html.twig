@@ -1,5 +1,5 @@
-<div class="col-3">
-    <div class="card mb-4">
+
+    <div class="card">
         <img class="card-img-top" src="{{ UploadDirectory ~ trick.mainImage }}" alt="Card image cap"
              style="max-height: 150px">
         <div class="card-body">
@@ -17,9 +17,9 @@
             </h4>
             <p class="card-text">
                 {{ trick.description | striptags  | slice(0, 50) ~ '...' }}
-                <a href="{{ path('trick_show', {'id': trick.id}) }}" class="btn btn-primary">Lire la
-                    suite</a>
+
             </p>
+            <span><a href="{{ path('trick_show', {'id': trick.id}) }}" class="btn btn-primary" id="btn-suite">Lire la
+                    suite</a></span>
         </div>
     </div>
-</div>
