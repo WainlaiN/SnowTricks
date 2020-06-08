@@ -81,10 +81,11 @@ class TrickController extends AbstractController
         Request $request,
         EntityManagerInterface $manager,
         UploadHelper $uploadHelper,
-        TrickRepository $repo
+        TrickRepository $repo,
+        $slug
     ) {
 
-        $trick = $repo->find($trick);
+        $trick = $repo->findOneBySlug($slug);
         $form = $this->createForm(TrickType::class, $trick);
 
         $form->handleRequest($request);
@@ -138,7 +139,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/{slug}", name="trick_show")
      */
-    public function show($slug, TrickRepository $repo, Request $request, EntityManagerInterface $manager)
+    public function show(TrickRepository $repo, Request $request, EntityManagerInterface $manager, $slug)
     {
         $trick = $repo->findOneBySlug($slug);
         $comment = new Comment();

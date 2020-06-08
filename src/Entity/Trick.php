@@ -259,7 +259,7 @@ class Trick
     }
 
     /**
-     * Initialisation du slug avant un persist ou un update
+     * Initialize slug before persist or update
      *
      * @ORM\PrePersist
      * @ORM\PreUpdate
