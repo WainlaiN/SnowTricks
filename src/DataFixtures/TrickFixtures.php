@@ -34,6 +34,16 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
         'methodair.jpg',
         'backsideair.jpg',
     ];
+    private static $description = [
+        'Saisie de la carre frontside de la planche entre les deux pieds avec la main avant',
+        'Saisie de la carre frontside de la planche, entre les deux pieds, avec la main arrière',
+        'Saisie de la carre frontside de la planche entre les deux pieds avec la main avant',
+        'Saisie de la carre backside de la planche entre les deux pieds avec la main arrière',
+        'Saisie de la partie arrière de la planche, avec la main arrière',
+        'Saisie de la partie avant de la planche, avec la main avant',
+        'Saisie de la carre backside de la planche entre les deux pieds avec la main arrière',
+        'Saisie de la carre frontside de la planche, entre les deux pieds, avec la main arrière',
+    ];
 
     private $uploadHelper;
 
@@ -47,10 +57,8 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
         //publish many tricks
         for ($i = 0; $i <= 7; $i++) {
             $trick = new Trick();
-            $trick->setName(self::$tricksDemoNames[$i]);
-
-            $content = '<p>'.join($this->faker->paragraphs(2), '</p><p>').'</p>';
-            $trick->setDescription($content)
+            $trick->setName(self::$tricksDemoNames[$i])
+                ->setDescription(self::$description[$i])
                 ->setCreatedAt(new \DateTime())
                 ->setSlug(Slugify::slugify($trick->getName()))
                 ->setCategory($this->getRandomReference(Category::class));
