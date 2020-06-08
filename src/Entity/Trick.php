@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
+ * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("name", message="Nom de figure dejà utilisé")
  * @UniqueEntity("slug", message= "slug deja utilisé")
  */
@@ -268,7 +269,8 @@ class Trick
     {
         if(empty($this->slug))
         {
-            $this->slug = slugify::slugify($this->name);
+            $slug = slugify::slugify($this->name);
+            $this->setSlug($slug);
         }
     }
 
