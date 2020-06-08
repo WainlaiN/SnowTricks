@@ -173,8 +173,18 @@ class TrickController extends AbstractController
      * @Route("/trick/{slug}/delete", name="trick_delete")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function delete()
+    public function delete(TrickRepository $repo, Request $request, EntityManagerInterface $manager, $slug)
     {
+        $trick = $repo->findOneBySlug($slug);
+
+        $manager->remove($trick);
+        $manager->flush();
+
+        $this->addFlash('success', "Le trick {$trick->getName()} a été supprimé avec succès !");
+
+        return $this->redirectToRoute('trick');
+
+
 
     }
 
