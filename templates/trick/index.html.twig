@@ -23,11 +23,15 @@
     <h1 style="text-align: center;margin-bottom: 20px">Découvrez nos Tricks</h1>
     <div class="container cards" id="trick">
 
-            <!-- Display Tricks -->
-            {% for trick in tricks %}
-                {% include 'trick/_trick.html.twig' %}
-            {% endfor %}
+        <!-- Display Tricks -->
+        {% for trick in tricks %}
+            {% include 'trick/_trick.html.twig' %}
+        {% endfor %}
 
+    </div>
+
+    <div class="container align-items-center">
+        <button class="btn-alert">Load More</button>
     </div>
 
 {% endblock %}
