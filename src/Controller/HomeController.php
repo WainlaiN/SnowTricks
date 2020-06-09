@@ -13,7 +13,7 @@ class HomeController extends AbstractController
      */
     public function index(TrickRepository $repo)
     {
-        $tricks = $repo->findAll();
+        $tricks = $repo->findFirstFour();
 
         return $this->render(
             'trick/index.html.twig',

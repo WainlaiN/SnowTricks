@@ -27,12 +27,22 @@
             </div>
         {% endif %}
 
-        <img src="{{ UploadDirectory ~ trick.mainImage }}" alt="" class="mb-5" style="width: 50%">
+
+        <div class="col-lg-6">
+            <img src="{{ UploadDirectory ~ trick.mainImage }}" class="mb-5" style="width: 100%" alt="">
+        </div>
 
 
-        <!-- display trick images -->
-        <h2>Images</h2>
-        {% include 'trick/_carousel.html.twig' %}
+        <!-- display trick images & videos -->
+        <div class="row">
+            <div class="col-lg-6" id="image">
+                {% include 'trick/_carouselImage.html.twig' %}
+            </div>
+            <div class="col-lg-6" id="image">
+                {% include 'trick/_carouselVideo.html.twig' %}
+            </div>
+
+        </div>
 
 
         {#<section id="images">

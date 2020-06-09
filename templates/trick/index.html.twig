@@ -10,31 +10,24 @@
     </div>
 
     <div class="container">
-        <h1>Bienvenue dans ce blog</h1>
+        <h1>Bienvenue sur le site communautaire SnowTricks !</h1>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto commodi cupiditate esse est facere
             fugiat
             illo
             incidunt inventore libero modi molestias mollitia neque nisi numquam placeat quas qui quibusdam quod ratione
             reiciendis repellat reprehenderit, saepe totam unde voluptate voluptatibus!</p>
-        <p>Animi atque, beatae deleniti
-            id
-            inventore magni minus molestiae nemo nihil provident quae qui quibusdam ratione reiciendis sed! Culpa
-            deserunt eos
-            et nihil placeat quaerat, reiciendis? Architecto consequuntur eaque eius fugit natus non officia praesentium
-            tempore. A ad modi temporibus!</p>
+        </p>
     </div>
 
-    <h1 style="text-align: center">Tricks</h1>
-    <div class="container">
+    <h1 style="text-align: center;margin-bottom: 20px">Découvrez nos Tricks</h1>
+    <div class="container cards" id="trick">
 
-    <div class="col-sm-3">
+            <!-- Display Tricks -->
             {% for trick in tricks %}
                 {% include 'trick/_trick.html.twig' %}
             {% endfor %}
 
-
     </div>
-
 
 {% endblock %}

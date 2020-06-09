@@ -18,4 +18,29 @@ img#bg {
     left: 1800px;
 }
 
+.collapse-content .fa.fa-heart:hover {
+    color: #f44336 !important;
+}
+.collapse-content .fa.fa-share-alt:hover {
+    color: #0d47a1 !important;
+}
+.cards {
 
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    grid-auto-rows: auto;
+
+    grid-gap: 1rem;
+
+}
+.card {
+
+    border: 2px solid #e7e7e7;
+
+    border-radius: 4px;
+
+    padding: .5rem;
+
+}

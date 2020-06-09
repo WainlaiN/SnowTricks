@@ -56,4 +56,13 @@ class TrickRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
             ;
     }
+
+    public function findFirstFour()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult();
+    }
 }
