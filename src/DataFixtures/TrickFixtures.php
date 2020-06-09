@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
+use App\Entity\User;
 use App\Services\Slugify;
 use App\Services\UploadHelper;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -61,7 +62,8 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
                 ->setDescription(self::$description[$i])
                 ->setCreatedAt(new \DateTime())
                 ->setSlug(Slugify::slugify($trick->getName()))
-                ->setCategory($this->getRandomReference(Category::class));
+                ->setCategory($this->getRandomReference(Category::class))
+                ->setUserId($this->getRandomReference(User::class));
 
             $image = self::$mainImages[$i];
 
@@ -81,7 +83,7 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return [CategoryFixtures::class];
+        return [CategoryFixtures::class, UserFixtures::class];
     }
 
 

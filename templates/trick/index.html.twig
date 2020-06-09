@@ -4,10 +4,10 @@
 
 {% block body %}
 
-        <img class="responsive" id="bg" src="{{ asset('build/images/home/home.jpg') }}" alt="">
-        <div class="row responsive" id="buttonDown">
-            <a href="#trick"><i id="arrow-down" class="fas fa-arrow-down fa-3x float-right"></i></a>
-        </div>
+    <img class="responsive" id="bg" src="{{ asset('build/images/home/home.jpg') }}" alt="">
+    <div class="row responsive" id="buttonDown">
+        <a href="#trick"><i id="arrow-down" class="fas fa-arrow-down fa-3x float-right"></i></a>
+    </div>
 
     <div class="container">
         <h1>Bienvenue dans ce blog</h1>
@@ -25,13 +25,16 @@
             tempore. A ad modi temporibus!</p>
     </div>
 
-    <div class="container" id="trick">
-        <h1 style="text-align: center">Tricks</h1>
-        <div class="row flex row-cols-lg-3 row-cols-sm-2">
+    <h1 style="text-align: center">Tricks</h1>
+    <div class="container">
+
+    <div class="col-sm-3">
             {% for trick in tricks %}
                 {% include 'trick/_trick.html.twig' %}
             {% endfor %}
-        </div>
+
+
     </div>
+
 
 {% endblock %}

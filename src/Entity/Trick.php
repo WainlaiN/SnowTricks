@@ -86,6 +86,12 @@ class Trick
      */
     private $file;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tricks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $userId;
+
 
     public function __construct()
     {
@@ -320,6 +326,18 @@ class Trick
     public function setMainImage($mainImage)
     {
         $this->mainImage = $mainImage;
+
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(?User $userId): self
+    {
+        $this->userId = $userId;
 
         return $this;
     }
