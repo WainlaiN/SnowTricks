@@ -22,8 +22,11 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
         '720',
         'Backflip',
         'Tail slide',
-        'Method air',
-        'Backside air',
+        'Method Air',
+        'Backside Air',
+        'Sad Grab',
+        'Truck Driver'
+
     ];
     private static $mainImages = [
         'mute.jpg',
@@ -34,6 +37,8 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
         'tailslide.jpg',
         'methodair.jpg',
         'backsideair.jpg',
+        'sad.jpg',
+        'truckdriver.jpg'
     ];
     private static $description = [
         'Saisie de la carre frontside de la planche entre les deux pieds avec la main avant',
@@ -44,6 +49,8 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
         'Saisie de la partie avant de la planche, avec la main avant',
         'Saisie de la carre backside de la planche entre les deux pieds avec la main arrière',
         'Saisie de la carre frontside de la planche, entre les deux pieds, avec la main arrière',
+        'Saisie de la carre backside de la planche, entre les deux pieds, avec la main avant',
+        'Saisie du carre avant et carre arrière avec chaque main (comme tenir un volant de voiture)'
     ];
 
     private $uploadHelper;
