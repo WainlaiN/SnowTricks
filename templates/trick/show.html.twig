@@ -3,8 +3,8 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('comment') }}
     {{ encore_entry_link_tags('carousel') }}
+    {{ encore_entry_link_tags('comment') }}
 {% endblock %}
 
 
@@ -52,11 +52,11 @@
             {% endif %}
 
 
-            <div class="container">
+
                 {% for comment in trick.comments %}
                     {% include 'trick/_comment.html.twig' %}
                 {% endfor %}
-            </div>
+
         </div>
     </div>
 

@@ -15,18 +15,21 @@
 
 <!-- comments container -->
 
-    {{ form_start(formComment) }}
-    <!-- used by #{user} to create a new comment -->
-    <div class="create_new_comment">
+{{ form_start(formComment) }}
+<!-- used by #{user} to create a new comment -->
+<div class="create_new_comment">
+    <div class="row">
 
         <!-- current #{user} avatar -->
         <div class="user_avatar">
             <img src="{{ UploadPicture ~ app.user.photo }}" alt="">
-        </div>{{ form_widget(formComment) }}
-        <div class="input_comment">
-            <input type="text" placeholder="Join the conversation..">
         </div>
-
+        <div class="input_comment">
+            {{ form_widget(formComment) }}
+        </div>
+        <button type="submit" class="btn btn-success col-sm-s8 mx-auto">Laisser un commentaire</button>
     </div>
 
-    {{ form_end(formComment) }}
+</div>
+
+{{ form_end(formComment) }}
