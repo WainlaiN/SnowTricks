@@ -1,6 +1,21 @@
 <section class="carousel" aria-label="Gallery">
+    {% set count = 1 %}
+    <!-- Set main image as First image -->
     <ol class="carousel__viewport">
-        {% set count = 0 %}
+        <li id="carousel__slide0"
+            tabindex="0"
+            class="carousel__slide">
+            <div class="carousel__snapper">
+                <a href="#carousel__slide{{ count }}"
+                   class="carousel__prev">Go to last slide</a>
+                <img width="100%" src="{{ UploadDirectory ~ trick.mainImage }}" alt="test"/>
+                <a href="#carousel__slide{{ count+1 }}"
+                   class="carousel__next">Go to next slide</a>
+            </div>
+        </li>
+        {% set count = 1 %}
+
+        <!-- Display other images -->
         {% for image in trick.images %}
             <li id="carousel__slide{{ count }}"
                 tabindex="{{ count }}"

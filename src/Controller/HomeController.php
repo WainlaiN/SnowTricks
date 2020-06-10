@@ -13,10 +13,11 @@ class HomeController extends AbstractController
      */
     public function index(TrickRepository $repo)
     {
-        $tricks = $repo->findFirstFour();
+        //$tricks = $repo->findFirstFour();
+        $tricks = $repo->findBy([], ['createdAt' => 'DESC'], 4, 0);
 
         return $this->render(
-            'trick/index.html.twig',
+            'home/index.html.twig',
             [
                 'controller_name' => 'TrickController',
                 'tricks' => $tricks,
@@ -24,7 +25,12 @@ class HomeController extends AbstractController
         );
     }
 
-    public function loadMoreTricks(TrickRepository $repo, $start = 15)
+    /**
+     * Get the 4 next tricks in the database and create a Twig file with them that will be displayed via Javascript
+     *
+     * @Route("/{start}", name="loadMoreTricks", requirements={"start": "\d+"})
+     */
+    public function loadMoreTricks(TrickRepository $repo, $start = 4)
     {
         // Get 15 tricks from the start position
         $tricks = $repo->findBy([], ['createdAt' => 'DESC'], 15, $start);

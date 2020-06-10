@@ -103,12 +103,12 @@ ol, li {
     position: relative;
     flex: 0 0 100%;
     width: 100%;
-    background-color: #f99;
+    background-color: transparent;
     counter-increment: item;
 }
 
 .carousel__slide:nth-child(even) {
-    background-color: #99f;
+    background-color: transparent;
 }
 
 .carousel__slide:before {
@@ -132,9 +132,9 @@ ol, li {
 
 @media (hover: hover) {
     .carousel__snapper {
-        /*animation-name: tonext, snap;*/
+        animation-name: tonext, snap;
         animation-timing-function: ease;
-        animation-duration: 2s;
+        animation-duration: 4s;
         animation-iteration-count: infinite;
     }
 

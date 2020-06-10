@@ -1,20 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Bienvenue!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <img class="responsive" id="bg" src="{{ asset('build/images/home/home.jpg') }}" alt="">
+    <div class="row responsive" id="buttonDown">
+        <a href="#trickList"><i id="arrow-down" class="fas fa-arrow-down fa-3x float-right"></i></a>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/SnowTricks/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/SnowTricks/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="container">
+        <h1>Bienvenue sur le site communautaire SnowTricks !</h1>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto commodi cupiditate esse est facere
+            fugiat
+            illo
+            incidunt inventore libero modi molestias mollitia neque nisi numquam placeat quas qui quibusdam quod ratione
+            reiciendis repellat reprehenderit, saepe totam unde voluptate voluptatibus!</p>
+        </p>
+    </div>
+
+    <h1 style="text-align: center;margin-bottom: 20px">Découvrez nos Tricks</h1>
+    <div class="container cards" id="trickList">
+
+        <!-- Display Tricks -->
+        {% for trick in tricks %}
+            {% include 'trick/_trick.html.twig' %}
+        {% endfor %}
+
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <button id="loadMoreTricks" class="btn btn-primary">Voir plus de tricks</button>
+        </div>
+    </div>
+    <div><a href="#trickList"><i id="arrow-up" class="fas fa-arrow-up fa-3x float-right"></i></a></div>
+
 {% endblock %}
+
+

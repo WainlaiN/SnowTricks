@@ -10,69 +10,48 @@
 
 {% block body %}
     <div class="container">
-
-        <h2>Nom de la figure: {{ trick.name }}</h2>
-        <div class="metadata">Edité le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans
-            la catégorie
-            <strong>{{ trick.category.title }}</strong></div>
-        <br>
-        <div><h5>Description: {{ trick.description | raw }}</h5></div>
-        {% if app.user %}
-            <div class="float-right">
-                <a href="{{ path('trick_edit', {'slug': trick.slug}) }}"><i
-                            class="fas fa-pencil-alt"></i></a>
-                <a href="{{ path('trick_delete', {'slug': trick.slug}) }}"
-                   onclick="return confirm(`Êtes-vous sûr de vouloir supprimer le trick : {{ trick.name }} ?`)"><i
-                            class="fas fa-trash-alt"></i></a>
+        <div class="raw mt-5">
+            <h2>Nom de la figure: <strong>{{ trick.name }}</strong></h2>
+            <div class="metadata">Edité le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }}
+                dans
+                la catégorie
+                <strong>{{ trick.category.title }}</strong>
             </div>
-        {% endif %}
-
-
-        <div class="col-lg-6">
-            <img src="{{ UploadDirectory ~ trick.mainImage }}" class="mb-5" style="width: 100%" alt="">
+            {% if app.user %}
+                <div class="float-right">
+                    <a href="{{ path('trick_edit', {'slug': trick.slug}) }}"><i
+                                class="fas fa-pencil-alt"></i></a>
+                    <a href="{{ path('trick_delete', {'slug': trick.slug}) }}"
+                       onclick="return confirm(`Êtes-vous sûr de vouloir supprimer le trick : {{ trick.name }} ?`)"><i
+                                class="fas fa-trash-alt"></i></a>
+                </div>
+            {% endif %}
+        </div>
+        <br>
+        <div class="raw mt-3 mb-5">
+            <h5>Description: {{ trick.description | raw }}</h5>
         </div>
 
 
-        <!-- display trick images & videos -->
-        <div class="row">
+        <!-- Display Main trick images
+        <div class="col-lg-6">
+            <img src="{{ UploadDirectory ~ trick.mainImage }}" class="mb-5" style="width: 100%" alt="">
+        </div> -->
+
+
+        <!-- Display trick images & videos -->
+        <div class="row mt-5">
             <div class="col-lg-6" id="image">
                 {% include 'trick/_carouselImage.html.twig' %}
             </div>
-            <div class="col-lg-6" id="image">
+            <div class="col-lg-6" id="video">
                 {% include 'trick/_carouselVideo.html.twig' %}
             </div>
 
         </div>
 
-        <!-- display trick videos -->
-        <section id="videos">
-            <div class="container">
-                <div class="d-flex align-content-start flex-wrap">
-                    {% for video in trick.videos %}
-                        <div class="trickVideo m-1">
-                            <iframe width="320" height="280" src="{{ video.videoUrl }}" frameborder="0"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
-                        </div>
-                    {% endfor %}
-                </div>
-        </section>
-
-        <!-- display add comments -->
-        <div class="row text-center">
-            {% if app.user %}
-                <div class="col-sm-10 col-md-8 mx-auto">
-                    {{ form_start(formComment) }}
-                    {{ form_widget(formComment) }}
-                    <button type="submit" class="btn btn-success col-sm-s8 mx-auto">Laisser un commentaire</button>
-                    {{ form_end(formComment) }}
-                </div>
-            {% else %}
-                <div class="col-sm-10 col-md-8 mx-auto">
-                    <h3>Veuillez vous connecter pour laisser un commentaire</h3>
-                </div>
-            {% endif %}
-        </div>
+        <!-- display formadd comments -->
+        {{ include('trick/_formComment.html.twig') }}
 
         <!-- display trick comments -->
         <section id="commentaires">
