@@ -10,55 +10,57 @@
 
 {% block body %}
     <div class="container">
-        <div class="raw mt-5">
-            <h2>Nom de la figure: <strong>{{ trick.name }}</strong></h2>
-            <div class="metadata">Edité le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }}
-                dans
-                la catégorie
-                <strong>{{ trick.category.title }}</strong>
+    <div class="raw mt-5">
+        <h2>Nom de la figure: <strong>{{ trick.name }}</strong></h2>
+        <div class="metadata">Edité le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }}
+            dans
+            la catégorie
+            <strong>{{ trick.category.title }}</strong>
+        </div>
+        {% if app.user %}
+            <div class="float-right">
+                <a href="{{ path('trick_edit', {'slug': trick.slug}) }}"><i
+                            class="fas fa-pencil-alt"></i></a>
+                <a href="{{ path('trick_delete', {'slug': trick.slug}) }}"
+                   onclick="return confirm(`Êtes-vous sûr de vouloir supprimer le trick : {{ trick.name }} ?`)"><i
+                            class="fas fa-trash-alt"></i></a>
             </div>
-            {% if app.user %}
-                <div class="float-right">
-                    <a href="{{ path('trick_edit', {'slug': trick.slug}) }}"><i
-                                class="fas fa-pencil-alt"></i></a>
-                    <a href="{{ path('trick_delete', {'slug': trick.slug}) }}"
-                       onclick="return confirm(`Êtes-vous sûr de vouloir supprimer le trick : {{ trick.name }} ?`)"><i
-                                class="fas fa-trash-alt"></i></a>
-                </div>
-            {% endif %}
-        </div>
-        <br>
-        <div class="raw mt-3 mb-5">
-            <h5>Description: {{ trick.description | raw }}</h5>
-        </div>
-
-        <!-- Display trick images & videos -->
-        <div class="row mt-5">
-            <div class="col-lg-6" id="image">
-                {% include 'trick/_carouselImage.html.twig' %}
-            </div>
-            <div class="col-lg-6" id="video">
-                {% include 'trick/_carouselVideo.html.twig' %}
-            </div>
-
-        </div>
-
-        <!-- display trick comments -->
-        <h1>{{ trick.comments | length }} Commentaires</h1>
-        <div class="comment_block">
-            <!-- display form add comments -->
-            {% if app.user %}
-                {{ include('trick/_formComment.html.twig') }}
-            {% endif %}
-
-
-
-                {% for comment in trick.comments %}
-                    {% include 'trick/_comment.html.twig' %}
-                {% endfor %}
-
-        </div>
+        {% endif %}
+    </div>
+    <br>
+    <div class="raw mt-3 mb-5">
+        <h5>Description: {{ trick.description | raw }}</h5>
     </div>
 
+    <!-- Display trick images & videos -->
+    <div class="row mt-5">
+        <div class="col-lg-6" id="image">
+            {% include 'trick/_carouselImage.html.twig' %}
+        </div>
+        <div class="col-lg-6" id="video">
+            {% include 'trick/_carouselVideo.html.twig' %}
+        </div>
+
+    </div>
+
+    <!-- display trick comments -->
+    <h1>{{ trick.comments | length }} Commentaires</h1>
+    <div class="comment_block">
+    <!-- display form add comments -->
+    {% if app.user %}
+        {{ include('trick/_formComment.html.twig') }}
+    {% endif %}
+
+    <div class="container">
+        <div class="row">
+            <div class="tab-pane active col-sm-11" id="comments-logout">
+                <ul class="media-list">
+                    {% for comment in trick.comments %}
+                        {% include 'trick/_comment.html.twig' %}
+                    {% endfor %}
+
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

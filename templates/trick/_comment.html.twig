@@ -1,33 +1,22 @@
-<!-- new comment -->
-<div class="new_comment">
+<li class="media">
+    <img class="media-object rounded-circle"
+         src="{{ UploadPicture ~ comment.user.photo }}" alt="profile">
 
-    <!-- build comment -->
-    <ul class="user_comment">
-        <div class="row">
-            <!-- current #{user} avatar -->
-            <div class="user_avatar">
-                <img src="{{ UploadPicture ~ comment.user.photo }}">
-            </div><!-- the comment body -->
-            <div class="comment_body">
-                <p><small>{{ comment.content | raw }}</small></p>
-            </div>
+    <div class="media-body">
+        <div class="well well-lg">
+            <h4 class="media-heading reviews">{{ comment.user.username }} </h4>
+            <ul class="media-date text-uppercase reviews list-inline">
+                <li class="dd">{{ comment.createdAt | date('d') }}</li>
+                <li class="mm">{{ comment.createdAt | date('m') }}</li>
+                <li class="aaaa">{{ comment.createdAt | date('Y') }}</li>
+            </ul>
+            <p class="media-comment">
+                <small>{{ comment.content | raw }}</small>
+            </p>
         </div>
+    </div>
+</li>
 
-        <!-- comments toolbar -->
-
-            <div class="comment_toolbar">
-
-                <!-- inc. date and time -->
-                <div class="comment_details">
-                    <ul>
-                        <li><i class="fa fa-calendar"></i>{{ comment.createdAt | date('d/m/Y') }}</li>
-                        <li><i class="fa fa-pencil-alt"></i><span class="user">{{ comment.user.username }}</span></li>
-                    </ul>
-                </div>
-            </div>
-
-    </ul>
-</div>
 
 
 

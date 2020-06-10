@@ -16,20 +16,12 @@
 <!-- comments container -->
 
 {{ form_start(formComment) }}
-<!-- used by #{user} to create a new comment -->
-<div class="create_new_comment">
-    <div class="row">
 
-        <!-- current #{user} avatar -->
-        <div class="user_avatar">
-            <img src="{{ UploadPicture ~ app.user.photo }}" alt="">
-        </div>
-        <div class="input_comment">
-            {{ form_widget(formComment) }}
-        </div>
-        <button type="submit" class="btn btn-success col-sm-s8 mx-auto">Laisser un commentaire</button>
-    </div>
 
+
+
+<div class="input-group">
+    <input class="form-control" placeholder="Add a comment" type="text">
+    <span class="input-group-addon">{{ form_widget(formComment) }}</span>
 </div>
-
 {{ form_end(formComment) }}
