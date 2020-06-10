@@ -32,13 +32,6 @@
             <h5>Description: {{ trick.description | raw }}</h5>
         </div>
 
-
-        <!-- Display Main trick images
-        <div class="col-lg-6">
-            <img src="{{ UploadDirectory ~ trick.mainImage }}" class="mb-5" style="width: 100%" alt="">
-        </div> -->
-
-
         <!-- Display trick images & videos -->
         <div class="row mt-5">
             <div class="col-lg-6" id="image">
@@ -50,18 +43,21 @@
 
         </div>
 
-        <!-- display formadd comments -->
-        {{ include('trick/_formComment.html.twig') }}
-
         <!-- display trick comments -->
-        <section id="commentaires">
-            <h1>{{ trick.comments | length }} Commentaires</h1>
+        <h1>{{ trick.comments | length }} Commentaires</h1>
+        <div class="comment_block">
+            <!-- display form add comments -->
+            {% if app.user %}
+                {{ include('trick/_formComment.html.twig') }}
+            {% endif %}
+
+
             <div class="container">
                 {% for comment in trick.comments %}
                     {% include 'trick/_comment.html.twig' %}
                 {% endfor %}
             </div>
-        </section>
+        </div>
     </div>
 
 

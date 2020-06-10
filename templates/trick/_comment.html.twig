@@ -1,21 +1,31 @@
+<!-- new comment -->
+<div class="new_comment">
 
-    <div class="row">
-        <div class="col-sm-2">
-            <div class="thumbnail">
-                <img class="img-responsive user-photo" src="{{ UploadPicture ~ comment.user.photo }}" alt="" width="100%">
+    <!-- build comment -->
+    <ul class="user_comment">
+
+        <!-- current #{user} avatar -->
+        <div class="user_avatar">
+            <img src="{{ UploadPicture ~ comment.user.photo }}">
+        </div><!-- the comment body -->
+        <div class="comment_body">
+            <p>{{ comment.content | raw }}</p>
+        </div>
+
+        <!-- comments toolbar -->
+        <div class="comment_toolbar">
+
+            <!-- inc. date and time -->
+            <div class="comment_details">
+                <ul>
+                    <li><i class="fa fa-calendar"></i>{{ comment.createdAt | date('d/m/Y') }}</li>
+                    <li><i class="fa fa-pencil-alt"></i> <span class="user">{{ comment.user.username }}</span></li>
+                </ul>
             </div>
         </div>
-        <div class="col-sm-10">
-            <div class="panel panel-default">
-                <div class="panel-heading"><strong>{{ comment.user.username }}</strong>
-                    <span class="text-muted">commenté le 5 days ago{{ comment.createdAt | date('d/m/Y') }}</span>
-                </div>
-                <div class="panel-body">
-                    {{ comment.content | raw }}
-                </div>
-            </div>
-        </div>
-    </div>
+    </ul>
+</div>
+
 
 
 
