@@ -29,6 +29,7 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('create', './assets/js/create.js')
+    .addEntry('loadbutton', './assets/js/load-more-button.js')
     .addStyleEntry('comment', './assets/css/comment.css')
     .addStyleEntry('carousel', './assets/css/carousel.css')
     //.addEntry('page2', './assets/js/page2.js')

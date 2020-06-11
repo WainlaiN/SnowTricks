@@ -63,7 +63,7 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
     public function loadData(ObjectManager $manager)
     {
         //publish many tricks
-        for ($i = 0; $i <= 7; $i++) {
+        for ($i = 0; $i <= 9; $i++) {
             $trick = new Trick();
             $trick->setName(self::$tricksDemoNames[$i])
                 ->setDescription(self::$description[$i])

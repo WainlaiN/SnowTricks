@@ -2,6 +2,13 @@
 
 {% block title %}Bienvenue!{% endblock %}
 
+{% block javascripts %}
+
+    {{ parent() }}
+    {{ encore_entry_script_tags('loadbutton') }}
+
+{% endblock %}
+
 {% block body %}
 
     <div>
@@ -34,7 +41,7 @@
 
     <div class="row mt-5">
         <div class="col-12 text-center">
-            <button id="loadMoreTricks" class="btn btn-primary">Voir plus de tricks</button>
+            <button id="loadMore" class="btn btn-primary">Voir plus de tricks</button>
         </div>
     </div>
     <div><a href="#trickList"><i id="arrow-up" class="fas fa-arrow-up fa-3x float-right"></i></a></div>
