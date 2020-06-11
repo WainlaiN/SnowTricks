@@ -5,6 +5,7 @@
     {{ parent() }}
     {{ encore_entry_link_tags('carousel') }}
     {{ encore_entry_link_tags('comment') }}
+    {{ encore_entry_script_tags('loadbutton') }}
 {% endblock %}
 
 
@@ -60,6 +61,12 @@
                     {% endfor %}
 
             </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <button id="loadMore" class="btn btn-primary">Voir plus de commentaires</button>
         </div>
     </div>
 
