@@ -1,4 +1,4 @@
-$( document ).ready(function () {
+$(document).ready(function () {
     $(".moreBox").slice(0, 4).show();
     if ($(".blogBox:hidden").length != 0) {
         $("#loadMore").show();
