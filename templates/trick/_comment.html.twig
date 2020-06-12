@@ -1,21 +1,52 @@
-<li class="media moreBox" style="display: none;">
-    <img class="media-object rounded-circle"
-         src="{{ UploadPicture ~ comment.user.photo }}" alt="profile">
+<!-- display trick comments -->
+<div class="comment_block">
+<h1>{{ trick.comments | length }} Commentaires</h1>
+    <!-- display form add comments -->
+    {% if app.user %}
+        {{ include('trick/_formComment.html.twig') }}
+    {% endif %}
 
-    <div class="media-body">
-        <div class="well well-lg">
-            <h4 class="media-heading reviews">{{ comment.user.username }} </h4>
-            <ul class="media-date text-uppercase reviews list-inline">
-                <li class="dd">{{ comment.createdAt | date('d') }}</li>
-                <li class="mm">{{ comment.createdAt | date('m') }}</li>
-                <li class="aaaa">{{ comment.createdAt | date('Y') }}</li>
-            </ul>
-            <p class="media-comment">
-                <small>{{ comment.content | raw }}</small>
-            </p>
+    <div class="container">
+        <div class="row">
+            <div class="tab-pane active col-sm-11" id="comments-logout">
+                <ul class="media-list">
+                    {% for comment in trick.comments %}
+                        <li class="media moreBox" style="display: none;">
+                            <img class="media-object rounded-circle"
+                                 src="{{ UploadPicture ~ comment.user.photo }}" alt="profile">
+
+                            <div class="media-body">
+                                <div class="well well-lg">
+                                    <h4 class="media-heading reviews">{{ comment.user.username }} </h4>
+                                    <ul class="media-date text-uppercase reviews list-inline">
+                                        <li class="dd">{{ comment.createdAt | date('d') }}</li>
+                                        <li class="mm">{{ comment.createdAt | date('m') }}</li>
+                                        <li class="aaaa">{{ comment.createdAt | date('Y') }}</li>
+                                    </ul>
+                                    <p class="media-comment">
+                                        <small>{{ comment.content | raw }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
-</li>
+
+    <!-- load more comments -->
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <button id="loadMore" class="btn btn-primary">Voir plus de commentaires</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 
 
 

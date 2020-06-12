@@ -1,13 +1,16 @@
 {% extends'base.html.twig' %}
 
-
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('comment') }}
     {{ encore_entry_link_tags('slickcss') }}
+
 {% endblock %}
 
 {% block body %}
+    <!-- Display main trick image -->
+    {#<div class="container-fluid"><img height="10%" src="{{ UploadDirectory ~ trick.mainImage }}" alt="test"/></div>#}
+
     <div class="container">
         <div class="raw mt-5">
             <h2>Nom de la figure: <strong>{{ trick.name }}</strong></h2>
@@ -28,46 +31,32 @@
             {% endif %}
         </div>
         <br>
+
+        <!-- trick description -->
         <div class="raw mt-3 mb-5">
             <h5>Description: {{ trick.description | raw }}</h5>
         </div>
 
-        <!-- Display trick images & videos -->
-        <div class="autoplay" id="fade">
-            {% for image in trick.images %}
-                <img width="100%" src="{{ UploadDirectory ~ image.imageFilename }}" alt="test"/>
+        <!-- Display trick images -->
+
+                {% for image in trick.images %}
+                    <img class="carousel__photo" src="{{ UploadDirectory ~ image.imageFilename }}" alt="test"/>
+                {% endfor %}
+
+
+        <!-- Display trick videos -->
+        {#<div class="single-item">
+            {% for video in trick.videos %}
+                <iframe width="30%" height="100%" src="{{ video.videoUrl }}" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
             {% endfor %}
 
+        </div>#}
 
-        </div>
+        <!-- Include comment template -->
+        {% include 'trick/_comment.html.twig' %}
 
-        <!-- display trick comments -->
-        <h1>{{ trick.comments | length }} Commentaires</h1>
-        <div class="comment_block">
-            <!-- display form add comments -->
-            {% if app.user %}
-                {{ include('trick/_formComment.html.twig') }}
-            {% endif %}
-
-            <div class="container">
-                <div class="row">
-                    <div class="tab-pane active col-sm-11" id="comments-logout">
-                        <ul class="media-list">
-                            {% for comment in trick.comments %}
-                                {% include 'trick/_comment.html.twig' %}
-                            {% endfor %}
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-5">
-                <div class="col-12 text-center">
-                    <button id="loadMore" class="btn btn-primary">Voir plus de commentaires</button>
-                </div>
-            </div>
-
-        </div>
     </div>
 
 {% endblock %}
@@ -75,8 +64,8 @@
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('slickjs') }}
-    {{ encore_entry_script_tags('slider') }}
     {{ encore_entry_script_tags('loadbutton') }}
+    {{ encore_entry_script_tags('slider') }}
 
 {% endblock %}
 

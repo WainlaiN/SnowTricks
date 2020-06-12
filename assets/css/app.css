@@ -38,3 +38,10 @@ img#bg {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+.action {
+    display: block;
+    margin: 100px auto;
+    width: 100%;
+    text-align: center;
+}
+
