@@ -14,6 +14,10 @@ class UploadHelper
      * @var string
      */
     private $uploadPath;
+    /**
+     * @var string
+     */
+    private $uploadPicture;
 
     public function __construct(string $uploadPath)
     {
