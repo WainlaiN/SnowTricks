@@ -11,8 +11,11 @@
   "build/slider.js": "/build/slider.js",
   "build/vendors~app.css": "/build/vendors~app.css",
   "build/vendors~app.js": "/build/vendors~app.js",
+  "build/vendors~create~edit~loadbutton~slickjs~slider.js": "/build/vendors~create~edit~loadbutton~slickjs~slider.js",
+  "build/vendors~create~edit~slickjs.js": "/build/vendors~create~edit~slickjs.js",
   "build/vendors~create~loadbutton~slickjs~slider.js": "/build/vendors~create~loadbutton~slickjs~slider.js",
   "build/vendors~create~slickjs.js": "/build/vendors~create~slickjs.js",
+  "build/vendors~edit.js": "/build/vendors~edit.js",
   "build/vendors~slickjs.js": "/build/vendors~slickjs.js",
   "build/fonts/fa-brands-400.woff2": "/build/fonts/fa-brands-400.31015e86.woff2",
   "build/fonts/fa-brands-400.ttf": "/build/fonts/fa-brands-400.5818bbd0.ttf",
@@ -30,8 +33,5 @@
   "build/images/fa-regular-400.svg": "/build/images/fa-regular-400.ab47faea.svg",
   "build/images/fa-solid-900.svg": "/build/images/fa-solid-900.18df003f.svg",
   "build/images/home/home.jpg": "/build/images/home/home.jpg",
-  "build/images/home/logo.png": "/build/images/home/logo.png",
-  "build/vendors~create~edit~loadbutton~slickjs~slider.js": "/build/vendors~create~edit~loadbutton~slickjs~slider.js",
-  "build/vendors~create~edit~slickjs.js": "/build/vendors~create~edit~slickjs.js",
-  "build/vendors~edit.js": "/build/vendors~edit.js"
+  "build/images/home/logo.png": "/build/images/home/logo.png"
 }
