@@ -20,10 +20,8 @@
                     <div class="p-2">
                         <img src="{{ UploadDirectory ~ image.imageFilename }}" alt="" width="150">
                         {% if app.user %}
-                            <div class="float-right">
-                                <a href="{{ path('image_delete', {id: image.id}) }}" data-delete><i
-                                            class="fas fa-trash-alt"></i></a>
-                            </div>
+                            <a href="{{ path('image_delete', {'id': image.id}) }}" data-delete><i
+                                        class="fas fa-trash-alt"></i></a>
                         {% endif %}
                     </div>
 
