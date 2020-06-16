@@ -56,6 +56,9 @@ class TrickType extends AbstractType
                     'mapped' => false,
                     'constraints' => [
                         new Image()
+                    ],
+                    'attr' => [
+                        'placeholder' => 'Image principale'
                     ]
                 ]
             )

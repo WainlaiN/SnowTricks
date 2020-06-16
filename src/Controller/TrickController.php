@@ -11,6 +11,7 @@ use App\Services\UploadHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -184,9 +185,24 @@ class TrickController extends AbstractController
         $this->addFlash('success', "Le trick {$trick->getName()} a été supprimé avec succès !");
 
         return $this->redirectToRoute('trick');
+    }
 
+    /**
+     * @Route("/delete/image/{id}", name="image_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function deleteImage(Image $image, Request $request, EntityManagerInterface $manager)
+    {
+        $data = json_decode($request->getContent(), true);
+        //delete the image in directory
+        unlink($this->getParameter('uploads-directory').'/'.$image->getImageFilename());
 
+        //remove image from database
+        $manager->remove($image);
+        $manager->flush();
 
+        //json response
+        return new JsonResponse(['success' => 1]);
     }
 
 }

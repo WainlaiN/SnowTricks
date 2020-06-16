@@ -6,17 +6,25 @@
 
         {{ form_row(formTrick.name) }}
         {{ form_row(formTrick.description) }}
-        {{ formTrick.vars.value.mainimage }}
+        {#{{ formTrick.vars.value.mainimage }}#}
+
+        {{ form_row(formTrick.category) }}
+        <div><img src="{{ UploadDirectory ~ trick.mainImage }}" alt="" width="150"</div>
         {{ form_widget(formTrick.file) }}
         {{ form_errors(formTrick.file) }}
-        {{ form_row(formTrick.category) }}
 
         <section id="images">
             <div class="d-flex align-content-start flex-wrap">
                 {% for image in trick.images %}
 
                     <div class="p-2">
-                        <img src="{{ image.imageFilename }}" alt="" width="150">
+                        <img src="{{ UploadDirectory ~ image.imageFilename }}" alt="" width="150">
+                        {% if app.user %}
+                            <div class="float-right">
+                                <a href="{{ path('image_delete', {id: image.id}) }}" data-delete><i
+                                            class="fas fa-trash-alt"></i></a>
+                            </div>
+                        {% endif %}
                     </div>
 
                 {% endfor %}
@@ -70,6 +78,7 @@
 
     {{ parent() }}
     {{ encore_entry_script_tags('create') }}
+    {{ encore_entry_script_tags('edit') }}
 
 {% endblock %}
 

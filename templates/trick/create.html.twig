@@ -2,56 +2,56 @@
 
 
 {% block body %}
+    <div class="container">
+
+        <h1>Ajouter l'article</h1>
+
+        {{ form_start(formTrick) }}
+
+        {{ form_row(formTrick.name) }}
+        {{ form_row(formTrick.category) }}
+        {{ form_row(formTrick.description) }}
+        {{ form_row(formTrick.file) }}
 
 
-    <h1>Ajouter l'article</h1>
+        <ul id="image-fields-list"
+            data-prototype="{{ form_widget(formTrick.images.vars.prototype)|e }}"
+            data-widget-tags="{{ '<li></li>'|e }}"
+            data-widget-counter="{{ formTrick.images|length }}">
+            {% for image in formTrick.images %}
+                <li>
+                    {{ form_errors(image) }}
+                    {{ form_label(image) }}
+                </li>
+            {% endfor %}
+        </ul>
 
-    {{ form_start(formTrick) }}
+        <button type="button"
+                class="add-another-collection-widget"
+                data-list-selector="#image-fields-list">Ajouter une image
+        </button>
+        <br>
+        <ul id="video-fields-list"
+            data-prototype="{{ form_widget(formTrick.videos.vars.prototype)|e }}"
+            data-widget-tags="{{ '<li></li>'|e }}"
+            data-widget-counter="{{ formTrick.videos|length }}">
+            {% for video in formTrick.videos %}
+                <li>
+                    {{ form_errors(video) }}
+                    {{ form_widget(video) }}
+                </li>
+            {% endfor %}
+        </ul>
 
-    {{ form_row(formTrick.name) }}
-    {{ form_row(formTrick.category) }}
-    {{ form_row(formTrick.description) }}
-    {{ form_row(formTrick.file) }}
+        <button type="button"
+                class="add-another-collection-widget"
+                data-list-selector="#video-fields-list">Ajouter une video
+        </button>
+        <br>
+        <button type="submit" class="btn btn-primary">Ajouter l'article</button>
 
-
-
-    <ul id="image-fields-list"
-        data-prototype="{{ form_widget(formTrick.images.vars.prototype)|e }}"
-        data-widget-tags="{{ '<li></li>'|e }}"
-        data-widget-counter="{{ formTrick.images|length }}">
-        {% for image in formTrick.images %}
-            <li>
-                {{ form_errors(image) }}
-                {{ form_label(image) }}
-            </li>
-        {% endfor %}
-    </ul>
-
-    <button type="button"
-            class="add-another-collection-widget"
-            data-list-selector="#image-fields-list">Ajouter une image
-    </button>
-    <br>
-    <ul id="video-fields-list"
-        data-prototype="{{ form_widget(formTrick.videos.vars.prototype)|e }}"
-        data-widget-tags="{{ '<li></li>'|e }}"
-        data-widget-counter="{{ formTrick.videos|length }}">
-        {% for video in formTrick.videos %}
-            <li>
-                {{ form_errors(video) }}
-                {{ form_widget(video) }}
-            </li>
-        {% endfor %}
-    </ul>
-
-    <button type="button"
-            class="add-another-collection-widget"
-            data-list-selector="#video-fields-list">Ajouter une video
-    </button>
-    <br>
-    <button type="submit" class="btn btn-primary">Ajouter l'article</button>
-
-    {{ form_end(formTrick) }}
+        {{ form_end(formTrick) }}
+    </div>
 {% endblock %}
 
 {% block javascripts %}

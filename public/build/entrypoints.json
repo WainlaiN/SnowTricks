@@ -2,58 +2,75 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/runtime.420770e4.js",
-        "/build/2.bb561c61.js",
-        "/build/app.eeb33fe6.js"
+        "/build/runtime.js",
+        "/build/vendors~app.js",
+        "/build/app.js"
       ],
       "css": [
-        "/build/2.21e06a9c.css",
-        "/build/app.1dafbd39.css"
+        "/build/vendors~app.css",
+        "/build/app.css"
       ]
     },
     "create": {
       "js": [
-        "/build/runtime.420770e4.js",
-        "/build/0.131cf955.js",
-        "/build/create.c8243d23.js"
+        "/build/runtime.js",
+        "/build/vendors~create~edit~loadbutton~slickjs~slider.js",
+        "/build/vendors~create~loadbutton~slickjs~slider.js",
+        "/build/vendors~create~edit~slickjs.js",
+        "/build/vendors~create~slickjs.js",
+        "/build/create.js"
+      ]
+    },
+    "edit": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~create~edit~loadbutton~slickjs~slider.js",
+        "/build/vendors~create~edit~slickjs.js",
+        "/build/vendors~edit.js",
+        "/build/edit.js"
       ]
     },
     "slickjs": {
       "js": [
-        "/build/runtime.420770e4.js",
-        "/build/0.131cf955.js",
-        "/build/1.77382f2d.js",
-        "/build/slickjs.94f43aa5.js"
+        "/build/runtime.js",
+        "/build/vendors~create~edit~loadbutton~slickjs~slider.js",
+        "/build/vendors~create~loadbutton~slickjs~slider.js",
+        "/build/vendors~create~edit~slickjs.js",
+        "/build/vendors~create~slickjs.js",
+        "/build/vendors~slickjs.js",
+        "/build/slickjs.js"
       ]
     },
     "slider": {
       "js": [
-        "/build/runtime.420770e4.js",
-        "/build/0.131cf955.js",
-        "/build/slider.356a22e2.js"
+        "/build/runtime.js",
+        "/build/vendors~create~edit~loadbutton~slickjs~slider.js",
+        "/build/vendors~create~loadbutton~slickjs~slider.js",
+        "/build/slider.js"
       ]
     },
     "loadbutton": {
       "js": [
-        "/build/runtime.420770e4.js",
-        "/build/0.131cf955.js",
-        "/build/loadbutton.fabcfcb2.js"
+        "/build/runtime.js",
+        "/build/vendors~create~edit~loadbutton~slickjs~slider.js",
+        "/build/vendors~create~loadbutton~slickjs~slider.js",
+        "/build/loadbutton.js"
       ]
     },
     "comment": {
       "js": [
-        "/build/runtime.420770e4.js"
+        "/build/runtime.js"
       ],
       "css": [
-        "/build/comment.98418789.css"
+        "/build/comment.css"
       ]
     },
     "slickcss": {
       "js": [
-        "/build/runtime.420770e4.js"
+        "/build/runtime.js"
       ],
       "css": [
-        "/build/slickcss.6156ec48.css"
+        "/build/slickcss.css"
       ]
     }
   }
