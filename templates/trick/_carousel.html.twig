@@ -1,22 +1,24 @@
-<div class="wrapper">
+<div class="carousel">
+    {% set count = 1 %}
 
-    <nav class="lil-nav">
-        {% set count = 0 %}
-        {% for image in trick.images %}
+    <div class="slider-outer">
+        <img class="prev" src="{{ asset('build/images/home/arrow-left.png') }}" alt="prev">
 
-            <a href="#image-{{ count }}">
-                <img class="lil-nav__img img" src={{ UploadDirectory ~ image.imageFilename }} alt="">
-            </a>
-            {% set count = count + 1 %}
-        {% endfor %}
-    </nav>
+        <div class="slider-inner">
+            {% for image in trick.images %}
+            <img src="{{ UploadDirectory ~ image.imageFilename }}" {% if count == 1 %} class="active" {% endif %}alt="test"/>
+                {% set count = count + 1 %}
+            {% endfor %}
+            {% for video in trick.videos %}
+                <iframe width="100%" height="100%" src="{{ video.videoUrl }}" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen> {% if count == 1 %} class="active" {% endif %}</iframe>
 
-    <div class="gallery">
-        {% set count = 0 %}
-        {% for image in trick.images %}
-            <img class="gallery__img img" src={{ UploadDirectory ~ image.imageFilename }} id="image-{{ count }}" alt="">
-            {% set count = count + 1 %}
-        {% endfor %}
+                {% set count = count + 1 %}
+            {% endfor %}
+        </div>
+
+        <img class="next" src="{{ asset('build/images/home/arrow-right.png') }}" alt="next">
     </div>
 
 </div>

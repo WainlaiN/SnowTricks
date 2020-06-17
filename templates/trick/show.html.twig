@@ -39,21 +39,9 @@
             <h5>Description:</h5> {{ trick.description | raw }}
         </div>
 
-        <!-- Display trick images -->
+        <!-- Display trick images and videos in carousel -->
+        {% include 'trick/_carousel.html.twig' %}
 
-        {% include 'trick/_carouselImage.html.twig' %}
-
-        <!-- Display trick videos -->
-        {#{% include 'trick/_carouselVideo.html.twig' %}#}
-
-        {#<div class="single-item">
-            {% for video in trick.videos %}
-                <iframe width="30%" height="100%" src="{{ video.videoUrl }}" frameborder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-            {% endfor %}
-
-        </div>#}
 
         <!-- Include comment template -->
         {% include 'trick/_comment.html.twig' %}

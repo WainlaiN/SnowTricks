@@ -9,7 +9,7 @@
     position: relative;
     overflow: hidden;
     float: left;
-    padding: 3px;
+    padding: 0px;
     border: #666 solid 1px;
 }
 .slider-inner img{
