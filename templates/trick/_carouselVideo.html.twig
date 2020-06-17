@@ -1,22 +1,20 @@
-<section class="carousel" aria-label="Gallery">
-    <ol class="carousel__viewport">
-        {% set count = 0 %}
-        {% for video in trick.videos %}
-            <li id="carousel__slide{{ count }}"
-                tabindex="{{ count }}"
-                class="carousel__slide">
-                <div class="carousel__snapper">
-                    <a href="#carousel__slide{{ count-1 }}"
-                       class="carousel__prev">Go to last slide</a>
-                    <iframe width="100%" height="100%" src="{{ video.videoUrl }}" frameborder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    <a href="#carousel__slide{{ count+1 }}"
-                       class="carousel__next">Go to next slide</a>
-                </div>
-            </li>
+<div class="carousel">
+    {% set count = 1 %}
 
-            {% set count = count + 1 %}
-        {% endfor %}
-    </ol>
-</section>
+    <div class="slider-outer">
+        <img class="prevVid" src="{{ asset('build/images/home/arrow-left.png') }}" alt="prev">
+
+        <div class="slider-inner">
+            {% for video in trick.videos %}
+                <iframe width="30%" height="100%" src="{{ video.videoUrl }}" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen> {% if count == 1 %} class="active" {% endif %}</iframe>
+
+                {% set count = count + 1 %}
+            {% endfor %}
+        </div>
+
+        <img class="nextVid" src="{{ asset('build/images/home/arrow-right.png') }}" alt="next">
+    </div>
+
+</div>

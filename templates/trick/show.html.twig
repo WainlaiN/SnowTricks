@@ -43,20 +43,17 @@
 
         {% include 'trick/_carouselImage.html.twig' %}
 
-                {#{% for image in trick.images %}
-                    <img class="carousel__photo" src="{{ UploadDirectory ~ image.imageFilename }}" alt="test"/>
-                {% endfor %}#}
-
-
         <!-- Display trick videos -->
-        <div class="single-item">
+        {#{% include 'trick/_carouselVideo.html.twig' %}#}
+
+        {#<div class="single-item">
             {% for video in trick.videos %}
                 <iframe width="30%" height="100%" src="{{ video.videoUrl }}" frameborder="0"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
             {% endfor %}
 
-        </div>
+        </div>#}
 
         <!-- Include comment template -->
         {% include 'trick/_comment.html.twig' %}

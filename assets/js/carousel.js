@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     $('.next').on('click', function () {
         var currentImg = $('.active');
         var nextImg = currentImg.next();
@@ -17,5 +18,4 @@ $(document).ready(function () {
             prevImg.addClass('active').css('z-index', 10);
         }
     });
-
 })
