@@ -44,4 +44,17 @@ img#bg {
     width: 100%;
     text-align: center;
 }
+.img-download {
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+.img-download .test {
+    position: absolute;
+    background: white;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}
 

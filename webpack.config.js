@@ -29,6 +29,7 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('create', './assets/js/create.js')
+    .addEntry('edit', './assets/js/edit.js')
     .addEntry('slickjs', './assets/js/slick.js')
     .addEntry('slider', './assets/js/slider.js')
     .addEntry('loadbutton', './assets/js/load-more-button.js')

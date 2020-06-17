@@ -24,20 +24,4 @@ class HomeController extends AbstractController
             ]
         );
     }
-
-    /**
-     * Get the 4 next tricks in the database and create a Twig file with them that will be displayed via Javascript
-     *
-     * @Route("/{start}", name="loadMoreTricks", requirements={"start": "\d+"})
-     */
-    public function loadMoreTricks(TrickRepository $repo, $start = 4)
-    {
-        // Get 15 tricks from the start position
-        $tricks = $repo->findBy([], ['createdAt' => 'DESC'], 15, $start);
-
-        return $this->render('home/loadMoreTricks.html.twig', [
-            'tricks' => $tricks
-        ]);
-    }
-
 }
