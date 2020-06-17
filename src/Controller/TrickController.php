@@ -49,6 +49,8 @@ class TrickController extends AbstractController
             $mainImage = $uploadHelper->saveMainFile($UploadedMain);
             //set MainImage to Trick
             $trick->setMainImage($mainImage);
+            //set user to Trick
+            $trick->setUserId($this->getUser());
 
             foreach ($trick->getImages() as $image) {
 
@@ -113,6 +115,8 @@ class TrickController extends AbstractController
             }
             $trick->setUpdatedAt(new \DateTime());
 
+            //set current user to trick
+            $trick->setUserId($this->getUser());
             //get MainImage in form
             $uploadedMain = $form->get('file')->getData();
             //check if it's a new uploaded Main file
