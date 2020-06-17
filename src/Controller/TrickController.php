@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Image;
+use App\Entity\Video;
 use App\Form\CommentType;
 use App\Form\TrickType;
 
@@ -78,7 +79,6 @@ class TrickController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      */
     public function edit(
-        Trick $trick,
         Request $request,
         EntityManagerInterface $manager,
         UploadHelper $uploadHelper,
@@ -94,13 +94,21 @@ class TrickController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             foreach ($trick->getImages() as $image) {
-
                 //check if it's a new uploaded file
                 if ($image->getFile()) {
 
                     $image = $uploadHelper->saveImage($image);
                     $image->setTrick($trick);
                     $manager->persist($image);
+                }
+            }
+
+            foreach ($trick->getVideos() as $video) {
+                //check if it's a new video URL
+                if ($video->getVideoURL()) {
+
+                    $video->setTrick($trick);
+                    $manager->persist($video);
                 }
             }
             $trick->setUpdatedAt(new \DateTime());
@@ -199,6 +207,22 @@ class TrickController extends AbstractController
 
         //remove image from database
         $manager->remove($image);
+        $manager->flush();
+
+        //json response
+        return new JsonResponse(['success' => 1]);
+    }
+
+    /**
+     * @Route("/delete/video/{id}", name="video_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function deleteVideo(Video $video, Request $request, EntityManagerInterface $manager)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        //remove image from database
+        $manager->remove($video);
         $manager->flush();
 
         //json response

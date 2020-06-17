@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
+    <div class="container" xmlns="http://www.w3.org/1999/html">
         {{ form_start(formTrick) }}
 
         {{ form_row(formTrick.name) }}
@@ -18,9 +18,9 @@
                 {% for image in trick.images %}
 
                     <div class="p-2">
-                        <img src="{{ UploadDirectory ~ image.imageFilename }}" alt="" width="150">
+                        <img class="img-download" src="{{ UploadDirectory ~ image.imageFilename }}" alt="" width="150">
                         {% if app.user %}
-                            <a href="{{ path('image_delete', {'id': image.id}) }}" data-delete><i
+                            <a class="test" href="{{ path('image_delete', {'id': image.id}) }}" data-delete><i
                                         class="fas fa-trash-alt"></i></a>
                         {% endif %}
                     </div>
@@ -48,6 +48,10 @@
                             <iframe width="240" height="180" src="{{ video.videoUrl }}" frameborder="0"
                                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen></iframe>
+                            {% if app.user %}
+                                <a class="test" href="{{ path('video_delete', {'id': video.id}) }}" data-delete><i
+                                            class="fas fa-trash-alt"></i></a>
+                            {% endif %}
                         </div>
                     {% endfor %}
                 </div>
@@ -65,8 +69,13 @@
         </section>
 
         <button type="submit" class="btn btn-primary">Editer l'article</button>
+
+        {# hide unwanted form#}
+        <div id="divCheckbox" style="display: none;">
+            {{ form_rest(formTrick) }}
+        </div>
         {{ form_end(formTrick) }}
-        {#{'render_rest': false}) }}#}
+
 
     </div>
 
