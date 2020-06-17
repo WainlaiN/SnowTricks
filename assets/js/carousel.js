@@ -18,4 +18,4 @@ $(document).ready(function () {
             prevImg.addClass('active').css('z-index', 10);
         }
     });
-})
+});
