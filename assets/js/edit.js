@@ -1,19 +1,19 @@
 window.onload = () => {
 
-    //gestion des boutons supprimer
+    //manage delete button
     let links = document.querySelectorAll("[data-delete]")
     console.log(links)
 
-    //on boucle sur links
+    //loop on links(data-delete) buttons
     for (link of links) {
-        //on écoute le clic
+        //listening to the click
         link.addEventListener("click", function (e) {
-            //on empeche le click
+            //prevent the click
             e.preventDefault()
 
-            //on demande confirmation
+            //ask for confirmation
             if (confirm("Voulez-vous supprimer cette image ?")) {
-                // on envoie une requete Ajax vers le href du lien avec la methode DELETE
+                //send AJAX request to the href with DELETE method
                 fetch(this.getAttribute("href"), {
                     method: "DELETE",
                     headers: {
@@ -21,7 +21,7 @@ window.onload = () => {
                         "Content-Type": "application/json"
                     }
                 }).then(
-                    //on recupere la reponse en JSON
+                    //get the JSON response
                     response => response.json()
                 ).then(data => {
                     if (data.success)
