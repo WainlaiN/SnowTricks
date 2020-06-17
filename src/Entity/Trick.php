@@ -26,7 +26,7 @@ class Trick
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min="10", max="255", minMessage="Au moins 10 caractères")
+     * @Assert\Length(min="3", max="255", minMessage="Au moins 3 caractères")
      */
     private $name;
 
