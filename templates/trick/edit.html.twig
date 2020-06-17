@@ -5,9 +5,9 @@
         {{ form_start(formTrick) }}
 
         {{ form_row(formTrick.name) }}
+        {{ form_errors(formTrick.name) }}
         {{ form_row(formTrick.description) }}
-        {#{{ formTrick.vars.value.mainimage }}#}
-
+        {{ form_errors(formTrick.description) }}
         {{ form_row(formTrick.category) }}
         <div><img src="{{ UploadDirectory ~ trick.mainImage }}" alt="" width="150"</div>
         {{ form_widget(formTrick.file) }}

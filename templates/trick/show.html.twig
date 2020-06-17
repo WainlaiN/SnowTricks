@@ -9,7 +9,9 @@
 
 {% block body %}
     <!-- Display main trick image -->
-    {#<div class="container-fluid"><img height="10%" src="{{ UploadDirectory ~ trick.mainImage }}" alt="test"/></div>#}
+    <div class="main" style="max-height: 200px">
+        <img src="{{ UploadDirectory ~ trick.mainImage }}" alt="test"/>
+    </div>
 
     <div class="container">
         <div class="raw mt-5">
@@ -34,7 +36,7 @@
 
         <!-- trick description -->
         <div class="raw mt-3 mb-5">
-            <h5>Description: {{ trick.description | raw }}</h5>
+            <h5>Description:</h5> {{ trick.description | raw }}
         </div>
 
         <!-- Display trick images -->
