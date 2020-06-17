@@ -3,7 +3,7 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('comment') }}
-    {{ encore_entry_link_tags('slickcss') }}
+    {{ encore_entry_link_tags('carousel') }}
 
 {% endblock %}
 
@@ -41,9 +41,11 @@
 
         <!-- Display trick images -->
 
-                {% for image in trick.images %}
+        {% include 'trick/_carouselImage.html.twig' %}
+
+                {#{% for image in trick.images %}
                     <img class="carousel__photo" src="{{ UploadDirectory ~ image.imageFilename }}" alt="test"/>
-                {% endfor %}
+                {% endfor %}#}
 
 
         <!-- Display trick videos -->
@@ -65,9 +67,8 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('slickjs') }}
     {{ encore_entry_script_tags('loadbutton') }}
-    {{ encore_entry_script_tags('slider') }}
+    {{ encore_entry_script_tags('carouselJs') }}
 
 {% endblock %}
 

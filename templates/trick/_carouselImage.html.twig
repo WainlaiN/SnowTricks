@@ -1,1 +1,17 @@
+<div class="carousel">
+    {% set count = 1 %}
 
+    <div class="slider-outer">
+        <img class="prev" src="{{ asset('build/images/home/arrow-left.png') }}" alt="prev">
+
+        <div class="slider-inner">
+            {% for image in trick.images %}
+            <img src="{{ UploadDirectory ~ image.imageFilename }}" {% if count == 1 %} class="active" {% endif %}alt="test"/>
+                {% set count = count + 1 %}
+            {% endfor %}
+        </div>
+
+        <img class="next" src="{{ asset('build/images/home/arrow-right.png') }}" alt="next">
+    </div>
+
+</div>

@@ -30,14 +30,11 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('create', './assets/js/create.js')
     .addEntry('edit', './assets/js/edit.js')
-    .addEntry('slickjs', './assets/js/slick.js')
-    .addEntry('slider', './assets/js/slider.js')
     .addEntry('loadbutton', './assets/js/load-more-button.js')
+    .addEntry('carouselJs', './assets/js/carousel.js')
 
     .addStyleEntry('comment', './assets/css/comment.css')
-    .addStyleEntry('slickcss', './assets/css/slick.css')
-
-    //.addEntry('page2', './assets/js/page2.js')
+    .addStyleEntry('carousel', './assets/css/carousel.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
