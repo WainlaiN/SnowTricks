@@ -14,9 +14,11 @@ img#bg {
 .collapse-content .fa.fa-heart:hover {
     color: #f44336 !important;
 }
+
 .collapse-content .fa.fa-share-alt:hover {
     color: #0d47a1 !important;
 }
+
 .cards {
 
     display: grid;
@@ -24,11 +26,16 @@ img#bg {
     grid-auto-rows: auto;
     grid-gap: 1rem;
 }
+
 .card {
     /*border: 2px solid #e7e7e7 ;*/
     border-radius: 6px;
     /*padding: .5rem;*/
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card-body {
+    padding: 0.5rem !important;
 }
 
 .btn.btn-flat {
@@ -38,12 +45,14 @@ img#bg {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+
 .action {
     display: block;
     margin: 100px auto;
     width: 100%;
     text-align: center;
 }
+
 .img-download {
     display: block;
     position: relative;
@@ -56,5 +65,15 @@ img#bg {
     bottom: 0;
     left: 0;
     z-index: 2;
+}
+
+.float {
+    display: inline-block;
+    margin: 0 0 10px 0;
+    padding: 3px 6px;
+    border: medium none;
+    cursor: pointer;
+    float: right;
+    padding-left: 1em;
 }
 

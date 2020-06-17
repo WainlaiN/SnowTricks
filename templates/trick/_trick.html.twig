@@ -4,12 +4,12 @@
         <img src="{{ UploadPicture ~ trick.userId.photo }}" class="rounded-circle mr-3" height="50px" width="50px"
              alt="avatar">
         <div>
-            <h4 class="card-title font-weight-bold mb-2">{{ trick.name | slice(0, 20) }}</h4>
+            <h5 class="card-title font-weight-bold mb-2">{{ trick.name | slice(0, 20) }}</h5>
             <p class="card-text"><i class="far fa-clock pr-2"></i>{{ trick.createdAt | date('d/m/Y') }}</p>
         </div>
-        <div>
+
             {% if app.user %}
-                <div class="float-right -align-right">
+                <div class="float">
                     <a href="{{ path('trick_edit', {'slug': trick.slug}) }}"><i
                                 class="fas fa-pencil-alt"></i></a>
                     <a href="{{ path('trick_delete', {'slug': trick.slug}) }}"
@@ -17,7 +17,7 @@
                                 class="fas fa-trash"></i></a>
                 </div>
             {% endif %}
-        </div>
+
     </div>
 
     <div class="view overlay">
