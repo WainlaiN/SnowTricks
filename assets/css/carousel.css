@@ -27,12 +27,12 @@
 }
 .prev {
     position: relative;
-    margin-right: -45px;
+    margin-right: -46px;
     z-index: 100;
 }
 .next {
     position: relative;
-    margin-left: -45px;
+    margin-left: -46px;
     z-index: 100;
 }
 
