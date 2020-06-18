@@ -9,8 +9,8 @@
 
 {% block body %}
     <!-- Display main trick image -->
-    <div class="main" style="max-height: 200px">
-        <img src="{{ UploadDirectory ~ trick.mainImage }}" alt="test"/>
+    <div class="main" style="max-height: 200px; background-image:url('{{ UploadDirectory ~ trick.mainImage }}')">
+        {#<img src="{{ UploadDirectory ~ trick.mainImage }}" alt="test"/>#}
     </div>
 
     <div class="container">
