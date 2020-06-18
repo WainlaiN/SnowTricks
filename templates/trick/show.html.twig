@@ -2,8 +2,8 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('comment') }}
-    {{ encore_entry_link_tags('carousel') }}
+    {#{{ encore_entry_link_tags('comment') }}
+    {{ encore_entry_link_tags('carousel') }}#}
 
 {% endblock %}
 
@@ -52,8 +52,8 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('loadbutton') }}
-    {{ encore_entry_script_tags('carouselJs') }}
+{#{{ encore_entry_script_tags('loadbutton') }}
+    {{ encore_entry_script_tags('carouselJs') }}#}
 
 {% endblock %}
 

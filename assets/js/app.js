@@ -8,8 +8,16 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import '../css/app.css';
 
+
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 //import $ from 'jquery';
 
 require('@fortawesome/fontawesome-free/css/all.min.css');
 require('@fortawesome/fontawesome-free/js/all.js');
+require('../css/carousel.css');
+require('../css/comment.css');
+
+require('../js/load-more-button');
+require('../js/carousel');
+require('../js/edit');
+require('../js/create');
