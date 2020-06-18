@@ -28,10 +28,10 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
-    //.addEntry('create', './assets/js/create.js')
-    //.addEntry('edit', './assets/js/edit.js')
-    //.addEntry('loadbutton', './assets/js/load-more-button.js')
-    //.addEntry('carouselJs', './assets/js/carousel.js')
+    .addEntry('create', './assets/js/create.js')
+    .addEntry('edit', './assets/js/edit.js')
+    .addEntry('loadbutton', './assets/js/load-more-button.js')
+    .addEntry('carouselJs', './assets/js/carousel.js')
 
     //.addStyleEntry('comment', './assets/css/comment.css')
     //.addStyleEntry('carousel', './assets/css/carousel.css')

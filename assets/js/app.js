@@ -17,7 +17,3 @@ require('@fortawesome/fontawesome-free/js/all.js');
 require('../css/carousel.css');
 require('../css/comment.css');
 
-require('../js/load-more-button');
-require('../js/carousel');
-require('../js/edit');
-require('../js/create');
