@@ -77,7 +77,6 @@ img#bg {
     padding-left: 1em;
 }
 .main {
-    /*display: flex;*/
     width: 100%;
     background-size: cover;
     background-position: center;
@@ -85,18 +84,7 @@ img#bg {
     height: 400px;
     overflow: hidden;
 }
-/*.main img {
-    display: block;
-    left: -100%;
-    right: -100%;
-    top: -100%;
-    bottom: -100%;
-    width: 50%;
-    margin: auto;
-    width: auto;
-    height: auto;
-    transform: translateY(-20%);
-}*/
+
 
 
 
