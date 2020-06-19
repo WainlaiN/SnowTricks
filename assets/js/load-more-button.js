@@ -13,6 +13,6 @@ $(document).ready(function () {
     });
     $("#buttonUp").on('click', function (e) {
         $("#buttonUp").hide();
-        $(".moreBox").slice(0, 4).hide();
+        $(".moreBox").slice(4, 8).hide();
     });
 });
