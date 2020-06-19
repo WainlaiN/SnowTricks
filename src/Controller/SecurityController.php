@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Form\ResetPasswordType;
 use App\Repository\UserRepository;
 use App\Services\UploadHelper;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,8 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
 
 
 class SecurityController extends AbstractController
@@ -27,7 +28,8 @@ class SecurityController extends AbstractController
         EntityManagerInterface $manager,
         UserPasswordEncoderInterface $encoder,
         UploadHelper $uploadHelper,
-        \Swift_Mailer $mailer
+        \Swift_Mailer $mailer,
+        TokenGeneratorInterface $tokenGenerator
     ) {
 
         $user = new User();
@@ -43,7 +45,7 @@ class SecurityController extends AbstractController
             $user->setPassword($hash);
 
             //generate Activation Token
-            $user->setActivationToken(md5(uniqid()));
+            $user->setActivationToken($tokenGenerator->generateToken());
 
             //get Picture in form
             $pictureFile = $user->getFile();
@@ -63,11 +65,11 @@ class SecurityController extends AbstractController
                 ->setTo($user->getEmail())
                 ->setBody(
                     $this->renderView(
-                        'email/activation.html.twig', ['token' => $user->getActivationToken()]
+                        'email/activation.html.twig',
+                        ['token' => $user->getActivationToken()]
                     ),
                     'text/html'
-                )
-            ;
+                );
             $mailer->send($message);
 
             $this->addFlash(
@@ -122,7 +124,7 @@ class SecurityController extends AbstractController
     {
         $user = $userRepository->findOneBy(['activationToken' => $token]);
 
-        if (!$user){
+        if (!$user) {
             throw $this->createNotFoundException('Cet utilisateur n\'existe pas');
         }
 
@@ -141,26 +143,47 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/reset", name="security_forgotten")
+     * @Route("/reset", name="security_forgotten_password")
      *
      */
-    public function forgottenPassword($token, UserRepository $userRepository, EntityManagerInterface $manager)
-    {
-        $user = $userRepository->findOneBy(['activationToken' => $token]);
+    public function forgottenPassword(
+        Request $request,
+        UserRepository $userRepository,
+        EntityManagerInterface $manager,
+        \Swift_Mailer $mailer,
+        TokenGeneratorInterface $tokenGenerator
+    ) {
+        $form = $this->createForm(ResetPasswordType::class);
 
-        if (!$user){
-            throw $this->createNotFoundException('Cet utilisateur n\'existe pas');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $user = $userRepository->findOneBy(['email' => $data['email']]);
+
+            if (!$user) {
+                $this->addFlash(
+                    'danger',
+                    'Cet email n\'existe pas!'
+                );
+
+                $this->redirectToRoute('security_login');
+            }
+
+            $token = $tokenGenerator->generateToken();
+
+            try {
+                $user->setResetToken($token);
+                $manager->persist($user);
+                $manager->flush();
+            } catch (\Exception $e) {
+                $this->addFlash(
+                    'danger',
+                    'Une erreur est survenue'
+                );
+            }
+
+
         }
-
-        $user->setActivationToken(null);
-        $manager->persist($user);
-        $manager->flush();
-
-        $this->addFlash(
-            'success',
-            'Votre compte a été activé !'
-        );
-
-        return $this->redirectToRoute('trick');
     }
 }
