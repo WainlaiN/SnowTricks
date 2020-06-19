@@ -56,4 +56,14 @@ class UserRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
             ;
     }
+
+    public function findOneByResetToken($resetToken)
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.ResetToken = :val')
+            ->setParameter('val', $resetToken)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }

@@ -75,7 +75,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $ResetToken;
+    private $resetToken;
 
     public function __construct()
     {
@@ -262,12 +262,12 @@ class User implements UserInterface
 
     public function getResetToken(): ?string
     {
-        return $this->ResetToken;
+        return $this->resetToken;
     }
 
-    public function setResetToken(?string $ResetToken): self
+    public function setResetToken(?string $resetToken): self
     {
-        $this->ResetToken = $ResetToken;
+        $this->resetToken = $resetToken;
 
         return $this;
     }
