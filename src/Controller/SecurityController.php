@@ -76,7 +76,6 @@ class SecurityController extends AbstractController
             );
 
             return $this->redirectToRoute('security_login');
-
         }
 
         return $this->render(
@@ -139,5 +138,29 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute('trick');
 
 
+    }
+
+    /**
+     * @Route("/reset", name="security_forgotten")
+     *
+     */
+    public function forgottenPassword($token, UserRepository $userRepository, EntityManagerInterface $manager)
+    {
+        $user = $userRepository->findOneBy(['activationToken' => $token]);
+
+        if (!$user){
+            throw $this->createNotFoundException('Cet utilisateur n\'existe pas');
+        }
+
+        $user->setActivationToken(null);
+        $manager->persist($user);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            'Votre compte a été activé !'
+        );
+
+        return $this->redirectToRoute('trick');
     }
 }

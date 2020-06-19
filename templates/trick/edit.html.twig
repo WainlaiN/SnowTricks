@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Edition de {{ trick.name }}{% endblock %}
+
 {% block body %}
     <div class="container" xmlns="http://www.w3.org/1999/html">
         {{ form_start(formTrick) }}
