@@ -143,7 +143,6 @@ class SecurityController extends AbstractController
 
         return $this->redirectToRoute('trick');
 
-
     }
 
     /**
@@ -165,7 +164,7 @@ class SecurityController extends AbstractController
 
             $email = $form->get('email')->getData();
 
-            $user = $userRepository->findOneBy(['email' =>$email]);
+            $user = $userRepository->findOneBy(['email' => $email]);
 
             if (!$user) {
                 $this->addFlash(
@@ -191,9 +190,11 @@ class SecurityController extends AbstractController
                 return $this->redirectToRoute('security_login');
             }
 
-            $url = $this->generateUrl('security_reset_password', ['resetToken' => $token],  UrlGeneratorInterface::ABSOLUTE_URL);
-
-
+            $url = $this->generateUrl(
+                'security_reset_password',
+                ['resetToken' => $token],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
 
             //Send email
             $message = (new Email())
@@ -263,7 +264,10 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('security_login');
         }
 
-        return $this->render('security/resetPassword.html.twig',['resetForm' => $form->createView(),'resetToken' => $resetToken]);
+        return $this->render(
+            'security/resetPassword.html.twig',
+            ['resetForm' => $form->createView(), 'resetToken' => $resetToken]
+        );
 
     }
 }
