@@ -11,42 +11,47 @@
 
 {% block body %}
 
-    <!-- Display full Home image -->
-    <div>
-        <img class="home" src="{{ asset('build/images/home/home.jpg')}} " style="max-height: 100%" alt="">
-        <div class="row responsive" id="buttonDown">
-            <a href="#trickList"><i id="arrow-down" class="fas fa-arrow-down fa-3x float-right"></i></a>
+        <!-- Display full Home image -->
+        <div>
+            <img class="home" src="{{ asset('build/images/home/home.jpg') }}" style="max-height: 100%" alt="">
+            <div class="row" id="buttonDown">
+                <a href="#trickList"><i id="arrow-down" class="fas fa-arrow-down fa-3x float-right"></i></a>
+            </div>
+
         </div>
 
-    </div>
 
     <div class="container">
-        <h1>Bienvenue sur le site communautaire SnowTricks !</h1>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto commodi cupiditate esse est facere
-            fugiat
-            illo
-            incidunt inventore libero modi molestias mollitia neque nisi numquam placeat quas qui quibusdam quod ratione
-            reiciendis repellat reprehenderit, saepe totam unde voluptate voluptatibus!</p>
-        </p>
-    </div>
+        <div class="container">
+            <h1>Bienvenue sur le site communautaire SnowTricks !</h1>
 
-    <h1 style="text-align: center;margin-bottom: 20px">Découvrez nos Tricks</h1>
-    <div class="container cards" id="trickList">
-
-        <!-- Display Tricks -->
-        {% for trick in tricks %}
-            {% include 'trick/_trick.html.twig' %}
-        {% endfor %}
-
-    </div>
-
-    <div class="row mt-5">
-        <div class="col-lg-12 text-center">
-            <button id="loadMore" class="btn btn-primary">Voir plus de tricks</button>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto commodi cupiditate esse est facere
+                fugiat
+                illo
+                incidunt inventore libero modi molestias mollitia neque nisi numquam placeat quas qui quibusdam quod
+                ratione
+                reiciendis repellat reprehenderit, saepe totam unde voluptate voluptatibus!</p>
+            </p>
         </div>
+
+        <h1 style="text-align: center;margin-bottom: 20px">Découvrez nos Tricks</h1>
+        <div class="container cards" id="trickList">
+
+            <!-- Display Tricks -->
+            {% for trick in tricks %}
+                {% include 'trick/_trick.html.twig' %}
+            {% endfor %}
+
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-lg-12 text-center">
+                <button id="loadMore" class="btn btn-primary">Voir plus de tricks</button>
+            </div>
+        </div>
+        <div><a href="#trickList"><i id="arrow-up" class="fas fa-arrow-up fa-3x float-right"></i></a></div>
     </div>
-    <div><a href="#trickList"><i id="arrow-up" class="fas fa-arrow-up fa-3x float-right"></i></a></div>
 
 {% endblock %}
 
