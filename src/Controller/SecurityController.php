@@ -160,10 +160,8 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            dd($data);
 
-            $email = [$data['email']];
+            $email = $form->get('email')->getData();
 
             $user = $userRepository->findOneByEmail($email);
 
