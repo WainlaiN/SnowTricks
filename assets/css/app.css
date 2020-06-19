@@ -3,6 +3,7 @@
     bottom: 0px;
     right: 30px;
 }
+
 #buttonUp {
     display: none;
     position: fixed;
@@ -62,12 +63,20 @@
 @media (min-width: 576px) {
     .cards {
         display: grid;
-        grid-template-columns: repeat(2, 50%);
+        grid-template-columns: repeat(1, 100%);
         grid-auto-rows: auto;
         grid-gap: 1rem;
     }
 }
 
+@media (min-width: 768px) {
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+        grid-auto-rows: auto;
+        grid-gap: 1rem;
+    }
+}
 
 @media (min-width: 992px) {
     .cards {
