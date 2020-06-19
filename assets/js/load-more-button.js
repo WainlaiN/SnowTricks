@@ -5,9 +5,13 @@ $(document).ready(function () {
     }
     $("#loadMore").on('click', function (e) {
         e.preventDefault();
+        $("#buttonUp").show();
         $(".moreBox:hidden").slice(0, 4).slideDown();
         if ($(".moreBox:hidden").length == 0) {
             $("#loadMore").fadeOut('slow');
         }
+    });
+    $("#buttonUp").on('click', function (e) {
+        $("#buttonUp").hidden();
     });
 });

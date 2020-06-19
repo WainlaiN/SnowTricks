@@ -1,7 +1,13 @@
 #buttonDown {
     position: absolute;
-    top: 750px;
-    left: 1700px;
+    bottom: 0px;
+    right: 30px;
+}
+#buttonUp {
+    display: none;
+    position: fixed;
+    bottom: 0px;
+    right: 30px;
 }
 
 .btn.btn-flat {

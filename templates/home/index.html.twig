@@ -11,14 +11,14 @@
 
 {% block body %}
 
-        <!-- Display full Home image -->
-        <div>
-            <img class="home" src="{{ asset('build/images/home/home.jpg') }}" style="max-height: 100%" alt="">
-            <div class="row" id="buttonDown">
-                <a href="#trickList"><i id="arrow-down" class="fas fa-arrow-down fa-3x float-right"></i></a>
-            </div>
-
+    <!-- Display full Home image -->
+    <div>
+        <img class="home" src="{{ asset('build/images/home/home.jpg') }}" style="max-height: 100%" alt="" id="home">
+        <div class="row" id="buttonDown">
+            <a href="#trickList"><i id="arrow-down" class="fas fa-arrow-down fa-3x float-right"></i></a>
         </div>
+
+    </div>
 
 
     <div class="container">
@@ -50,7 +50,9 @@
                 <button id="loadMore" class="btn btn-primary">Voir plus de tricks</button>
             </div>
         </div>
-        <div><a href="#trickList"><i id="arrow-up" class="fas fa-arrow-up fa-3x float-right"></i></a></div>
+        <div class="row" id="buttonUp">
+            <a href="#home"><i id="arrow-up" class="fas fa-arrow-up fa-3x float-right"></i></a>
+        </div>
     </div>
 
 {% endblock %}
