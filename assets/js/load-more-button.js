@@ -12,6 +12,6 @@ $(document).ready(function () {
         }
     });
     $("#buttonUp").on('click', function (e) {
-        $("#buttonUp").hidden();
+        $("#buttonUp").hide();
     });
 });
