@@ -10,6 +10,8 @@ use App\Services\UploadHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
@@ -28,7 +30,7 @@ class SecurityController extends AbstractController
         EntityManagerInterface $manager,
         UserPasswordEncoderInterface $encoder,
         UploadHelper $uploadHelper,
-        \Swift_Mailer $mailer,
+        MailerInterface $mailer,
         TokenGeneratorInterface $tokenGenerator
     ) {
 
@@ -60,15 +62,15 @@ class SecurityController extends AbstractController
             $manager->flush();
 
             //Send email
-            $message = (new \Swift_Message('Activation de votre compte'))
-                ->setFrom("nicodupblog@gmail.com")
-                ->setTo($user->getEmail())
-                ->setBody(
+            $message = (new Email())
+                ->subject('Activation de votre compte!')
+                ->from("nicodupblog@gmail.com")
+                ->to($user->getEmail())
+                ->text(
                     $this->renderView(
                         'email/activation.html.twig',
                         ['token' => $user->getActivationToken()]
-                    ),
-                    'text/html'
+                    )
                 );
             $mailer->send($message);
 
@@ -150,7 +152,7 @@ class SecurityController extends AbstractController
         Request $request,
         UserRepository $userRepository,
         EntityManagerInterface $manager,
-        \Swift_Mailer $mailer,
+        MailerInterface $mailer,
         TokenGeneratorInterface $tokenGenerator
     ) {
         $form = $this->createForm(ResetPasswordType::class);
@@ -159,7 +161,7 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $user = $userRepository->findOneBy(['email' => $data['email']]);
+            $user = $userRepository->findOneByEmail([$data ->'email']));
 
             if (!$user) {
                 $this->addFlash(
@@ -167,7 +169,7 @@ class SecurityController extends AbstractController
                     'Cet email n\'existe pas!'
                 );
 
-                $this->redirectToRoute('security_login');
+                return $this->redirectToRoute('security_login');
             }
 
             $token = $tokenGenerator->generateToken();
@@ -179,11 +181,35 @@ class SecurityController extends AbstractController
             } catch (\Exception $e) {
                 $this->addFlash(
                     'danger',
-                    'Une erreur est survenue'
+                    'Une erreur est survenue :' / $e->getMessage()
                 );
+
+                return $this->redirectToRoute('security_login');
             }
 
+            $url = $this->generateUrl('security_reset_password', ['token' => $token]);
 
+            //Send email
+            $message = (new Email())
+                ->subject('Reinitialisation de votre mot de passe')
+                ->from("nicodupblog@gmail.com")
+                ->to($user->getEmail())
+                ->text(
+                    $this->renderView(
+                        'email/reset.html.twig',
+                        ['url' => $url]
+                    )
+                );
+            $mailer->send($message);
+
+            $this->addFlash(
+                'success',
+                'Un email de réinitialisation du mot de passe vous a été envoyé'
+            );
+
+            return $this->redirectToRoute('security_login');
         }
+
+        return $this->render('security/ForgottenPassword.html.twig', ['resetForm' => $form->createView()]);
     }
 }
