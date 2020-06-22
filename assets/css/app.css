@@ -157,13 +157,22 @@
     z-index: 2;
 }
 
-.container .fa-trash-alt {
+.image .fa-trash-alt {
     position: absolute;
     top: 0;
     right: 0;
     z-index: 3;
     margin: 5px;
 }
+
+.video .fa-trash-alt {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 3;
+    margin: 5px;
+}
+
 iframe {
     z-index: 2;
 }
