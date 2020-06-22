@@ -32,6 +32,7 @@ Encore
     .addEntry('edit', './assets/js/edit.js')
     .addEntry('loadbutton', './assets/js/load-more-button.js')
     .addEntry('carouselJs', './assets/js/carousel.js')
+    .addEntry('btnMedia', './assets/js/btn-media.js')
 
     //.addStyleEntry('comment', './assets/css/comment.css')
     //.addStyleEntry('carousel', './assets/css/carousel.css')

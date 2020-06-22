@@ -10,7 +10,7 @@
 .reviews {
     color: #555;
     font-weight: bold;
-    margin: 10px auto 20px;
+    margin: 3px auto 20px;
 }
 .notes {
     color: #999;
@@ -20,6 +20,11 @@
     max-width: 80px;
     padding-right: 5px ;
 
+}
+@media (max-width: 768px) {
+    .media-object {
+        display: none;
+    }
 }
 .media-body {
     position: relative;
