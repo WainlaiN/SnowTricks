@@ -70,11 +70,11 @@
 
 .centered {
     position: absolute;
-    top: 65%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: snowboard, serif;
-    font-size: 10rem !important;
+    font-size: 12rem !important;
     color: white;
 }
 
