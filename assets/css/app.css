@@ -34,13 +34,16 @@
 }
 
 .float {
-    display: inline-block;
+    /*display: inline-block;
     margin: 0 0 10px 0;
-    padding: 3px 6px;
     border: medium none;
     cursor: pointer;
     float: right;
-    padding-left: 1em;
+    padding-left: 1em;*/
+    width: 100%;
+
+    text-align: right;
+
 }
 
 .main {
@@ -109,15 +112,6 @@
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-@font-face
-{
-    font-family: "snowboarding";
-    src: url('public/d/s.eot'); /* IE9 Compat Modes */
-    src: url('build/fonts/myfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('build/fonts/myfont.woff') format('woff'), /* Modern Browsers */
-    url('build/fonts/myfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-    url('build/fonts/myfont.svg#myfont') format('svg'); /* Legacy iOS */
-}
 
 
 
