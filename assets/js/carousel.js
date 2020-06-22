@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    if ($(window).width() > 1000) {
+    if ($(window).width() > 992) {
         $('.next').on('click', function () {
             var currentImg = $('.active');
             var nextImg = currentImg.next();
@@ -19,6 +19,8 @@ $(document).ready(function () {
                 prevImg.addClass('active').css('z-index', 10);
             }
         });
+    //} else {
+      //  $('#carousel').hide();//
     }
 });
 

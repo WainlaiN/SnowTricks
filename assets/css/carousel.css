@@ -1,31 +1,30 @@
-.carousel {
-    width: 540px;
-    margin: 40px auto;
-    overflow: auto;
-}
+@media (min-width: 992px) {
 
-@media (max-width: 992px) {
+
     .carousel {
-        width: 300px;
+        width: 540px;
         margin: 40px auto;
         overflow: auto;
     }
+
     .slider-inner {
-        width: 300px;
-        height: 100px;
+        width: 500px;
+        height: 300px;
         position: relative;
         overflow: hidden;
         float: left;
         padding: 0px;
-        border: #666 solid 1px;
+        border: #666 solid;
     }
+
     .slider-inner img {
         display: none;
-        width: 300px;
-        height: 100px;
+        width: 500px;
+        height: 300px;
     }
+
     .slider-inner img.active {
-        /*display: inline;*/
+        display: inline-block;
     }
 
     .prev, .next {
@@ -47,41 +46,41 @@
     }
 }
 
-.slider-inner {
-    width: 500px;
-    height: 300px;
-    position: relative;
-    overflow: hidden;
-    float: left;
-    padding: 0px;
-    border: #666 solid 1px;
+@media (max-width: 992px) {
+    .carousel {
+        width: 100%;
+        margin: 40px auto;
+        overflow: auto;
+
+    }
+
+    .slider-inner {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        position: relative;
+        overflow: hidden;
+        float: left;
+        padding: 0;
+        border: #666 solid 1px;
+    }
+
+    .slider-inner img {
+        /*flex-direction: column;*/
+        width: 100%;
+        height: auto;
+    }
+
+    .slider-inner img.active {
+        display: flex;
+    }
+
+    .prev, .next {
+        display: none;
+    }
+
 }
 
-.slider-inner img {
-    display: none;
-    width: 500px;
-    height: 300px;
-}
 
-.slider-inner img.active {
-    display: inline-block;
-}
-
-.prev, .next {
-    float: left;
-    margin-top: 130px;
-    cursor: pointer;
-}
-
-.prev {
-    position: relative;
-    margin-right: -46px;
-    z-index: 100;
-}
-
-.next {
-    position: relative;
-    margin-left: -46px;
-    z-index: 100;
-}
 
