@@ -25,7 +25,7 @@
         height: 100px;
     }
     .slider-inner img.active {
-        display: inline;
+        /*display: inline;*/
     }
 
     .prev, .next {
