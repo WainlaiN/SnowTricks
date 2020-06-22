@@ -1,5 +1,5 @@
-$(window).resize(function() {
-    if( $(window).width() < 1000) {
+$(window).resize(function () {
+    if ($(window).width() < 1000) {
         $('#btn-media').show();
         $('#carousel').hide();
     } else {
@@ -8,14 +8,9 @@ $(window).resize(function() {
 
     }
 
-    $('.prev').on('click', function () {
-        var currentImg = $('.active');
-        var prevImg = currentImg.prev();
-
-        if (prevImg.length) {
-            currentImg.removeClass('active').css('z-index', -10);
-            prevImg.addClass('active').css('z-index', 10);
-        }
+    $('#btn-media').on('click', function () {
+        $('#carousel').show();
+        $('#btn-media').hide();
     });
 
 });

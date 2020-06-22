@@ -1,8 +1,52 @@
 .carousel {
     width: 540px;
-    margin:40px auto;
+    margin: 40px auto;
     overflow: auto;
 }
+
+@media (max-width: 992px) {
+    .carousel {
+        width: 300px;
+        margin: 40px auto;
+        overflow: auto;
+    }
+    .slider-inner {
+        width: 300px;
+        height: 100px;
+        position: relative;
+        overflow: hidden;
+        float: left;
+        padding: 0px;
+        border: #666 solid 1px;
+    }
+    .slider-inner img {
+        display: none;
+        width: 300px;
+        height: 100px;
+    }
+    .slider-inner img.active {
+        display: inline;
+    }
+
+    .prev, .next {
+        float: left;
+        margin-top: 130px;
+        cursor: pointer;
+    }
+
+    .prev {
+        position: relative;
+        margin-right: -46px;
+        z-index: 100;
+    }
+
+    .next {
+        position: relative;
+        margin-left: -46px;
+        z-index: 100;
+    }
+}
+
 .slider-inner {
     width: 500px;
     height: 300px;
@@ -12,24 +56,29 @@
     padding: 0px;
     border: #666 solid 1px;
 }
-.slider-inner img{
+
+.slider-inner img {
     display: none;
     width: 500px;
     height: 300px;
 }
+
 .slider-inner img.active {
     display: inline-block;
 }
-.prev,.next {
+
+.prev, .next {
     float: left;
     margin-top: 130px;
     cursor: pointer;
 }
+
 .prev {
     position: relative;
     margin-right: -46px;
     z-index: 100;
 }
+
 .next {
     position: relative;
     margin-left: -46px;
