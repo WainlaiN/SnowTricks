@@ -4,6 +4,7 @@ namespace App\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -24,10 +25,12 @@ class CommentType extends AbstractType
                 TextType::class,
                 [
                     'attr' => [
-                        'placeholder' => 'Votre commentaire',
+                        'placeholder' => 'Laisser un commentaire...',
                     ],
+                    'label' => false
                 ]
-            );
+            )
+            ->add('validez', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

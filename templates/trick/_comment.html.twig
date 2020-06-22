@@ -1,9 +1,16 @@
 <!-- display trick comments -->
 <div class="comment_block">
-<h1>{{ trick.comments | length }} Commentaires</h1>
+    <div class="mb-5">
+        <h1>{{ trick.comments | length }} Commentaires</h1>
+    </div>
     <!-- display form add comments -->
     {% if app.user %}
         {{ include('trick/_formComment.html.twig') }}
+    {% else %}
+        <div class="col-sm-10 col-md-8 mx-auto mb-3">
+            <h3>Veuillez vous connecter pour laisser un commentaire</h3>
+        </div>
+
     {% endif %}
 
     <div class="container">
@@ -20,7 +27,7 @@
                                     <h4 class="media-heading reviews">{{ comment.user.username }}
 
                                         <small> le {{ comment.createdAt | date('d') }}.
-                                        {{ comment.createdAt | date('m') }}.
+                                            {{ comment.createdAt | date('m') }}.
                                             {{ comment.createdAt | date('Y') }}</small></h4>
 
                                     <p class="media-comment">

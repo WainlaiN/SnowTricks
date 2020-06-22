@@ -3,10 +3,9 @@
     <div class="card-body d-flex flex-row">
         <img src="{{ UploadPicture ~ trick.userId.photo }}" class="rounded-circle mr-3" height="50px" width="50px"
              alt="avatar">
-        <div>
-            <h5 class="card-title font-weight-bold mb-2">{{ trick.name | slice(0, 20) }}</h5>
-            <small class="card-text"><i
-                        class="far fa-clock pr-2"></i><small></small>{{ trick.createdAt | date('d/m/Y') }}</small></p>
+        <div class="col-auto">
+            <h6 class="card-title font-weight-bold mb-2">{{ trick.name | slice(0, 20) }}</h6>
+            <i class="far fa-clock pr-2"></i><small>{{ trick.createdAt | date('d/m/Y') }}</small>
         </div>
 
         {% if app.user %}

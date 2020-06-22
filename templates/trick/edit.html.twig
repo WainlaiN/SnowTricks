@@ -11,49 +11,51 @@
         {{ form_row(formTrick.description) }}
         {{ form_errors(formTrick.description) }}
         {{ form_row(formTrick.category) }}
-        <div><img src="{{ UploadDirectory ~ trick.mainImage }}" alt="" width="150"</div>
+        <div class="m-3">
+            <img src="{{ UploadDirectory ~ trick.mainImage }}" alt="" width="150">
+        </div>
         {{ form_widget(formTrick.file) }}
         {{ form_errors(formTrick.file) }}
 
         <section id="images">
-            <div class="d-flex align-content-start flex-wrap">
-                {% for image in trick.images %}
+            <div class="container">
+                <div class="d-flex align-content-start flex-wrap align-items-center">
+                    {% for image in trick.images %}
+                        <div class="image m-3">
+                            <a href="{{ path('image_delete', {'id': image.id}) }}" data-delete><i
+                                        class="fas fa-trash-alt del_icon"></i>
+                                <img class="img-download" src="{{ UploadDirectory ~ image.imageFilename }}" alt=""
+                                     width="150">
+                            </a>
+                        </div>
 
-                    <div class="p-2">
-                        <img class="img-download" src="{{ UploadDirectory ~ image.imageFilename }}" alt="" width="150">
-                        {% if app.user %}
-                            <a class="test" href="{{ path('image_delete', {'id': image.id}) }}" data-delete><i
-                                        class="fas fa-trash-alt"></i></a>
-                        {% endif %}
-                    </div>
+                    {% endfor %}
+                </div>
+                <ul id="image-fields-list"
+                    data-prototype="{{ form_widget(formTrick.images.vars.prototype)|e }}"
+                    data-widget-tags="{{ '<li></li>'|e }}"
+                    data-widget-counter="{{ formTrick.images|length }}">
 
-                {% endfor %}
+                </ul>
+
+                <button type="button"
+                        class="add-another-collection-widget"
+                        data-list-selector="#image-fields-list">Ajouter une image
+                </button>
             </div>
-            <ul id="image-fields-list"
-                data-prototype="{{ form_widget(formTrick.images.vars.prototype)|e }}"
-                data-widget-tags="{{ '<li></li>'|e }}"
-                data-widget-counter="{{ formTrick.images|length }}">
-
-            </ul>
-
-            <button type="button"
-                    class="add-another-collection-widget"
-                    data-list-selector="#image-fields-list">Ajouter une image
-            </button>
         </section>
 
         <section id="videos">
             <div class="container">
                 <div class="d-flex align-content-start flex-wrap">
                     {% for video in trick.videos %}
-                        <div class="trickVideo m-3">
-                            <iframe width="240" height="180" src="{{ video.videoUrl }}" frameborder="0"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
-                            {% if app.user %}
-                                <a class="test" href="{{ path('video_delete', {'id': video.id}) }}" data-delete><i
-                                            class="fas fa-trash-alt"></i></a>
-                            {% endif %}
+                        <div class="video m-3">
+                            <a href="{{ path('video_delete', {'id': video.id}) }}" data-delete><i
+                                        class="fas fa-trash-alt"></i>
+                                <iframe width="240" height="180" src="{{ video.videoUrl }}" frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                            </a>
                         </div>
                     {% endfor %}
                 </div>
@@ -69,10 +71,11 @@
                         data-list-selector="#video-fields-list">Ajouter une video
                 </button>
         </section>
-
-        <button type="submit" class="btn btn-primary">Editer l'article</button>
-
-        {# hide unwanted form_widget#}
+        <div class="row justify-content-center">
+            <button class="btn btn-primary"><a href="{{ path('trick_show', {'slug': trick.slug}) }}"></a>Retour</button>
+            <button type="submit" class="btn btn-danger">Sauvegarder</button>
+        </div>
+        {# hide unwanted form_widget #}
         <div id="divCheckbox" style="display: none;">
             {{ form_rest(formTrick) }}
         </div>
