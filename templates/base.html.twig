@@ -37,7 +37,9 @@
 
 {% endblock %}
 
-{{ include('home/_footer.html.twig') }}
+{% block footer %}
+    {{ include('home/_footer.html.twig') }}
+{% endblock %}
 
 </body>
 
