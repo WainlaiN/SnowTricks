@@ -5,7 +5,7 @@
              alt="avatar">
         <div>
             <h5 class="card-title font-weight-bold mb-2">{{ trick.name | slice(0, 20) }}</h5>
-            <p class="card-text"><i class="far fa-clock pr-2"></i>{{ trick.createdAt | date('d/m/Y') }}</p>
+            <small class="card-text"><i class="far fa-clock pr-2"></i><small></small>{{ trick.createdAt | date('d/m/Y') }}</small></p>
         </div>
 
             {% if app.user %}
