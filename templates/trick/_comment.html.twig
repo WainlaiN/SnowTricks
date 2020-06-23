@@ -22,7 +22,7 @@
                     {% for comment in trick.comments %}
                         <li class=" media moreBox" style="display: none;">
                             <img class="media-object rounded-circle"
-                                 src="{{ UploadDirectory ~ comment.user.photo }}" alt="profile">
+                                 src="{{ asset('/uploads/pictures/') ~ comment.user.photo }}" alt="profile">
 
                             <div class="media-body col-sm-12">
                                 <div class="well well-lg">
