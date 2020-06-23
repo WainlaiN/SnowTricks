@@ -31,6 +31,6 @@ services:
 
     App\Services\UploadHelper:
         arguments:
-            $uploadPath: '%kernel.project_dir%/public'
+            $uploadPath: '%kernel.project_dir%/assets'
 
 
