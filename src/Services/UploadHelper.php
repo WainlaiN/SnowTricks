@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadHelper
 {
-    const IMAGE_DIR = '/uploads/images';
-    const PICTURE_DIR = '/uploads/pictures';
+    const IMAGE_DIR = '../../assets/uploads/images/';
+    const PICTURE_DIR = '../../assets/uploads/pictures/';
     /**
      * @var string
      */
