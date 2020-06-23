@@ -4,31 +4,17 @@
 
 }
 
-@media (max-width: 992px) {
-    .home {
-        width: 100%;
-        /*height: 100%;*/
-    }
-    .containerBox {
-        position: relative;
-        display: inline-block;
-        height: auto;
-    }
+.home {
+    width: 100%;
+    height: 100%;
+
 }
 
-@media (min-width: 992px) {
-    .home {
-        width: 100%;
-        height: auto;
-
+.containerBox {
+    position: relative;
+    display: inline-block;
+    height: calc(100vh - 62px);
     }
-
-    .containerBox {
-        position: relative;
-        display: inline-block;
-        height: calc(100vh - 62px);
-    }
-}
 
 #buttonDown {
     position: absolute;
