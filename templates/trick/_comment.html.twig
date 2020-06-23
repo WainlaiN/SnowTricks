@@ -4,12 +4,14 @@
         <h1>{{ trick.comments | length }} Commentaires</h1>
     </div>
     <!-- display form add comments -->
-    {% if app.user %}
+    <div class="container">
+        {% if app.user %}
         {{ include('trick/_formComment.html.twig') }}
-    {% else %}
+        {% else %}
         <div class="col-sm-10 col-md-8 mx-auto mb-3">
             <h3>Veuillez vous connecter pour laisser un commentaire</h3>
         </div>
+    </div>
 
     {% endif %}
 

@@ -7,17 +7,19 @@
 .home {
     width: 100%;
     height: 100%;
+
 }
 
 .containerBox {
     position: relative;
     display: inline-block;
+    height: calc(100vh - 62px);
     }
 
 #buttonDown {
     position: absolute;
-    bottom: 0;
-    right: 30px;
+    bottom: 30px;
+    right: 50px;
 }
 
 .centered {
