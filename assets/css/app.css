@@ -12,7 +12,12 @@
 .containerBox {
     position: relative;
     display: inline-block;
-    z-index: -100;
+    }
+
+#buttonDown {
+    position: absolute;
+    bottom: 0;
+    right: 30px;
 }
 
 .centered {
@@ -29,12 +34,6 @@
 #banner {
     font-family: snowboard, serif;
     font-size: 7rem !important;
-}
-
-#buttonDown {
-    position: absolute;
-    bottom: 0;
-    right: 30px;
 }
 
 #buttonUp {
