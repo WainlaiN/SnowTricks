@@ -13,7 +13,7 @@
     position: relative;
     display: inline-block;
     height: calc(100vh - 62px);
-    }
+}
 
 #buttonDown {
     position: absolute;
@@ -76,7 +76,7 @@
     display: none
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
     .centered {
         position: absolute;
         top: 65%;
@@ -85,6 +85,14 @@
         font-family: snowboard, serif;
         font-size: 5rem !important;
         color: white;
+    }
+    .navbar {
+        background-color: blue;
+        overflow: hidden;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 200;
     }
 }
 
@@ -181,7 +189,6 @@ iframe {
     font-family: snowboard, serif;
     font-size: 6rem !important;
     color: black;
-
 }
 
 
