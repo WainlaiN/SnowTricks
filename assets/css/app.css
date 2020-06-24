@@ -94,6 +94,9 @@
         width: 100%;
         z-index: 200;
     }
+    .navbar-brand {
+
+    }
 }
 
 @media (min-width: 576px) {
