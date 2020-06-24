@@ -7,9 +7,8 @@ use Symfony\Component\Mailer\Event\MessageEvent;
 
 class EmailListener
 {
-    public function onKernelException(MessageEvent $event){
-
-
+    public function onMessage(MessageEvent $event){
+        die('toto');
     }
 
 }

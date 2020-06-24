@@ -26,9 +26,17 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    App\EventListener\KernelException:
+    #App\EventListener\KernelException:
+        #tags:
+            #- { name: kernel.event_listener , event: kernel.exception }
+
+    #App\EventSubcriber\KernelSubscriber:
+        #tags:
+            #- { name: kernel.event_subscriber }
+
+    App\EventListener\EmailListener:
         tags:
-            - { name: kernel.event_listener , event: kernel.exception }
+            #- { name: mailer.transport_factory, event: m}
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
