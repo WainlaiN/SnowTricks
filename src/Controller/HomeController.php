@@ -13,7 +13,6 @@ class HomeController extends AbstractController
      */
     public function index(TrickRepository $repo)
     {
-        //$tricks = $repo->findFirstFour();
         $tricks = $repo->findAll();
 
         return $this->render(
@@ -23,5 +22,13 @@ class HomeController extends AbstractController
                 'tricks' => $tricks,
             ]
         );
+    }
+
+    /**
+     * @Route("/mentions-legales", name="mentions")
+     */
+    public function mentions()
+    {
+        return $this->render('home/mentions.html.twig');
     }
 }
