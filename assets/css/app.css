@@ -5,8 +5,9 @@
 }
 
 .containerBox {
+    background:url("../images/home.jpg") center;
     position: relative;
-    display: inline-block;
+    /*display: inline-block;*/
     height: calc(100vh - 62px);
 }
 
@@ -23,6 +24,7 @@
 
 
 .centered {
+    background:url("/public/uploads/home/home.jpg");
     position: absolute;
     top: 60%;
     left: 50%;
