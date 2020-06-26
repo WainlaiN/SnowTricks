@@ -1,19 +1,16 @@
 $(document).ready(function () {
+    var commentLength = $(".moreComment:hidden").length;
     $(".moreComment").slice(0, 4).show();
-    if ($(".moreComment:hidden").length != 0) {
-        $("#loadMore").show();
+    if (commentLength != 0) {
+        $("#loadMoreComment").show();
     }
-    $("#loadMore").on('click', function (e) {
+    $("#loadMoreComment").on('click', function (e) {
         //e.preventDefault();
-        $("#showLess").show();
+
         $(".moreComment:hidden").slice(0, 4).slideDown();
-        if ($(".moreComment:hidden").length == 0) {
-            $("#loadMore").fadeOut('slow');
+        if (commentLength == 0) {
+            $("#loadMoreComment").fadeOut('slow');
         }
     });
-    $("#showLess").on('click', function (e) {
-        $("#showLess").hide();
-        $(".moreComment").slice(4, 8).hide();
 
-    });
 });

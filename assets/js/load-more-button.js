@@ -21,9 +21,11 @@ $(document).ready(function () {
     $("#showLess").on('click', function (e) {
         if ($(".moreBox:visible").length == 4){
             $("#showLess").hide();
-        }
+        } else {
         $(".moreBox").slice(length - 4, length).hide();
         length = length -4 ;
+        }
+        console.log(length)
 
     });
 });

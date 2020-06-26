@@ -48,7 +48,7 @@
 
                     {# display comments #}
                     {% for comment in trick.comments %}
-                        <li class=" media moreBox" style="display: none;">
+                        <li class=" media moreComment" style="display: none;">
                             <img class="media-object rounded-circle"
                                  src="{{ asset('/uploads/pictures/') ~ comment.user.photo }}" alt="profile">
 
@@ -75,7 +75,7 @@
     <!-- load more comments -->
     <div class="row mt-5">
         <div class="col-12 text-center">
-            <button id="loadMore" class="btn btn-primary">Voir plus de commentaires</button>
+            <button id="loadMoreComment" class="btn btn-primary">Voir plus de commentaires</button>
         </div>
     </div>
 </div>
