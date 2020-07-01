@@ -30,6 +30,10 @@ services:
         #tags:
             #- { name: kernel.event_listener , event: kernel.exception }
 
+    App\EventListener\LoginListener:
+        tags:
+            - { name: 'kernel.event_listener', event: 'security.interactive_login' }
+
     #App\EventSubcriber\KernelSubscriber:
         #tags:
             #- { name: kernel.event_subscriber }
