@@ -83,7 +83,7 @@ class SecurityController extends AbstractController
 
             return $this->redirectToRoute('security_login');
         }
-        //dump($form->getErrors());
+
         return $this->render(
             'security/registration.html.twig',
             [
@@ -141,7 +141,7 @@ class SecurityController extends AbstractController
             'Votre compte a été activé !'
         );
 
-        return $this->redirectToRoute('trick');
+        return $this->redirectToRoute('security_login');
 
     }
 
