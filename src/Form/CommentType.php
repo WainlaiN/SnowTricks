@@ -27,10 +27,12 @@ class CommentType extends AbstractType
                     'attr' => [
                         'placeholder' => 'Laisser un commentaire...',
                     ],
-                    'label' => false
+                    'label' => false,
                 ]
             )
-            ->add('validez', SubmitType::class);
+            ->add(
+                'validez',
+                SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

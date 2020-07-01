@@ -15,9 +15,10 @@
         <div class="row">
             <div class="tab-pane active col-sm-11" id="comments">
                 <ul class="media-list">
+
                     {# enable user to add comment if connected #}
                     {% if app.user %}
-                        <li class=" media moreComment" style="display: none;">
+                        <li class=" media moreComment">
                             <img class="media-object rounded-circle"
                                  src="{{ asset('/uploads/pictures/') ~ app.user.photo }}" alt="profile">
                             <div class="media-body col-sm-12">

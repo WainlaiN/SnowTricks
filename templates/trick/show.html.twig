@@ -14,7 +14,7 @@
     </div>
 
     <div class="container">
-        <div class="raw mt-5">
+        <div class="mt-5">
             <h2>Trick : <strong>{{ trick.name }}</strong></h2>
             <div class="metadata">Edité le <strong>{{ trick.createdAt | date('d/m/Y') }}</strong> à
                 <strong>{{ trick.createdAt | date('H:i') }}</strong>
@@ -39,10 +39,9 @@
             <h5>Description:</h5> {{ trick.description | raw }}
         </div>
 
-        <!-- Display trick images and videos in carousel -->
-        <div class="container">
+        <!-- Include trick images and videos in carousel -->
         {% include 'trick/_carousel.html.twig' %}
-        </div>
+
 
         <!-- Include comments template -->
         {% include 'trick/_comment.html.twig' %}

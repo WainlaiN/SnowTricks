@@ -27,7 +27,9 @@
 
 {% block body %}{% endblock %}
 
-<footer></footer>
+{% block footer %}
+    {{ include('home/_footer.html.twig') }}
+{% endblock %}
 
 {% block javascripts %}
     <script
@@ -39,9 +41,7 @@
 
 {% endblock %}
 
-{% block footer %}
-    {{ include('home/_footer.html.twig') }}
-{% endblock %}
+
 
 </body>
 
