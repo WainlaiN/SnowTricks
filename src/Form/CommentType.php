@@ -29,8 +29,8 @@ class CommentType extends AbstractType
                     ],
                     'label' => false
                 ]
-            );
-            //->add('validez', SubmitType::class);
+            )
+            ->add('validez', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

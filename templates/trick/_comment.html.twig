@@ -5,22 +5,17 @@
     </div>
     <!-- display form add comments -->
     <div class="container">
-        {% if app.user %}
-        {# {{ include('trick/_formComment.html.twig') }} #}
-        {% else %}
-        <div class="col-sm-10 col-md-8 mx-auto mb-3">
-            <h3>Veuillez vous connecter pour laisser un commentaire</h3>
-        </div>
+        {% if not app.user %}
+            <div class="col-sm-10 col-md-8 mx-auto mb-3">
+                <h3>Veuillez vous connecter pour laisser un commentaire</h3>
+            </div>
+        {% endif %}
     </div>
-
-    {% endif %}
-
     <div class="container">
         <div class="row">
-            <div class="tab-pane active col-sm-11" id="comments-logout">
-            <div class="tab-pane active col-sm-11" id="comments-logout">
+            <div class="tab-pane active col-sm-11" id="comments">
                 <ul class="media-list">
-                    {# enable user to add comment is connected #}
+                    {# enable user to add comment if connected #}
                     {% if app.user %}
                         <li class=" media moreComment" style="display: none;">
                             <img class="media-object rounded-circle"
@@ -28,21 +23,10 @@
                             <div class="media-body col-sm-12">
                                 <div class="well well-lg">
                                     <h4 class="media-heading reviews">{{ app.user.username }}
-
-                                        <small>{{ form_start(formComment) }}
-                                            {{ form_end(formComment) }}
-                                            <div class="col-sm-2">
-                                                <button class="submit btn btn-primary">Valider</button>
-                                            </div>{# le {{ comment.createdAt | date('d') }}.
-                                        {{ comment.createdAt | date('m') }}.
-                                        {{ comment.createdAt | date('Y') }} #}</small></h4>
-
-                                    <p class="media-comment">
-                                        <small>{# {{ comment.content | raw }} #}</small>
-                                    </p>
+                                        {{ form_start(formComment) }}
+                                        {{ form_end(formComment) }}
                                 </div>
                             </div>
-
                         </li>
                     {% endif %}
 
@@ -70,15 +54,14 @@
                 </ul>
             </div>
         </div>
-    </div>
 
-    <!-- load more comments -->
-    <div class="row mt-5">
-        <div class="col-12 text-center">
-            <button id="loadMoreComment" class="btn btn-primary">Voir plus de commentaires</button>
+        <!-- load more comments -->
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <button id="loadMoreComment" class="btn btn-primary">Voir plus de commentaires</button>
+            </div>
         </div>
     </div>
-</div>
 
 
 
