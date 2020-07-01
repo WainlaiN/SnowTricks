@@ -35,26 +35,26 @@
         <br>
 
         <!-- Trick description -->
-        <div class="raw mt-3 mb-5">
+        <div class="mt-3 mb-5">
             <h5>Description:</h5> {{ trick.description | raw }}
         </div>
-
-        <!-- Include trick images and videos in carousel -->
-        {% include 'trick/_carousel.html.twig' %}
-
-
-        <!-- Include comments template -->
-        {% include 'trick/_comment.html.twig' %}
-
     </div>
 
+    <!-- Include trick images and videos in carousel -->
+    {% include 'trick/_carousel.html.twig' %}
+
+
+    <!-- Include comments template -->
+    {% include 'trick/_comment.html.twig' %}
+
+
+
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('loadbuttoncomments') }}
-    {{ encore_entry_script_tags('carouselJs') }}
-    {{ encore_entry_script_tags('btnMedia') }}
-
-{% endblock %}
+    {% block javascripts %}
+        {{ parent() }}
+        {{ encore_entry_script_tags('loadbuttoncomments') }}
+        {{ encore_entry_script_tags('carouselJs') }}
+        {{ encore_entry_script_tags('btnMedia') }}
+    {% endblock %}
 

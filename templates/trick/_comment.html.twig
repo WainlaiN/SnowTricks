@@ -1,68 +1,70 @@
 <!-- display trick comments -->
-<div class="comment_block">
+<div class="container">
     <div class="mb-5">
         <h1>{{ trick.comments | length }} Commentaires</h1>
     </div>
-    <!-- display form add comments -->
-    <div class="container">
-        {% if not app.user %}
-            <div class="col-sm-10 col-md-8 mx-auto mb-3">
-                <h3>Veuillez vous connecter pour laisser un commentaire</h3>
-            </div>
-        {% endif %}
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="tab-pane active col-sm-11" id="comments">
-                <ul class="media-list">
 
-                    {# enable user to add comment if connected #}
-                    {% if app.user %}
-                        <li class=" media moreComment">
-                            <img class="media-object rounded-circle"
-                                 src="{{ asset('/uploads/pictures/') ~ app.user.photo }}" alt="profile">
-                            <div class="media-body col-sm-12">
-                                <div class="well well-lg">
-                                    <h4 class="media-heading reviews">{{ app.user.username }}
-                                        {{ form_start(formComment) }}
-                                        {{ form_end(formComment) }}
-                                </div>
-                            </div>
-                        </li>
-                    {% endif %}
-
-                    {# display comments #}
-                    {% for comment in trick.comments %}
-                        <li class=" media moreComment" style="display: none;">
-                            <img class="media-object rounded-circle"
-                                 src="{{ asset('/uploads/pictures/') ~ comment.user.photo }}" alt="profile">
-
-                            <div class="media-body col-sm-12">
-                                <div class="well well-lg">
-                                    <h4 class="media-heading reviews">{{ comment.user.username }}
-
-                                        <small> le {{ comment.createdAt | date('d') }}.
-                                            {{ comment.createdAt | date('m') }}.
-                                            {{ comment.createdAt | date('Y') }}</small></h4>
-
-                                    <p class="media-comment">
-                                        <small>{{ comment.content | raw }}</small>
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+    <!-- display form to add comments -->
+    {% if not app.user %}
+        <div class="col-sm-10 col-md-8 mx-auto mb-3">
+            <h3>Veuillez vous connecter pour laisser un commentaire</h3>
         </div>
+    {% endif %}
+</div>
 
-        <!-- load more comments -->
-        <div class="row mt-5">
-            <div class="col-12 text-center">
-                <button id="loadMoreComment" class="btn btn-primary">Voir plus de commentaires</button>
-            </div>
+<!-- list comments -->
+<div class="container">
+    <div class="row">
+        <div class="tab-pane active col-sm-11" id="comments">
+            <ul class="media-list">
+
+                {# enable user to add comment if connected #}
+                {% if app.user %}
+                    <li class=" media moreComment">
+                        <img class="media-object rounded-circle"
+                             src="{{ asset('/uploads/pictures/') ~ app.user.photo }}" alt="profile">
+                        <div class="media-body col-sm-12">
+                            <div class="well well-lg">
+                                <h4 class="media-heading reviews">{{ app.user.username }}
+                                    {{ form_start(formComment) }}
+                                    {{ form_end(formComment) }}
+                            </div>
+                        </div>
+                    </li>
+                {% endif %}
+
+                {# display comments #}
+                {% for comment in trick.comments %}
+                    <li class=" media moreComment" style="display: none;">
+                        <img class="media-object rounded-circle"
+                             src="{{ asset('/uploads/pictures/') ~ comment.user.photo }}" alt="profile">
+
+                        <div class="media-body col-sm-12">
+                            <div class="well well-lg">
+                                <h4 class="media-heading reviews">{{ comment.user.username }}
+
+                                    <small> le {{ comment.createdAt | date('d') }}.
+                                        {{ comment.createdAt | date('m') }}.
+                                        {{ comment.createdAt | date('Y') }}</small></h4>
+
+                                <p class="media-comment">
+                                    <small>{{ comment.content | raw }}</small>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
+
+    <!-- load more comments button -->
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <button id="loadMoreComment" class="btn btn-primary">Voir plus de commentaires</button>
+        </div>
+    </div>
+</div>
 
 
 
