@@ -4,7 +4,11 @@ $(document).ready(function () {
 
     var commentLength = $(".moreComment:hidden").length;
 
-    if (commentLength != 0) {
+    console.log(commentLength);
+
+    if (commentLength === 0) {
+        $("#loadMoreComment").hide();
+    } else {
         $("#loadMoreComment").show();
     }
     $("#loadMoreComment").on('click', function (e) {
