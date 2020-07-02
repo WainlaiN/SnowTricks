@@ -13,12 +13,6 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        bind:
-            $adminEmail: 'nicodupblog@gmail.com'
-
-    App\Services\Mailer:
-        arguments:
-            $adminEmail: 'nicodupblog@gmail.com'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -32,20 +26,20 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    App\EventListener\LoginListener:
-        tags:
-            - { name: 'kernel.event_listener', event: 'security.interactive_login' }
-
-    App\EventListener\EmailListener:
-        tags:
-            #- { name: mailer.transport_factory, event:  }
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-
+    # add service to upload images and picture
     App\Services\UploadHelper:
         arguments:
             $uploadPath: '%kernel.project_dir%/public/uploads'
+
+    # add service to send mail using main email
+    App\Services\Mailer:
+        arguments:
+            $adminEmail: 'nicodupblog@gmail.com'
+
+    # add listener to check token activation
+    App\EventListener\LoginListener:
+        tags:
+            - { name: 'kernel.event_listener', event: 'security.interactive_login' }
 
 
 

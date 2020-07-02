@@ -33,7 +33,6 @@ class SecurityController extends AbstractController
         EntityManagerInterface $manager,
         UserPasswordEncoderInterface $encoder,
         UploadHelper $uploadHelper,
-        //MailerInterface $mailer,
         Mailer $mailer,
         TokenGeneratorInterface $tokenGenerator
     ) {
@@ -66,7 +65,6 @@ class SecurityController extends AbstractController
             $manager->flush();
 
             //Send email using service
-
             $mailer->sendEmail(
                 'Activation de votre compte!',
                 $user->getEmail(),
@@ -75,18 +73,6 @@ class SecurityController extends AbstractController
                     ['token' => $user->getActivationToken()]
                 )
             );
-
-            /**$message = (new Email())
-             * ->subject('Activation de votre compte!')
-             * ->from($this->getParameter($adminEmail))
-             * ->to($user->getEmail())
-             * ->html(
-             * $this->renderView(
-             * 'email/activation.html.twig',
-             * ['token' => $user->getActivationToken()]
-             * )
-             * );
-             * $mailer->send($message);**/
 
             $this->addFlash(
                 'success',
@@ -165,7 +151,7 @@ class SecurityController extends AbstractController
         Request $request,
         UserRepository $userRepository,
         EntityManagerInterface $manager,
-        MailerInterface $mailer,
+        Mailer $mailer,
         TokenGeneratorInterface $tokenGenerator
     ) {
         $form = $this->createForm(ForgotPasswordType::class);
@@ -208,18 +194,15 @@ class SecurityController extends AbstractController
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
 
-            //Send email
-            $message = (new Email())
-                ->subject('Reinitialisation de votre mot de passe')
-                ->from($this->getParameter('$adminEmail'))
-                ->to($user->getEmail())
-                ->html(
-                    $this->renderView(
-                        'email/reset.html.twig',
-                        ['url' => $url]
-                    )
-                );
-            $mailer->send($message);
+            //Send reset email using service
+            $mailer->sendEmail(
+                'Reinitialisation de votre mot de passe',
+                $user->getEmail(),
+                $this->renderView(
+                    'email/reset.html.twig',
+                    ['url' => $url]
+                )
+            );
 
             $this->addFlash(
                 'success',
