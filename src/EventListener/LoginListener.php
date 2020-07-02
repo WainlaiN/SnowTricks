@@ -3,12 +3,10 @@
 
 namespace App\EventListener;
 
-use App\Entity\User;
+
+use App\Security\TokenException;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpFoundation\Test\Constraint\ResponseIsRedirected;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class LoginListener
@@ -30,11 +28,7 @@ class LoginListener
         //check if token activation token is still present
         if ($user->getActivationToken()) {
 
-            $this->session->getFlashBag()->add('danger', 'Vous devez activer votre compte avant la connexion !');
-
-            return new RedirectResponse('security_logout');
-
-
+            throw new TokenException();
         }
 
 

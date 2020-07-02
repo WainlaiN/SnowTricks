@@ -26,17 +26,9 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    #App\EventListener\KernelException:
-        #tags:
-            #- { name: kernel.event_listener , event: kernel.exception }
-
     App\EventListener\LoginListener:
         tags:
             - { name: 'kernel.event_listener', event: 'security.interactive_login' }
-
-    #App\EventSubcriber\KernelSubscriber:
-        #tags:
-            #- { name: kernel.event_subscriber }
 
     App\EventListener\EmailListener:
         tags:

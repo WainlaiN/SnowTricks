@@ -4,14 +4,10 @@
 namespace App\Security;
 
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
-
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\Exception\AccountStatusException;
-use Symfony\Component\Security\Core\Exception\AccountExpiredException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+
 
 
 class UserChecker implements UserCheckerInterface
@@ -30,9 +26,10 @@ class UserChecker implements UserCheckerInterface
         // if user ActivationToken is still in DB,
         if ($user->getActivationToken()) {
 
-            $this->session->getFlashBag()->add('danger', 'Vous devez activer votre compte avant la connexion !');
+            //$this->session->getFlashBag()->add('danger', 'Vous devez activer votre compte avant la connexion !');
 
-            return new RedirectResponse('security_login');
+
+            throw new TokenException('Vous devez activer votre compte avant la connexion !');
 
         }
     }
