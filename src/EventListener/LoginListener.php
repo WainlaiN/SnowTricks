@@ -4,9 +4,9 @@
 namespace App\EventListener;
 
 
-use App\Security\TokenException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class LoginListener
@@ -28,7 +28,7 @@ class LoginListener
         //check if token activation token is still present
         if ($user->getActivationToken()) {
 
-            throw new TokenException();
+            throw new CustomUserMessageAuthenticationException ('Vous devez activer votre compte avant la connexion !');
         }
 
 
