@@ -1,4 +1,37 @@
-window.onload = () => {
+$(document).ready(function () {
+    var links = $(".data-delete");
+    console.log(links);
+
+
+        $('.data-delete').click(function (event) {
+            event.preventDefault();
+            confirm("voulez-vous supprimer cette image");
+            var a_href = $(this).attr('href');
+            //alert ("Href is: "+a_href);
+
+            // AJAX Request
+            $.ajax({
+                url: a_href,
+                type: 'DELETE',
+
+                success: function (response) {
+
+                    if (response == 1) {
+                        // Remove row from HTML Table
+
+                            $(this).remove();
+
+                    } else {
+                        alert('Invalid ID.');
+                    }
+                }
+            });
+
+        });
+
+});
+
+/*window.onload = () => {
 
     //manage delete button
     let links = document.querySelectorAll("[data-delete]")
@@ -32,4 +65,4 @@ window.onload = () => {
             }
         })
     }
-}
+}*/

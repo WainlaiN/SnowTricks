@@ -23,14 +23,14 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: snowboard, serif;
-    font-size: 12rem !important;
+    font-size: 12rem;
     color: white;
 
 }
 
 #banner {
     font-family: snowboard, serif;
-    font-size: 7rem !important;
+    font-size: 7rem;
 }
 
 #showLess {
@@ -79,7 +79,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         font-family: snowboard, serif;
-        font-size: 5rem !important;
+        font-size: 5rem;
         color: white;
     }
 
@@ -135,7 +135,7 @@
 }
 
 .card-body {
-    padding: 0.5rem !important;
+    padding: 0.5rem;
 }
 
 .page-footer {
@@ -184,7 +184,7 @@ iframe {
 
 .mentions {
     font-family: snowboard, serif;
-    font-size: 6rem !important;
+    font-size: 6rem;
     color: black;
 }
 

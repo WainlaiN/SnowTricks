@@ -225,7 +225,7 @@ class TrickController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
-        //remove image from database
+        //remove video from database
         $manager->remove($video);
         $manager->flush();
 
