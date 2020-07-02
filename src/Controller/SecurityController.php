@@ -18,6 +18,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use App\Services\Mailer;
 
 
 class SecurityController extends AbstractController
@@ -32,7 +33,8 @@ class SecurityController extends AbstractController
         EntityManagerInterface $manager,
         UserPasswordEncoderInterface $encoder,
         UploadHelper $uploadHelper,
-        MailerInterface $mailer,
+        //MailerInterface $mailer,
+        Mailer $mailer,
         TokenGeneratorInterface $tokenGenerator
     ) {
 
@@ -63,18 +65,28 @@ class SecurityController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            //Send email
-            $message = (new Email())
-                ->subject('Activation de votre compte!')
-                ->from("nicodupblog@gmail.com")
-                ->to($user->getEmail())
-                ->html(
-                    $this->renderView(
-                        'email/activation.html.twig',
-                        ['token' => $user->getActivationToken()]
-                    )
-                );
-            $mailer->send($message);
+            //Send email using service
+            $test = $this->container->getParameter($adminEmail)
+            $mailer->sendEmail(
+                'Activation de votre compte!',
+                $user->getEmail(),
+                $this->renderView(
+                    'email/activation.html.twig',
+                    ['token' => $user->getActivationToken()]
+                )
+            );
+
+            /**$message = (new Email())
+             * ->subject('Activation de votre compte!')
+             * ->from($this->getParameter($adminEmail))
+             * ->to($user->getEmail())
+             * ->html(
+             * $this->renderView(
+             * 'email/activation.html.twig',
+             * ['token' => $user->getActivationToken()]
+             * )
+             * );
+             * $mailer->send($message);**/
 
             $this->addFlash(
                 'success',
@@ -199,7 +211,7 @@ class SecurityController extends AbstractController
             //Send email
             $message = (new Email())
                 ->subject('Reinitialisation de votre mot de passe')
-                ->from("nicodupblog@gmail.com")
+                ->from($this->getParameter('$adminEmail'))
                 ->to($user->getEmail())
                 ->html(
                     $this->renderView(

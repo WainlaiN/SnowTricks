@@ -22,7 +22,7 @@
                 <div class="d-flex align-content-start flex-wrap align-items-center">
                     {% for image in trick.images %}
                         <div class="image m-3">
-                            <a href="{{ path('image_delete', {'id': image.id}) }}" data-delete><i
+                            <a href="{{ path('image_delete', {'id': image.id}) }}" class="data-delete"><i
                                         class="fas fa-trash-alt del_icon"></i>
                                 <img class="img-download" src="{{ UploadDirectory ~ image.imageFilename }}" alt=""
                                      width="150">
