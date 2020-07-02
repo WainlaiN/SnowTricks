@@ -43,9 +43,9 @@ class UserFixtures extends BaseFixture
 
             $picture = self::$picture[$i];
 
-            $fs = new Filesystem();
+            $fileSystem = new Filesystem();
             $targetPath = sys_get_temp_dir().'/'.$picture;
-            $fs->copy(__DIR__.'/pictures/'.$picture, $targetPath, true);
+            $fileSystem->copy(__DIR__.'/pictures/'.$picture, $targetPath, true);
 
             $photo = $this->uploadHelper->savePicture(new File($targetPath));
             $user->setPhoto($photo);

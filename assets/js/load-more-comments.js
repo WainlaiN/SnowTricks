@@ -4,8 +4,6 @@ $(document).ready(function () {
 
     var commentLength = $(".moreComment:hidden").length;
 
-    console.log(commentLength);
-
     if (commentLength === 0) {
         $("#loadMoreComment").hide();
     } else {

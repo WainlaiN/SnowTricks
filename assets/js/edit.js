@@ -1,37 +1,35 @@
 $(document).ready(function () {
     var links = $(".data-delete");
-    console.log(links);
 
+    $('.data-delete').click(function (event) {
+        event.preventDefault();
+        confirm("voulez-vous supprimer cette image");
+        var a_href = $(this).attr('href');
+        //alert ("Href is: "+a_href);
 
-        $('.data-delete').click(function (event) {
-            event.preventDefault();
-            confirm("voulez-vous supprimer cette image");
-            var a_href = $(this).attr('href');
-            //alert ("Href is: "+a_href);
+        // AJAX Request
+        $.ajax({
+            url: a_href,
+            type: 'DELETE',
 
-            // AJAX Request
-            $.ajax({
-                url: a_href,
-                type: 'DELETE',
+            success: function (response) {
 
-                success: function (response) {
+                if (response == 1) {
+                    // Remove row from HTML Table
 
-                    if (response == 1) {
-                        // Remove row from HTML Table
+                    $(this).remove();
 
-                            $(this).remove();
-
-                    } else {
-                        alert('Invalid ID.');
-                    }
+                } else {
+                    alert('Invalid ID.');
                 }
-            });
-
+            }
         });
+
+    });
 
 });
 
-/*window.onload = () => {
+/**window.onload = () => {
 
     //manage delete button
     let links = document.querySelectorAll("[data-delete]")
@@ -65,4 +63,4 @@ $(document).ready(function () {
             }
         })
     }
-}*/
+}**/

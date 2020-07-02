@@ -73,9 +73,9 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
 
             $image = self::$mainImages[$i];
 
-            $fs = new Filesystem();
+            $fileSystem = new Filesystem();
             $targetPath = sys_get_temp_dir().'/'.$image;
-            $fs->copy(__DIR__.'/mainImage/'.$image, $targetPath, true);
+            $fileSystem->copy(__DIR__.'/mainImage/'.$image, $targetPath, true);
 
             $imageFileName = $this->uploadHelper->saveMainFile(new File($targetPath));
             $trick->setMainImage($imageFileName);

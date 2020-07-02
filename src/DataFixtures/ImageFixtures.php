@@ -58,9 +58,9 @@ class ImageFixtures extends BaseFixture implements DependentFixtureInterface
 
             $imageFile = self::$mainImages[$i];
 
-            $fs = new Filesystem();
+            $fileSystem = new Filesystem();
             $targetPath = sys_get_temp_dir().'/'.$imageFile;
-            $fs->copy(__DIR__.'/images/'.$imageFile, $targetPath, true);
+            $fileSystem->copy(__DIR__.'/images/'.$imageFile, $targetPath, true);
 
             $imageFileName = $this->uploadHelper->saveMainFile(new File($targetPath));
             $image->setImageFilename($imageFileName);
