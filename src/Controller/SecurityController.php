@@ -66,7 +66,7 @@ class SecurityController extends AbstractController
             $manager->flush();
 
             //Send email using service
-            $test = $this->container->getParameter($adminEmail)
+
             $mailer->sendEmail(
                 'Activation de votre compte!',
                 $user->getEmail(),

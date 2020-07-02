@@ -9,7 +9,11 @@ use Symfony\Component\Mime\Email;
 
 class Mailer
 {
+
     private $mailer;
+    /**
+     * @var string
+     */
     private $adminEmail;
 
     public function __construct(string $adminEmail, MailerInterface $mailer)
@@ -23,7 +27,7 @@ class Mailer
 
         $message = (new Email())
             ->subject($subject)
-            ->from($adminEmail)
+            ->from($this->adminEmail)
             ->to($to)
             ->html($render);
 
