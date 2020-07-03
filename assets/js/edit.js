@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var links = $(".data-delete");
 
-    $('.data-delete').click(function (event) {
+    links.click(function (event) {
         event.preventDefault();
         confirm("voulez-vous supprimer cette image");
         var a_href = $(this).attr('href');
@@ -11,11 +11,12 @@ $(document).ready(function () {
         $.ajax({
             url: a_href,
             type: 'DELETE',
+            data:
+            success: function(response) {
 
-            success: function (response) {
-
-                if (response == 1) {
+                if (response === 1) {
                     // Remove row from HTML Table
+                    console.log(this);
 
                     $(this).remove();
 
