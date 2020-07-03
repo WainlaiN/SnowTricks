@@ -263,4 +263,13 @@ class SecurityController extends AbstractController
         );
 
     }
+
+    /**
+     * @Route("/error404", name="security_404")
+     *
+     */
+    public function error404()
+    {
+        return $this->render('security/404.html.twig');
+    }
 }

@@ -42,5 +42,16 @@ services:
             - { name: 'kernel.event_listener', event: 'security.interactive_login' }
 
 
+    #App\EventListener\KernelException:
+        #tags:
+            #- { name: kernel.event_listener , event: kernel.exception }
+
+
+
+    App\EventSubscriber\KernelSubscriber:
+        tags:
+            - { name: kernel.event_subscriber }
+
+
 
 
