@@ -50,7 +50,7 @@
                 <div class="d-flex align-content-start flex-wrap">
                     {% for video in trick.videos %}
                         <div class="image m-3">
-                            <a href="{{ path('video_delete', {'id': video.id}) }}" data-delete><i
+                            <a href="{{ path('video_delete', {'id': video.id}) }}" class="data-delete"><i
                                         class="fas fa-trash-alt"></i>
                                 <iframe width="240" height="180" src="{{ video.videoUrl }}" frameborder="0"
                                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"

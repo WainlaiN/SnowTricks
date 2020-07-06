@@ -2,22 +2,22 @@ $(document).ready(function () {
     var links = $(".data-delete");
 
     links.click(function (event) {
+
         event.preventDefault();
         confirm("voulez-vous supprimer cette image");
         var a_href = $(this).attr('href');
-        //alert ("Href is: "+a_href);
 
         // AJAX Request
         $.ajax({
+            context: this,
             url: a_href,
             type: 'DELETE',
-            data:
-            success: function(response) {
+            data: {path: a_href},
+            success: function (response) {
+                console.log(response);
+                if (response == 1) {
 
-                if (response === 1) {
-                    // Remove row from HTML Table
-                    console.log(this);
-
+                    // Remove image from HTML
                     $(this).remove();
 
                 } else {
