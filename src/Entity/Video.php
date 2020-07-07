@@ -19,6 +19,7 @@ class Video
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Url()
      */
     private $videoURL;
 

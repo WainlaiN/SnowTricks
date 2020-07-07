@@ -28,7 +28,7 @@ class TrickType extends AbstractType
                 TextType::class,
                 [
                     'attr' => [
-                        'placeholder' => 'Enter the title here',
+                        'placeholder' => 'Nom de la figure',
                     ],
                 ]
             )
@@ -45,7 +45,7 @@ class TrickType extends AbstractType
                 TextareaType::class,
                 [
                     'attr' => [
-                        'placeholder' => 'Enter your description here',
+                        'placeholder' => 'Description du trick',
                     ],
                 ]
             )
@@ -56,9 +56,9 @@ class TrickType extends AbstractType
                     'label' => false,
                     'required' => false,
                     'mapped' => false,
-                    'constraints' => [
+                    /**'constraints' => [
                         new Image(),
-                    ],
+                    ],**/
                     'attr' => [
                         'placeholder' => 'Image principale',
                     ],

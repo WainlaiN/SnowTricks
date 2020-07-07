@@ -10,7 +10,7 @@
         {{ form_errors(formTrick.name) }}
         {{ form_row(formTrick.description) }}
         {{ form_errors(formTrick.description) }}
-        {{ form_errors(formTrick.images) }}
+
         {{ form_row(formTrick.category) }}
         <div class="m-3">
             <img src="{{ UploadDirectory ~ trick.mainImage }}" alt="" width="150">
@@ -34,13 +34,14 @@
 
                     {% endfor %}
                 </div>
+
                 <ul id="image-fields-list"
                     data-prototype="{{ form_widget(formTrick.images.vars.prototype)|e }}"
                     data-widget-tags="{{ '<li></li>'|e }}"
                     data-widget-counter="{{ formTrick.images|length }}">
 
                 </ul>
-
+                {{ form_errors(formTrick.images) }}
                 <button type="button"
                         class="add-another-collection-widget"
                         data-list-selector="#image-fields-list">Ajouter une image
@@ -75,13 +76,15 @@
                 </button>
         </section>
         <div class="row justify-content-center mt-5">
-            <button class="btn btn-primary"><a href="{{ path('trick_show', {'slug': trick.slug}) }}"></a>Retour</button>
+            <button class="btn btn-primary"><a class="btnPrev" href="{{ path('trick_show', {'slug': trick.slug}) }}" style="color: white!important;">Retour</a></button>
             <button type="submit" class="btn btn-danger">Sauvegarder</button>
         </div>
+
         {# hide unwanted form_widget #}
         <div id="divCheckbox" style="display: none;">
             {{ form_rest(formTrick) }}
         </div>
+
         {{ form_end(formTrick) }}
 
     </div>
