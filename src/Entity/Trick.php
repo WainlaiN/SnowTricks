@@ -273,8 +273,7 @@ class Trick
      */
     public function initializeSlug()
     {
-        if(empty($this->slug))
-        {
+        if (empty($this->slug)) {
             $slug = slugify::slugify($this->name);
             $this->setSlug($slug);
         }
@@ -341,9 +340,6 @@ class Trick
 
         return $this;
     }
-
-
-
 
 
 }

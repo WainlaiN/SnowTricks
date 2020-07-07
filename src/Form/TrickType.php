@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Image;
 
 
@@ -72,6 +73,16 @@ class TrickType extends AbstractType
                     'allow_delete' => true,
                     'required' => false,
                     'prototype' => true,
+                    /**'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/jpg',
+                                'image/png'
+                            ],
+                            'mimeTypesMessage' => "Image PNG ou JPG seulement",
+                        ])
+                    ]**/
                 ]
             )
             ->add(

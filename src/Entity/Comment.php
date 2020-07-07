@@ -27,7 +27,7 @@ class Comment
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
      */
     private $createdAt;
 

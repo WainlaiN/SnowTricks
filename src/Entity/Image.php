@@ -24,9 +24,7 @@ class Image
     private $imageFilename;
 
     /**
-     * @Assert\Image(
-     *  mimeTypes= {"image/jpeg", "image/jpg", "image/png"},
-     *  mimeTypesMessage = "Le fichier ne possède pas une extension valide ! Veuillez insérer une image en .jpg, .jpeg ou .png")
+     *
      */
     private $file;
 

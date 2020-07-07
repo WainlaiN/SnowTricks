@@ -10,6 +10,7 @@
         {{ form_errors(formTrick.name) }}
         {{ form_row(formTrick.description) }}
         {{ form_errors(formTrick.description) }}
+        {{ form_errors(formTrick.images) }}
         {{ form_row(formTrick.category) }}
         <div class="m-3">
             <img src="{{ UploadDirectory ~ trick.mainImage }}" alt="" width="150">
@@ -22,11 +23,13 @@
                 <div class="d-flex align-content-start flex-wrap align-items-center">
                     {% for image in trick.images %}
                         <div class="image m-3">
+                            {% if image.id %}
                             <a href="{{ path('image_delete', {'id': image.id}) }}" class="data-delete"><i
                                         class="fas fa-trash-alt del_icon"></i>
                                 <img class="img-download" src="{{ UploadDirectory ~ image.imageFilename }}" alt=""
                                      width="150">
                             </a>
+                            {% endif %}
                         </div>
 
                     {% endfor %}
