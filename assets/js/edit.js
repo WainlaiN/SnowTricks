@@ -15,7 +15,7 @@ $(document).ready(function () {
             data: {path: a_href},
             success: function (response) {
                 console.log(response);
-                if (response == 1) {
+                if (response.success === 1) {
 
                     // Remove image from HTML
                     $(this).remove();

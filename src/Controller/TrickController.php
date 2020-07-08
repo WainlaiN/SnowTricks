@@ -51,6 +51,7 @@ class TrickController extends AbstractController
             //set user to Trick
             $trick->setUserId($this->getUser());
 
+            // check if image are present
             foreach ($trick->getImages() as $image) {
 
                 $image = $uploadHelper->saveImage($image);
