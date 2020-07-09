@@ -49,6 +49,7 @@ class User implements UserInterface
     private $photo;
 
     /**
+     * @Assert\NotNull()
      * @Assert\Image(
      *  mimeTypes= {"image/jpeg", "image/jpg", "image/png"},
      *  mimeTypesMessage = "Le fichier ne possède pas une extension valide ! Veuillez insérer une image en .jpg, .jpeg ou .png")
@@ -80,11 +81,8 @@ class User implements UserInterface
      */
     private $resetToken;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=false)
-     */
-    private $role;
-
+    /** @ORM\Column(type="json") */
+    private $roles = [];
 
     public function __construct()
     {
@@ -163,13 +161,17 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return $this->role;
+        return $this->roles;
     }
 
-    public function setRoles($role)
+    public function setRoles()
     {
-        $this->role = $role;
-        //return ['ROLE_USER'];
+        $this->roles = ['ROLE_USER'];
+    }
+
+    public function setAdminRoles()
+    {
+        $this->roles = ['ROLE_ADMIN'];
     }
 
     public function getSalt()
@@ -285,22 +287,6 @@ class User implements UserInterface
         $this->resetToken = $resetToken;
 
         return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    /**
-     * @param mixed $role
-     */
-    public function setRole($role): void
-    {
-        $this->role = $role;
     }
 
 

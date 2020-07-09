@@ -34,13 +34,13 @@ class UserFixtures extends BaseFixture
     public function loadData(ObjectManager $manager)
     {
 
-        //publish many tricks
+        //publish many users
         for ($i = 0; $i <= 9; $i++) {
             $user = new User();
             $user->setEmail($this->faker->email)
                 ->setUsername($this->faker->userName)
                 ->setPassword($this->faker->password)
-                ->setRoles('ROLE_USER');
+                ->setRoles();
 
             $picture = self::$picture[$i];
 
