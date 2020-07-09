@@ -25,6 +25,9 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
+                        <a href="{{ path('admin_index') }}" class="nav-link"><i class="fa fa-user"></i> Admin</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ path('security_logout') }}" class="nav-link"><i class="fa fa-sign-out-alt"></i> Deconnexion</a>
                     </li>
                 {% endif %}

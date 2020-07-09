@@ -202,13 +202,7 @@ a:hover {
     margin-bottom: 150px;
 }
 
-.btnPrev {
+ .btn > a {
     color: white!important;
 }
-
-
-
-
-
-
 

@@ -1,9 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/index.html.twig' %}
+
 
 {% block title %}Category index{% endblock %}
 
 {% block body %}
+    {% include 'admin/_admin_button.html.twig' %}
+
     <div class="container">
+
         <h1>Index des Categories</h1>
 
         <table class="table">
@@ -36,6 +40,6 @@
             </tbody>
         </table>
 
-        <a href="{{ path('category_new') }}">Créer une categorie</a>
+        <a href="{{ path('category_new') }}" class="btn btn-info">Créer une categorie</a>
     </div>
 {% endblock %}

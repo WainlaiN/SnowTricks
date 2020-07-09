@@ -31,6 +31,8 @@ Encore
     .addEntry('loadbuttoncomments', './assets/js/load-more-comments.js')
     .addEntry('carouselJs', './assets/js/carousel.js')
     .addEntry('btnMedia', './assets/js/btn-media.js')
+    .addEntry('AdminUser', './assets/js/admin-user.js')
+
 
     //.addStyleEntry('comment', './assets/css/comment.css')
     //.addStyleEntry('carousel', './assets/css/carousel.css')
