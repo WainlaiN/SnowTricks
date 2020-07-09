@@ -23,7 +23,7 @@ class TrickController extends AbstractController
 {
     /**
      * @Route("/trick/new", name="trick_create")
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      * @param Request $request
      * @param EntityManagerInterface $manager
      * @param UploadHelper $uploadHelper
@@ -78,7 +78,7 @@ class TrickController extends AbstractController
 
     /**
      * @Route("/trick/{slug}/edit", name="trick_edit")
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      */
     public function edit(
         Request $request,
@@ -185,7 +185,7 @@ class TrickController extends AbstractController
 
     /**
      * @Route("/trick/{slug}/delete", name="trick_delete")
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      */
     public function delete(TrickRepository $repo, Request $request, EntityManagerInterface $manager, $slug)
     {
@@ -201,7 +201,7 @@ class TrickController extends AbstractController
 
     /**
      * @Route("/delete/image/{id}", name="image_delete", methods={"DELETE"})
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      */
     public function deleteImage(Image $image, Request $request, EntityManagerInterface $manager)
     {
@@ -219,7 +219,7 @@ class TrickController extends AbstractController
 
     /**
      * @Route("/delete/video/{id}", name="video_delete", methods={"DELETE"})
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      */
     public function deleteVideo(Video $video, Request $request, EntityManagerInterface $manager)
     {

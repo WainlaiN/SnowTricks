@@ -39,7 +39,8 @@ class UserFixtures extends BaseFixture
             $user = new User();
             $user->setEmail($this->faker->email)
                 ->setUsername($this->faker->userName)
-                ->setPassword($this->faker->password);
+                ->setPassword($this->faker->password)
+                ->setRoles('ROLE_USER');
 
             $picture = self::$picture[$i];
 

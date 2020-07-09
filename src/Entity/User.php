@@ -33,7 +33,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
-     * @Assert\Length(min="5", minMessage="Nom d'utilisateur trop court (5 caractères minimum)")
+     * @Assert\Length(min="4", minMessage="Nom d'utilisateur trop court (5 caractères minimum)")
      */
     private $username;
 
@@ -79,6 +79,12 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $resetToken;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=false)
+     */
+    private $role;
+
 
     public function __construct()
     {
@@ -157,7 +163,13 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return ['ROLE_ADMIN'];
+        return $this->role;
+    }
+
+    public function setRoles($role)
+    {
+        $this->role = $role;
+        //return ['ROLE_USER'];
     }
 
     public function getSalt()
@@ -273,6 +285,22 @@ class User implements UserInterface
         $this->resetToken = $resetToken;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role): void
+    {
+        $this->role = $role;
     }
 
 

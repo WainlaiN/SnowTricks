@@ -59,6 +59,9 @@ class SecurityController extends AbstractController
             //set Picture to User
             $user->setPhoto($PictureImage);
 
+            //set ROLE_USER to user
+            $user->setRoles('ROLE_USER');
+
             $manager->persist($user);
             $manager->flush();
 
