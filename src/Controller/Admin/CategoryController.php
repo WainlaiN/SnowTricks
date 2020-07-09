@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,14 +23,14 @@ class CategoryController extends AbstractController
      */
     public function index(CategoryRepository $categoryRepository): Response
     {
-        return $this->render('category/index.html.twig', [
+        return $this->render('admin/category/index.html.twig', [
             'categories' => $categoryRepository->findAll(),
         ]);
     }
 
     /**
      * @Route("/new", name="category_new", methods={"GET","POST"})
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      */
     public function new(Request $request): Response
     {
@@ -45,7 +46,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('trick_create');
         }
 
-        return $this->render('category/new.html.twig', [
+        return $this->render('admin/category/new.html.twig', [
             'category' => $category,
             'form' => $form->createView(),
         ]);
@@ -56,7 +57,7 @@ class CategoryController extends AbstractController
      */
     public function show(Category $category): Response
     {
-        return $this->render('category/show.html.twig', [
+        return $this->render('admin/category/show.html.twig', [
             'category' => $category,
         ]);
     }
@@ -75,7 +76,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category_index');
         }
 
-        return $this->render('category/edit.html.twig', [
+        return $this->render('admin/category/edit.html.twig', [
             'category' => $category,
             'form' => $form->createView(),
         ]);
@@ -92,6 +93,6 @@ class CategoryController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('category_index');
+        return $this->redirectToRoute('admin/category_index');
     }
 }
