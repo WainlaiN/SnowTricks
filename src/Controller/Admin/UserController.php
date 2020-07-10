@@ -7,6 +7,7 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -83,12 +84,13 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/switch/{id}", name="user_switch")
+     * @Route("/{id}/switch/", name="user_switch", methods={"GET"})
      */
-    public function switchUser(UserRepository $repo, EntityManagerInterface $manager)
+    public function switchUser(User $user, EntityManagerInterface $manager)
     {
-        $repo->findOneBy(id)
-        if ($user->getRoles() == "ROLE_USER") {
+        $userRole = $user->getRoles();
+
+        if (in_array("ROLE_USER", $userRole)) {
             $user->setAdminRoles();
         } else {
             $user->setRoles();
@@ -96,6 +98,8 @@ class UserController extends AbstractController
 
         $manager->persist($user);
         $manager->flush();
+
+        return new Response("true");
     }
 
 }
