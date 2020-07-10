@@ -1,24 +1,30 @@
 $(document).ready(function () {
-    var switches = $(".checkbox");
+    var switches = $(":checkbox");
 
-    switches.click(function (event) {
+    switches.click(function () {
 
-        event.preventDefault();
+        //event.preventDefault();
         //confirm("voulez-vous supprimer cette image");
-        var a_href = $(this).attr('href');
+        var id = $(this).attr('data-id')
+        var url = 'switch/' + id;
+        console.log(url)
 
         // AJAX Request
         $.ajax({
             context: this,
-            url: a_href,
-            type: 'GET',
-            data: {'data-id'},
+            url: url,
+            type: 'POST',
+
             success: function (response) {
                 console.log(response);
                 if (response.success === 1) {
 
                     // Remove image from HTML
-                    $(this).remove();
+                    if ($(this).is(":checked")) {
+                        $(this).prop("checked", false);
+                    } else {
+                        $(this).prop("checked", true);
+                    }
 
                 } else {
                     alert('Invalid ID.');

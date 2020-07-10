@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -84,7 +85,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/switch/", name="user_switch", methods={"GET"})
+     * @Route("/switch/{id}", name="user_switch", methods={"POST"})
      */
     public function switchUser(User $user, EntityManagerInterface $manager)
     {
@@ -99,7 +100,7 @@ class UserController extends AbstractController
         $manager->persist($user);
         $manager->flush();
 
-        return new Response("true");
+        return new JsonResponse(['success' => 1]);
     }
 
 }
