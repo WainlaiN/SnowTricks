@@ -38,6 +38,7 @@ class TrickController extends AbstractController
 
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $trick->setCreatedAt(new \DateTime());
@@ -51,7 +52,7 @@ class TrickController extends AbstractController
             //set user to Trick
             $trick->setUserId($this->getUser());
 
-            // check if image are present
+            // check if images are present
             foreach ($trick->getImages() as $image) {
 
                 $image = $uploadHelper->saveImage($image);

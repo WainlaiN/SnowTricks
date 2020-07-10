@@ -3,20 +3,23 @@
 {% block title %}Création d'un Trick{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container mt-5">
 
-        <h1>Ajouter l'article</h1>
+        <h1>Ajouter une figure</h1>
 
         {{ form_start(formTrick) }}
 
-        {{ form_row(formTrick.name) }}
+        {{ form_row(formTrick.name, {'label': 'Nom de la figure'}) }}
         {{ form_errors(formTrick.name) }}
-        {{ form_row(formTrick.category) }}
+        {{ form_row(formTrick.category, {'label': 'Categorie'}) }}
         {{ form_errors(formTrick.category) }}
         <a href="{{ path('category_new') }}" class="btn btn-primary">Créer une categorie</a>
         {{ form_row(formTrick.description) }}
         {{ form_errors(formTrick.description) }}
-        {{ form_row(formTrick.file, {'label': 'Image Principale (obligatoire)', 'attr': {'placeholder': 'choisissez votre photo'}}) }}
+        {{ form_row(formTrick.file, {'label': 'Image Principale (obligatoire)', 'attr': {'placeholder': 'Choisissez votre image principale'}}) }}
+        {#{{ form_row(formTrick.images, {'label': 'Ajoutez des images', 'attr': {'placeholder': 'Choisissez vos images'}}) }}#}
+        {{ form_errors(formTrick.images) }}
+
 
 
 
@@ -62,7 +65,7 @@
 
         {# hide unwanted form_widget #}
         <div id="divCheckbox" style="display: none;">
-            {{ form_rest(formTrick) }}
+            {#{{ form_rest(formTrick) }}#}
         </div>
 
         {{ form_end(formTrick) }}
@@ -73,7 +76,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('create') }}
+{#{{ encore_entry_script_tags('create') }}#}
 {% endblock %}
 
 

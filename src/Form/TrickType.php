@@ -60,10 +60,7 @@ class TrickType extends AbstractType
                     'constraints' => [
                         new Image(),
                         new NotNull(),
-                    ],
-                    'attr' => [
-                        'placeholder' => 'Image principale',
-                    ],
+                    ]
                 ]
             )
             ->add(

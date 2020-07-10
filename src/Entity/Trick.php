@@ -56,7 +56,7 @@ class Trick
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", orphanRemoval=true, cascade={"persist", "remove"})
-     * @Assert\NotBlank()
+     *
      */
     private $images;
 
@@ -80,10 +80,6 @@ class Trick
      */
     private $mainImage;
 
-    /**
-     *
-     *
-     */
     private $file;
 
     /**
