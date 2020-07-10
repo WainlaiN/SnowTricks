@@ -1,10 +1,10 @@
 $(document).ready(function () {
     var switches = $(":checkbox");
 
-    switches.click(function (event) {
+    switches.click(function () {
 
-        event.preventDefault();
-        //confirm("voulez-vous supprimer cette image");
+        //event.preventDefault();
+
         var id = $(this).attr('data-id')
         var url = 'switch/' + id;
         console.log(url)
@@ -19,19 +19,21 @@ $(document).ready(function () {
                 console.log(response);
                 if (response.success === 1) {
 
-                    // Remove image from HTML
-                    if ($(this).is(":checked")) {
-                        $(this).prop("checked", false);
-                    } else {
-                        $(this).prop("checked", true);
-                    }
+                    alert("Changement de statut utilisateur validé");
+                    // Refresh checkbox
+                    //if ($(this).is(":checked")) {
+                    //   $(this).prop("checked", false);
+                    //} else {
+                    //    $(this).prop("checked", true);
+                    //}
+
+                    //checkboxradio('refresh');
+
 
                 } else {
                     alert('Problème technique.');
                 }
             }
         });
-
     });
-
 });
