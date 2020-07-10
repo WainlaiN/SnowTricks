@@ -30,9 +30,9 @@
                     <td>{{ user.username }}</td>
                     <td>
                         <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="customSwitch1"
+                            <input type="checkbox" class="custom-control-input" id="customSwitch{{ user.id }}"
                             {% if user.roles[0] == "ROLE_ADMIN" %} checked {% endif %} data-id="{{ user.id }}">
-                            <label class="custom-control-label" for="customSwitch1"></label>
+                            <label class="custom-control-label" for="customSwitch{{ user.id }}"></label>
                         </div>
                     </td>
                     <td>

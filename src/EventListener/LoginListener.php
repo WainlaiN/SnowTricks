@@ -28,7 +28,7 @@ class LoginListener
         //check if token activation token is still present
         if ($user->getActivationToken()) {
 
-            throw new CustomUserMessageAuthenticationException ('Vous devez activer votre compte avant la connexion !');
+            throw new CustomUserMessageAuthenticationException ('Vous devez activer votre compte avant la première connexion !');
         }
 
 
