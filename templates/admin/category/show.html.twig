@@ -23,9 +23,9 @@
             </tbody>
         </table>
 
-        <a href="{{ path('category_index') }}">Revenir</a>
+        <a href="{{ path('category_index') }}" class="btn btn-info">Revenir</a>
 
-        <a href="{{ path('category_edit', {'id': category.id}) }}">Editer</a>
+        <a href="{{ path('category_edit', {'id': category.id}) }}" class="btn btn-info">Editer</a>
 
         {{ include('admin/category/_delete_form.html.twig') }}
     </div>

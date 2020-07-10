@@ -55,17 +55,12 @@ class TrickType extends AbstractType
                 FileType::class,
                 [
                     'label' => false,
-                    'required' => true,
+                    'required' => false,
                     'mapped' => false,
+
                     'constraints' => [
-                        new File([
-                            'mimeTypes' => [
-                                'image/jpeg',
-                                'image/jpg',
-                                'image/png'
-                            ],
-                            'mimeTypesMessage' => "Image PNG ou JPG seulement",
-                        ])
+                        new Image(),
+                        new NotNull(),
                     ],
                     'attr' => [
                         'placeholder' => 'Image principale',

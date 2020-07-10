@@ -82,6 +82,7 @@ class Trick
 
     /**
      *
+     *
      */
     private $file;
 
