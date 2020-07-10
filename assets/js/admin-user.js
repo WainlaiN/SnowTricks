@@ -4,10 +4,9 @@ $(document).ready(function () {
     switches.click(function () {
 
         //event.preventDefault();
-
         var id = $(this).attr('data-id')
+        console.log(id)
         var url = 'switch/' + id;
-        console.log(url)
 
         // AJAX Request
         $.ajax({
