@@ -57,7 +57,6 @@ class TrickType extends AbstractType
                     'label' => false,
                     'required' => false,
                     'mapped' => false,
-
                     'constraints' => [
                         new Image(),
                         new NotNull(),

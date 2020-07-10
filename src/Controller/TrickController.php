@@ -35,11 +35,8 @@ class TrickController extends AbstractController
         $trick = new Trick();
 
         $form = $this->createForm(TrickType::class, $trick);
-        //$request->request->set('file', $request->files->get('files'));
-        //dd($request->get('file'));
 
         $form->handleRequest($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
 
