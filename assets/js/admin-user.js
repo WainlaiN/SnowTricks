@@ -1,9 +1,9 @@
 $(document).ready(function () {
     var switches = $(":checkbox");
 
-    switches.click(function () {
+    switches.click(function (event) {
 
-        //event.preventDefault();
+        event.preventDefault();
         //confirm("voulez-vous supprimer cette image");
         var id = $(this).attr('data-id')
         var url = 'switch/' + id;
@@ -27,7 +27,7 @@ $(document).ready(function () {
                     }
 
                 } else {
-                    alert('Invalid ID.');
+                    alert('Problème technique.');
                 }
             }
         });
