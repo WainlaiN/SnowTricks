@@ -15,12 +15,14 @@ class VideoHelper
             if (strpos($url, "v=") !== false) {
 
                 $id = substr($url, strpos($url, "v=") + 2, 11);
-                return $id;
+
+                return "https://www.youtube.com/embed/".$id;
 
             } elseif (strpos($url, "embed/") !== false) {
 
                 $id = substr($url, strpos($url, "embed/") + 6, 11);
-                return $id;
+
+                return "https://www.youtube.com/embed/".$id;
             }
 
         } elseif (strpos($url, "dailymotion")) {
