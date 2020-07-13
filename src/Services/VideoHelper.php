@@ -25,7 +25,7 @@ class VideoHelper
 
         } elseif (strpos($url, "dailymotion")) {
 
-            $id = substr($url, strpos($url, "embed/video/") + 12, )
+            $id = substr($url, strpos($url, "embed/video/") + 12, 11);
         }
     }
 
