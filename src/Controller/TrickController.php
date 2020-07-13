@@ -67,8 +67,8 @@ class TrickController extends AbstractController
             //check if videos are present
             foreach ($trick->getVideos() as $video) {
 
-                $id = getIdFromUrl($video->getVideoURL());
-
+                $id = $videoHelper->getIdFromUrl($video->getVideoURL());
+                dd($id);
                 $video->setTrick($trick);
                 $manager->persist($video);
             }
