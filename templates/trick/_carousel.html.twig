@@ -1,3 +1,4 @@
+{% if trick.images|length > 0 and trick.videos|length > 0 %}
 <div class="carousel" id="carousel">
     {% set count = 1 %}
 
@@ -28,3 +29,7 @@
         <button class="btn btn-primary" id="btn-media">Medias</button>
     </div>
 </div>
+    {% else %}
+        <div class="container jumbotron text-center"><strong>Pas de médias disponible pour ce trick</strong></div>
+
+{% endif %}

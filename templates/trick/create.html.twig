@@ -63,9 +63,9 @@
             <button type="submit" class="btn btn-danger">Ajouter l'article</button>
         </div>
 
-        {# hide unwanted form_widget #}
+         hide unwanted form_widget #}
         <div id="divCheckbox" style="display: none;">
-            {#{{ form_rest(formTrick) }}#}
+            {{ form_rest(formTrick) }}
         </div>
 
         {{ form_end(formTrick) }}
@@ -76,7 +76,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-{#{{ encore_entry_script_tags('create') }}#}
+{{ encore_entry_script_tags('create') }}
 {% endblock %}
 
 
