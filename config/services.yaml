@@ -36,6 +36,9 @@ services:
         arguments:
             $adminEmail: 'nicodupblog@gmail.com'
 
+
+
+
     # add listener to check token activation
     App\EventListener\LoginListener:
         tags:

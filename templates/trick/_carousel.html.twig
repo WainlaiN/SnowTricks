@@ -1,4 +1,4 @@
-{% if trick.images|length > 0 and trick.videos|length > 0 %}
+{% if trick.images|length > 0 or trick.videos|length > 0 %}
 <div class="carousel" id="carousel">
     {% set count = 1 %}
 
