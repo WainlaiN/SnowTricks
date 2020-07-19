@@ -1,0 +1,2 @@
+# SnowTricks
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7f94066d83cb4990829c99f829f708ed)](https://app.codacy.com/manual/WainlaiN/SnowTricks?utm_source=github.com&utm_medium=referral&utm_content=WainlaiN/SnowTricks&utm_campaign=Badge_Grade_Dashboard)
