@@ -59,7 +59,7 @@ class TrickType extends AbstractType
                     'mapped' => false,
                     'constraints' => [
                         new Image(),
-                        new NotNull(),
+                        //new NotNull(),
                     ]
                 ]
             )
