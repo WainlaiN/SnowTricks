@@ -9,6 +9,7 @@ use App\Form\CommentType;
 use App\Form\TrickType;
 
 use App\Services\UploadHelper;
+use App\Services\VideoHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,8 +30,12 @@ class TrickController extends AbstractController
      * @param UploadHelper $uploadHelper
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function create(Request $request, EntityManagerInterface $manager, UploadHelper $uploadHelper)
-    {
+    public function create(
+        Request $request,
+        EntityManagerInterface $manager,
+        UploadHelper $uploadHelper,
+        VideoHelper $videoHelper
+    ) {
 
         $trick = new Trick();
 
@@ -45,7 +50,7 @@ class TrickController extends AbstractController
 
             //get MainImage in form
             $UploadedMain = $form->get('file')->getData();
-            //save MainImage in directory
+            //save MainImage in directory using service
             $mainImage = $uploadHelper->saveMainFile($UploadedMain);
             //set MainImage to Trick
             $trick->setMainImage($mainImage);
@@ -57,6 +62,17 @@ class TrickController extends AbstractController
 
                 $image = $uploadHelper->saveImage($image);
                 $image->setTrick($trick);
+            }
+
+            //check if videos are present
+            foreach ($trick->getVideos() as $video) {
+
+                //use service to clean videoURL with id
+                $urlVideo = $videoHelper->getIdFromUrl($video->getVideoURL());
+
+                $video->setVideoURL($urlVideo);
+                $video->setTrick($trick);
+                $manager->persist($video);
             }
 
             $manager->persist($trick);
@@ -86,7 +102,8 @@ class TrickController extends AbstractController
         EntityManagerInterface $manager,
         UploadHelper $uploadHelper,
         TrickRepository $repo,
-        $slug
+        $slug,
+        VideoHelper $videoHelper
     ) {
 
         $trick = $repo->findOneBySlug($slug);
@@ -97,6 +114,7 @@ class TrickController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             foreach ($trick->getImages() as $image) {
+
                 //check if it's a new uploaded file
                 if ($image->getFile()) {
 
@@ -110,24 +128,29 @@ class TrickController extends AbstractController
                 //check if it's a new video URL
                 if ($video->getVideoURL()) {
 
+                    //use service to clean videoURL with id
+                    $urlVideo = $videoHelper->getIdFromUrl($video->getVideoURL());
+
+                    $video->setVideoURL($urlVideo);
                     $video->setTrick($trick);
                     $manager->persist($video);
                 }
             }
-            $trick->setUpdatedAt(new \DateTime());
 
             //set current user to trick
             $trick->setUserId($this->getUser());
             //get MainImage in form
             $uploadedMain = $form->get('file')->getData();
-            //check if it's a new uploaded Main file
 
+            //check if it's a new uploaded Main file
             if ($uploadedMain) {
-                //save MainImage in directory
+                //save MainImage in directory using service
                 $mainImage = $uploadHelper->saveMainFile($uploadedMain);
                 //set MainImage to Trick
                 $trick->setMainImage($mainImage);
             }
+            //update with new updatedAt
+            $trick->setUpdatedAt(new \DateTime());
 
             $manager->persist($trick);
             $manager->flush();
