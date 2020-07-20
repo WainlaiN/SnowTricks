@@ -39,19 +39,4 @@ class VideoHelper
         }
     }
 
-
-    public function getPlatformFromUrl($url)
-    {
-        if (strpos($url, "youtu") !== false) {
-
-            return $platform = 'youtube';
-
-        } elseif (strpos($url, "dailymotion")) {
-
-            return $platform = 'dailymotion';
-        }
-
-
-    }
-
 }
