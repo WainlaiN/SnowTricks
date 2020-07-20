@@ -33,27 +33,10 @@ class VideoHelper
 
                 $id = substr($url, strpos($url, "video/") + 6, 7);
 
-                //dump($id);
-
                 return self::DAILYMOTION_URL.$id;
             }
 
         }
-    }
-
-
-    public function getPlatformFromUrl($url)
-    {
-        if (strpos($url, "youtu") !== false) {
-
-            return $platform = 'youtube';
-
-        } elseif (strpos($url, "dailymotion")) {
-
-            return $platform = 'dailymotion';
-        }
-
-
     }
 
 }
