@@ -33,8 +33,6 @@ class VideoHelper
 
                 $id = substr($url, strpos($url, "video/") + 6, 7);
 
-                //dump($id);
-
                 return self::DAILYMOTION_URL.$id;
             }
 
