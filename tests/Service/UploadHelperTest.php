@@ -4,7 +4,7 @@
 namespace App\Tests\Service;
 
 
-class TestSlugify
+class UploadHelperTest
 {
 
 }

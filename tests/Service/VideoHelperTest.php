@@ -4,7 +4,7 @@
 namespace App\Tests\Service;
 
 
-class TestMailer
+class VideoHelperTest
 {
 
 }

@@ -4,7 +4,7 @@
 namespace App\Tests\Controller;
 
 
-class TestTrickController
+class TrickControllerTest
 {
 
 }
