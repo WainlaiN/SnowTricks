@@ -3,7 +3,6 @@
 
 namespace App\Tests\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class HomeControllerTest extends WebTestCase
@@ -12,7 +11,9 @@ class HomeControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
-        self::assertEquals(200, $client->getResponse()->getStatusCode());
+        //self::assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertResponseIsSuccessful();
 
     }
 
