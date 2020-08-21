@@ -9,8 +9,8 @@ class Slugify
         $str = strtolower(trim($str));
         $str = preg_replace('/[^A-Za-z0-9-]+/', '-', $str);
         $str = preg_replace('/-+/', "-", $str);
-        return rtrim($str, '-');
 
+        return rtrim($str, '-');
     }
 
 }

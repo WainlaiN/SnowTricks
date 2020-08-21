@@ -11,23 +11,24 @@ use Symfony\Component\Mailer\MailerInterface;
 
 class MailerTest extends TestCase
 {
-    private $mailer;
-
-    public function test__construct(Mailer $mailer)
-    {
-        $this->mailer = $mailer;
-
-    }
 
     public function testSend()
     {
+        $symfonyMailer = $this->createMock(MailerInterface::class);
+        $symfonyMailer->expects($this->once())
+            ->method('send');
 
+        $sujet = 'sujet de test';
+        $adminEmail = 'nicodupblog@gmail.com';
+        $userEmail = 'nicodupblog@gmail.com';
+        $render = "ceci est un test";
+
+        $mailer = new Mailer($adminEmail, $symfonyMailer);
         $mailer->sendEmail(
-            'sujet de test',
-            'nicodupblog@gmail.com',
-            "Ceci est un email de test"
+            $sujet,
+            $userEmail,
+            $render
         );
-
 
     }
 
