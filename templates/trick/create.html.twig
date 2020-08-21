@@ -20,9 +20,6 @@
         {#{{ form_row(formTrick.images, {'label': 'Ajoutez des images', 'attr': {'placeholder': 'Choisissez vos images'}}) }}#}
         {{ form_errors(formTrick.images) }}
 
-
-
-
         <ul id="image-fields-list"
             data-prototype="{{ form_widget(formTrick.images.vars.prototype)|e }}"
             data-widget-tags="{{ '<li></li>'|e }}"
@@ -52,9 +49,10 @@
             {% endfor %}
         </ul>
 
+        <p>Ajouter Vos Videos (Youtube ou Dailymotion)</p>
         <button type="button"
                 class="add-another-collection-widget"
-                data-list-selector="#video-fields-list">Ajouter une video
+                data-list-selector="#video-fields-list">Ajouter
         </button>
         <br>
 
