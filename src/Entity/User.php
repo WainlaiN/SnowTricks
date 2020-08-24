@@ -49,7 +49,7 @@ class User implements UserInterface
     private $photo;
 
     /**
-     * @Assert\NotNull()
+     *
      * @Assert\Image(
      *  mimeTypes= {"image/jpeg", "image/jpg", "image/png"},
      *  mimeTypesMessage = "Le fichier ne possède pas une extension valide ! Veuillez insérer une image en .jpg, .jpeg ou .png")

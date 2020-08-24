@@ -9,34 +9,54 @@ class VideoHelper
     const YOUTUBE_URL = "https://www.youtube.com/embed/";
     const DAILYMOTION_URL = "https://www.dailymotion.com/embed/video/";
 
-    public function getIdFromUrl($url)
+    public function extractPlatformFromURL($url)
     {
-
         if (strpos($url, "youtu") !== false) {
+            return $this->encodeYoutube($url);
 
-            if (strpos($url, "v=") !== false) {
+        } elseif (strpos($url, "dailymotion") !== false || strpos($url, "dai.ly") !== false) {
+            return $this->encodeDailymotion($url);
+        }
 
-                $id = substr($url, strpos($url, "v=") + 2, 11);
+    }
 
-                return self::YOUTUBE_URL.$id;
+    private function encodeYoutube($url)
+    {
+        if (strpos($url, "v=") !== false) {
 
-            } elseif (strpos($url, "embed/") !== false) {
+            $id = substr($url, strpos($url, "v=") + 2, 11);
 
-                $id = substr($url, strpos($url, "embed/") + 6, 11);
+            return self::YOUTUBE_URL.$id;
 
-                return self::YOUTUBE_URL.$id;
-            }
+        } elseif (strpos($url, "embed/") !== false) {
 
-        } elseif (strpos($url, "dailymotion") !== false) {
+            $id = substr($url, strpos($url, "embed/") + 6, 11);
 
-            if (strpos($url, "video/")) {
+            return self::YOUTUBE_URL.$id;
 
-                $id = substr($url, strpos($url, "video/") + 6, 7);
+        } elseif (strpos($url, "youtu.be/") !== false) {
 
-                return self::DAILYMOTION_URL.$id;
-            }
+            $id = substr($url, strpos($url, "youtu.be/") + 9, 11);
+
+            return self::YOUTUBE_URL.$id;
 
         }
     }
 
+    private function encodeDailymotion($url)
+    {
+        if (strpos($url, "video/")) {
+
+            $id = substr($url, strpos($url, "video/") + 6, 7);
+
+            return self::DAILYMOTION_URL.$id;
+
+        } elseif (strpos($url, "dai.ly/")) {
+
+            $id = substr($url, strpos($url, "dai.ly/") + 7, 7);
+
+            return self::DAILYMOTION_URL.$id;
+
+        }
+    }
 }
