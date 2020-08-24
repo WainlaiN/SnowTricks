@@ -30,6 +30,9 @@ class MailerTest extends TestCase
             $render
         );
 
+        $this->assertEquals($result, $slugString);
+
+
         //decoupe et test les 4 variables
 
     }

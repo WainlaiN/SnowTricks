@@ -22,16 +22,20 @@ class Mailer
         $this->adminEmail = $adminEmail;
     }
 
-    public function sendEmail($subject, $to, $render)
+    private function setMessage($subject, $to, $render)
     {
-
-        $message = (new Email())
-            ->subject($subject)
+        $email = new Email();
+        $email->subject($subject)
             ->from($this->adminEmail)
             ->to($to)
             ->html($render);
 
-        $this->mailer->send($message);
+        return $email;
+    }
+
+    public function sendEmail($subject, $to, $render)
+    {
+        $this->mailer->send($this->setMessage($subject, $to, $render));
     }
 
 }
