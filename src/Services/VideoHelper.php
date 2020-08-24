@@ -26,21 +26,17 @@ class VideoHelper
 
             $id = substr($url, strpos($url, "v=") + 2, 11);
 
-            return self::YOUTUBE_URL.$id;
-
         } elseif (strpos($url, "embed/") !== false) {
 
             $id = substr($url, strpos($url, "embed/") + 6, 11);
-
-            return self::YOUTUBE_URL.$id;
 
         } elseif (strpos($url, "youtu.be/") !== false) {
 
             $id = substr($url, strpos($url, "youtu.be/") + 9, 11);
 
-            return self::YOUTUBE_URL.$id;
-
         }
+
+        return self::YOUTUBE_URL.$id;
     }
 
     private function encodeDailymotion($url)
@@ -49,14 +45,12 @@ class VideoHelper
 
             $id = substr($url, strpos($url, "video/") + 6, 7);
 
-            return self::DAILYMOTION_URL.$id;
-
         } elseif (strpos($url, "dai.ly/")) {
 
             $id = substr($url, strpos($url, "dai.ly/") + 7, 7);
 
-            return self::DAILYMOTION_URL.$id;
-
         }
+
+        return self::DAILYMOTION_URL.$id;
     }
 }
