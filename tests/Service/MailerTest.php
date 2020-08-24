@@ -30,6 +30,8 @@ class MailerTest extends TestCase
             $render
         );
 
+        //decoupe et test les 4 variables
+
     }
 
 }

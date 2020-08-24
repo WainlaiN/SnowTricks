@@ -43,20 +43,12 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //hash and set password to user
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
-
-            //generate Activation Token
             $user->setActivationToken($tokenGenerator->generateToken());
 
-            //get Picture in form
             $pictureFile = $user->getFile();
-
-            //save MainImage in directory
             $PictureImage = $uploadHelper->savePicture($pictureFile);
-
-            //set Picture to User
             $user->setPhoto($PictureImage);
 
             //set ROLE_USER to user
@@ -65,7 +57,6 @@ class SecurityController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            //Send email using service
             $mailer->sendEmail(
                 'Activation de votre compte!',
                 $user->getEmail(),
@@ -195,7 +186,6 @@ class SecurityController extends AbstractController
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
 
-            //Send reset email using service
             $mailer->sendEmail(
                 'Reinitialisation de votre mot de passe',
                 $user->getEmail(),
@@ -228,7 +218,6 @@ class SecurityController extends AbstractController
         UserRepository $userRepository
     ) {
         $user = $userRepository->findOneBy(['resetToken' => $resetToken]);
-
 
         if (!$user) {
             $this->addFlash(

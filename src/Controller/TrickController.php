@@ -40,36 +40,25 @@ class TrickController extends AbstractController
         $trick = new Trick();
 
         $form = $this->createForm(TrickType::class, $trick);
-
         $form->handleRequest($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $trick->setCreatedAt(new \DateTime());
-
-            //get MainImage in form
             $UploadedMain = $form->get('file')->getData();
-            //save MainImage in directory using service
             $mainImage = $uploadHelper->saveMainFile($UploadedMain);
-            //set MainImage to Trick
             $trick->setMainImage($mainImage);
-            //set user to Trick
             $trick->setUserId($this->getUser());
 
             // check if images are present
             foreach ($trick->getImages() as $image) {
-
                 $image = $uploadHelper->saveImage($image);
                 $image->setTrick($trick);
             }
-
             //check if videos are present
             foreach ($trick->getVideos() as $video) {
-
                 //use service to clean videoURL with id
                 $urlVideo = $videoHelper->getIdFromUrl($video->getVideoURL());
-
                 $video->setVideoURL($urlVideo);
                 $video->setTrick($trick);
                 $manager->persist($video);
@@ -108,16 +97,13 @@ class TrickController extends AbstractController
 
         $trick = $repo->findOneBySlug($slug);
         $form = $this->createForm(TrickType::class, $trick);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             foreach ($trick->getImages() as $image) {
-
                 //check if it's a new uploaded file
                 if ($image->getFile()) {
-
                     $image = $uploadHelper->saveImage($image);
                     $image->setTrick($trick);
                     $manager->persist($image);
@@ -127,7 +113,6 @@ class TrickController extends AbstractController
             foreach ($trick->getVideos() as $video) {
                 //check if it's a new video URL
                 if ($video->getVideoURL()) {
-
                     //use service to clean videoURL with id
                     $urlVideo = $videoHelper->getIdFromUrl($video->getVideoURL());
 
@@ -137,21 +122,18 @@ class TrickController extends AbstractController
                 }
             }
 
-            //set current user to trick
             $trick->setUserId($this->getUser());
+
             //get MainImage in form
             $uploadedMain = $form->get('file')->getData();
 
             //check if it's a new uploaded Main file
             if ($uploadedMain) {
-                //save MainImage in directory using service
                 $mainImage = $uploadHelper->saveMainFile($uploadedMain);
-                //set MainImage to Trick
                 $trick->setMainImage($mainImage);
             }
-            //update with new updatedAt
-            $trick->setUpdatedAt(new \DateTime());
 
+            $trick->setUpdatedAt(new \DateTime());
             $manager->persist($trick);
             $manager->flush();
 
@@ -188,7 +170,6 @@ class TrickController extends AbstractController
             $comment->setCreatedAt(new \DateTime());
             $comment->setTrick($trick);
             $comment->setUser($this->getUser());
-
             $manager->persist($comment);
             $manager->flush();
 
@@ -214,7 +195,6 @@ class TrickController extends AbstractController
     public function delete(TrickRepository $repo, Request $request, EntityManagerInterface $manager, $slug)
     {
         $trick = $repo->findOneBySlug($slug);
-
         $manager->remove($trick);
         $manager->flush();
 
@@ -230,6 +210,7 @@ class TrickController extends AbstractController
     public function deleteImage(Image $image, Request $request, EntityManagerInterface $manager)
     {
         $data = json_decode($request->getContent(), true);
+
         //delete the image in directory
         unlink($this->getParameter('uploads-directory').'/'.$image->getImageFilename());
 

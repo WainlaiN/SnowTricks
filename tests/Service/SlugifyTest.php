@@ -13,10 +13,14 @@ class SlugifyTest extends TestCase
     {
 
         $slugify = new Slugify();
-        $string = "Une chaine de caractère à transformer en slug";
+        $string = "Uneê chaine de caractère! à transformer en slug";
         $slugString = "une-chaine-de-caractere-a-transformer-en-slug";
         $result = $slugify->slugify($string);
         $this->assertEquals($result, $slugString);
+
+        //assert by caracter
+
+        //assertNotin
 
     }
 }
