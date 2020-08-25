@@ -23,15 +23,17 @@ class VideoHelperTest extends TestCase
 
     public function testIsEncodedDailymotionCorrectly()
     {
-        $string = "https://www.dailymotion.com/video/xcegta";
-        $string2 = "https://dai.ly/xcegta";
-        $correctDailymotionUrl = "https://www.dailymotion.com/embed/video/xcegta";
-        $correctDailymotionUrl = "<div style=\"position:relative;padding-bottom:56.25%;height:0;overflow:hidden;\"> <iframe style=\"width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden\" frameborder=\"0\" type=\"text/html\" src=\"https://www.dailymotion.com/embed/video/xcegta\" width=\"100%\" height=\"100%\" allowfullscreen > </iframe> </div>
-";
+        $string = "https://www.dailymotion.com/video/x425sf4";
+        $string2 = "https://dai.ly/x425sf4";
+        $string3 = "https://www.dailymotion.com/embed/video/x425sf4";
+        $string4 = "<div style=\"position:relative;padding-bottom:56.25%;height:0;overflow:hidden;\"> <iframe style=\"width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden\" frameborder=\"0\" type=\"text/html\" src=\"https://www.dailymotion.com/embed/video/x425sf4\" width=\"100%\" height=\"100%\" allowfullscreen > </iframe> </div>";
+        $correctDailymotionUrl = "https://www.dailymotion.com/embed/video/x425sf4";
 
         $videoHelper = new VideoHelper();
         $this->assertEquals($videoHelper->extractPlatformFromURL($string), $correctDailymotionUrl);
         $this->assertEquals($videoHelper->extractPlatformFromURL($string2), $correctDailymotionUrl);
+        $this->assertEquals($videoHelper->extractPlatformFromURL($string3), $correctDailymotionUrl);
+        $this->assertEquals($videoHelper->extractPlatformFromURL($string4), $correctDailymotionUrl);
 
     }
 }
