@@ -10,8 +10,9 @@
         {{ form_errors(formTrick.name) }}
         {{ form_row(formTrick.description) }}
         {{ form_errors(formTrick.description) }}
-
-        {{ form_row(formTrick.category) }}
+        {{ form_row(formTrick.category, {'label': 'Categorie'}) }}
+        {{ form_errors(formTrick.category) }}
+        <a href="{{ path('category_new') }}" class="btn btn-primary m-2">Créer une categorie</a>
         <div class="m-3">
             <img src="{{ UploadDirectory ~ trick.mainImage }}" alt="" width="150">
         </div>

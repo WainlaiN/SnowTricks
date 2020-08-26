@@ -16,6 +16,9 @@ class VideoHelper
 
         } elseif (strpos($url, "dailymotion") !== false || strpos($url, "dai.ly") !== false) {
             return $this->encodeDailymotion($url);
+        } else {
+
+            return false;
         }
 
     }

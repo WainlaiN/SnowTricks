@@ -112,10 +112,8 @@ class TrickController extends AbstractController
             }
 
             foreach ($trick->getVideos() as $video) {
-
                 //check if it's a new video URL
                 if ($video->getVideoURL()) {
-
                     //use service to clean videoURL with id
                     $urlVideo = $videoHelper->extractPlatformFromURL($video->getVideoURL());
 
@@ -129,7 +127,6 @@ class TrickController extends AbstractController
 
             //get MainImage in form
             $uploadedMain = $form->get('file')->getData();
-
             //check if it's a new uploaded Main file
             if ($uploadedMain) {
                 $mainImage = $uploadHelper->saveMainFile($uploadedMain);
