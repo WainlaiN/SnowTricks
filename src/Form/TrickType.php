@@ -23,6 +23,9 @@ class TrickType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $trick = $options['data'] ?? null;
+        $isEdit = $trick && $trick->getId();
+
         $builder
             ->add(
                 'name',
@@ -49,18 +52,32 @@ class TrickType extends AbstractType
                         'placeholder' => 'Description du trick',
                     ],
                 ]
-            )
+            );
+
+
+        $imageConstraints = [
+            new Image(
+                [
+                    'maxSize' => '5M',
+                ]
+            ),
+        ];
+        if (!$isEdit) {
+            $imageConstraints[] = new NotNull(
+                [
+                    'message' => 'Veuillez choisir une image principale',
+                ]
+            );
+        }
+
+        $builder
             ->add(
                 'file',
                 FileType::class,
                 [
-                    'label' => false,
-                    'required' => false,
                     'mapped' => false,
-                    'constraints' => [
-                        new Image(),
-                        //new NotNull(),
-                    ]
+                    'required' => false,
+                    'constraints' => $imageConstraints,
                 ]
             )
             ->add(
@@ -86,6 +103,7 @@ class TrickType extends AbstractType
                     'prototype' => true,
                 ]
             );
+
 
     }
 
