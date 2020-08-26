@@ -12,10 +12,13 @@ class VideoHelper
     public function extractPlatformFromURL($url)
     {
         if (strpos($url, "youtu") !== false) {
+
             return $this->encodeYoutube($url);
 
         } elseif (strpos($url, "dailymotion") !== false || strpos($url, "dai.ly") !== false) {
+
             return $this->encodeDailymotion($url);
+
         } else {
 
             return false;
