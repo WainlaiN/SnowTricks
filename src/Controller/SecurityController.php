@@ -22,9 +22,17 @@ use App\Services\Mailer;
 class SecurityController extends AbstractController
 {
 
+
     /**
-     * @Route("/registration", name="security_registration")
      *
+     * @Route("/registration", name="security_registration")
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param UserPasswordEncoderInterface $encoder
+     * @param UploadHelper $uploadHelper
+     * @param Mailer $mailer
+     * @param TokenGeneratorInterface $tokenGenerator
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function registration(
         Request $request,

@@ -50,18 +50,28 @@ class TrickController extends AbstractController
             $trick->setMainImage($mainImage);
             $trick->setUserId($this->getUser());
 
-            // check if images are present
             foreach ($trick->getImages() as $image) {
                 $image = $uploadHelper->saveImage($image);
                 $image->setTrick($trick);
             }
-            //check if videos are present
+
             foreach ($trick->getVideos() as $video) {
-                //use service to clean videoURL with id
-                $urlVideo = $videoHelper->extractPlatformFromURL($video->getVideoURL());
-                $video->setVideoURL($urlVideo);
-                $video->setTrick($trick);
-                $manager->persist($video);
+
+                if ($videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
+
+                    $video->setVideoURL($videoHelper->extractPlatformFromURL($video->getVideoURL()));
+                    $video->setTrick($trick);
+                    $manager->persist($video);
+
+                } else {
+
+                    $this->addFlash(
+                        'danger',
+                        "Problème lors de l'enregistrement des videos"
+                    );
+
+                    return $this->redirectToRoute('trick_create');
+                }
             }
 
             $manager->persist($trick);
@@ -112,22 +122,32 @@ class TrickController extends AbstractController
             }
 
             foreach ($trick->getVideos() as $video) {
-                //check if it's a new video URL
-                if ($video->getVideoURL()) {
-                    //use service to clean videoURL with id
-                    $urlVideo = $videoHelper->extractPlatformFromURL($video->getVideoURL());
 
-                    $video->setVideoURL($urlVideo);
-                    $video->setTrick($trick);
-                    $manager->persist($video);
+                if ($video->getVideoURL()) {
+
+                    if ($videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
+
+                        $video->setVideoURL($videoHelper->extractPlatformFromURL($video->getVideoURL()));
+                        $video->setTrick($trick);
+                        $manager->persist($video);
+
+                    } else {
+
+                        $this->addFlash(
+                            'danger',
+                            "Problème lors de l'enregistrement des videos"
+                        );
+
+                        return $this->redirectToRoute('trick_edit', ['slug' => $trick->getSlug()]);
+
+                    }
                 }
             }
 
             $trick->setUserId($this->getUser());
 
-            //get MainImage in form
             $uploadedMain = $form->get('file')->getData();
-            //check if it's a new uploaded Main file
+            
             if ($uploadedMain) {
                 $mainImage = $uploadHelper->saveMainFile($uploadedMain);
                 $trick->setMainImage($mainImage);
