@@ -80,6 +80,9 @@ class Trick
      */
     private $mainImage;
 
+    /**
+     * @Assert\NotNull(groups={"add"})
+     */
     private $file;
 
     /**

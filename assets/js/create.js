@@ -5,14 +5,6 @@ $(document).on('change', '.custom-file-input', function(event) {
         .html(inputFile.files[0].name);
 });
 
-$(document).on('ready', '.custom-file-input', function(event) {
-    var inputFile = event.currentTarget;
-    $(inputFile).parent()
-        .find('.custom-file-label')
-        .html(inputFile.files[0].name);
-});
-
-
 jQuery(document).ready(function () {
     jQuery('.add-another-collection-widget').click(function (e) {
         var list = jQuery(jQuery(this).attr('data-list-selector'));

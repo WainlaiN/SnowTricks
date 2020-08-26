@@ -16,7 +16,7 @@
         <a href="{{ path('category_new') }}" class="btn btn-primary m-2">Créer une categorie</a>
         {{ form_row(formTrick.description) }}
         {{ form_errors(formTrick.description) }}
-        {{ form_row(formTrick.file, {'label': 'Image Principale (obligatoire)', 'attr': {'placeholder': 'Choisissez votre image principale'}}) }}
+        {{ form_row(formTrick.file, {'label': 'Image Principale (obligatoire)', 'attr': {'placeholder': 'Choisissez votre image principale'}}, 'a') }}
         {{ form_errors(formTrick.images) }}
 
         <ul id="image-fields-list"
