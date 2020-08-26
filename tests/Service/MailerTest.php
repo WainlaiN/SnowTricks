@@ -24,11 +24,13 @@ class MailerTest extends TestCase
         $render = "ceci est un test";
 
         $mailer = new Mailer($adminEmail, $symfonyMailer);
-        $mailer->sendEmail(
+        $mail = $mailer->setMessage(
             $sujet,
             $userEmail,
             $render
         );
+
+        $mail->
 
         //$this->assertEquals($result, $slugString);
 

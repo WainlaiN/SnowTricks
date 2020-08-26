@@ -57,13 +57,14 @@ class SecurityController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            $mailer->sendEmail(
+            $mailer->setMessage(
                 'Activation de votre compte!',
                 $user->getEmail(),
                 $this->renderView(
                     'email/activation.html.twig',
                     ['token' => $user->getActivationToken()]
-                )
+                ),
+                true
             );
 
             $this->addFlash(
@@ -186,13 +187,14 @@ class SecurityController extends AbstractController
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
 
-            $mailer->sendEmail(
+            $mailer->setMessage(
                 'Reinitialisation de votre mot de passe',
                 $user->getEmail(),
                 $this->renderView(
                     'email/reset.html.twig',
                     ['url' => $url]
-                )
+                ),
+                true
             );
 
             $this->addFlash(

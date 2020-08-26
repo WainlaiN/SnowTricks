@@ -26,7 +26,6 @@ class SlugifyTest extends TestCase
         $this->assertEquals($slugify->slugify("ê"), "e");
         $this->assertEquals($slugify->slugify("un espace"), "un-espace");
 
-
         //test some special characters
         $special_chars = array("?", "[", "]", "/", "\\", "=", "<", ">", ":", ";", ",", "'", "\"", "&", "$", "#", "*", "(", ")", "|", "~", "`", "!", "{", "}");
         $this->assertEquals($slugify->slugify(implode($special_chars)), "");

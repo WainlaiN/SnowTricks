@@ -22,7 +22,7 @@ class Mailer
         $this->adminEmail = $adminEmail;
     }
 
-    private function setMessage($subject, $to, $render)
+    public function setMessage($subject, $to, $render, $send = false)
     {
         $email = new Email();
         $email->subject($subject)
@@ -30,12 +30,17 @@ class Mailer
             ->to($to)
             ->html($render);
 
-        return $email;
+        if ($send == false) {
+
+            return $email;
+        }
+
+        $this->sendEmail($email);
     }
 
-    public function sendEmail($subject, $to, $render)
+    private function sendEmail($email)
     {
-        $this->mailer->send($this->setMessage($subject, $to, $render));
+        $this->mailer->send($email);
     }
 
 }
