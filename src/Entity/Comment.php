@@ -17,7 +17,6 @@ class Comment
      */
     private $id;
 
-
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
