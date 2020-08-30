@@ -25,7 +25,7 @@ class TrickController extends AbstractController
 {
     /**
      * @Route("/trick/new", name="trick_create")
-     * @IsGranted("ROLE_USER",statusCode=404, message="No access! Get out!")
+     * @IsGranted("ROLE_USER")
      * @param Request $request
      * @param EntityManagerInterface $manager
      * @param UploadHelper $uploadHelper
