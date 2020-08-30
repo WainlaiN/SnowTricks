@@ -8,22 +8,20 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadHelperTest extends TestCase
 {
-    /**public function testSomething()
-    {
-        $this->assertTrue(true);
-    }**/
 
-
-    public function testSaveImage ()
+    public function testSaveImage()
     {
+        $uploadHelper = $this->createMock(UploadHelper::class);
         $photo = new UploadedFile(
-            '',
-            'photo.jpg',
-            'image/jpeg',
+            '/Uploads/photo.png',
+            'photo.png',
+            'image/png',
             null
         );
+        dump($photo);
 
-        $uploadHelper = new UploadHelper("test");
+        $uploadHelper->saveMainFile($photo);
+
 
     }
 }

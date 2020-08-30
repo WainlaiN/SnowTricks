@@ -27,6 +27,8 @@ security:
                 path: security_logout
                 target: trick
 
+            # access_denied_handler: App\Security\AccessDeniedHandler
+
 
 
             # activate different ways to authenticate

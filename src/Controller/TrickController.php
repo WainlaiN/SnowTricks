@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Image;
+use App\Entity\User;
 use App\Entity\Video;
 use App\Form\CommentType;
 use App\Form\TrickType;
@@ -24,12 +25,18 @@ class TrickController extends AbstractController
 {
     /**
      * @Route("/trick/new", name="trick_create")
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_USER",statusCode=404, message="No access! Get out!")
      * @param Request $request
      * @param EntityManagerInterface $manager
      * @param UploadHelper $uploadHelper
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
+
+    /**public function checkUser(User $user)
+    {
+
+    }**/
+
     public function create(
         Request $request,
         EntityManagerInterface $manager,

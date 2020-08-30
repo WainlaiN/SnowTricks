@@ -26,7 +26,7 @@ class UploadHelper
 
         $destination = $this->uploadPath.self::IMAGE_DIR;
         $file = $image->getFile();
-        $filename = md5(uniqid()) . '.' . $file->guessExtension();
+        $filename = md5(uniqid()).'.'.$file->guessExtension();
         $file->move(
             $destination,
             $filename
@@ -40,7 +40,7 @@ class UploadHelper
     public function saveMainFile(File $file)
     {
         $destination = $this->uploadPath.self::IMAGE_DIR;
-        $filename = md5(uniqid()) . '.' . $file->guessExtension();
+        $filename = md5(uniqid()).'.'.$file->guessExtension();
         $file->move(
             $destination,
             $filename
@@ -52,7 +52,7 @@ class UploadHelper
     public function savePicture(File $file)
     {
         $destination = $this->uploadPath.self::PICTURE_DIR;
-        $filename = md5(uniqid()) . '.' . $file->guessExtension();
+        $filename = md5(uniqid()).'.'.$file->guessExtension();
         $file->move(
             $destination,
             $filename
