@@ -128,7 +128,12 @@ class SecurityController extends AbstractController
         $user = $userRepository->findOneBy(['activationToken' => $token]);
 
         if (!$user) {
-            throw $this->createNotFoundException('Cet utilisateur n\'existe pas');
+            $this->addFlash(
+                'danger',
+                'Problème d\'identification !'
+            );
+
+            return $this->redirectToRoute('security_login');
         }
 
         $user->setActivationToken(null);
