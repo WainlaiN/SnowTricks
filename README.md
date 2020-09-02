@@ -32,11 +32,11 @@ MAILER_DSN=gmail://email:password@default
 ```
     composer install
 ```
-4. Téléchargez et installez les dépendances front-end du projet avec [Yarn](https://www.npmjs.com/get-npm) :
+4. Téléchargez et installez les dépendances front-end du projet avec [Yarn](https://classic.yarnpkg.com/en/docs/install) :
 ```
     Yarn install
 ```
-5. Créer un build d'assets (grâce à Webpack Encore) avec [Yarn](https://www.npmjs.com/get-npm) :
+5. Créer un build d'assets (grâce à Webpack Encore) avec [Yarn](https://classic.yarnpkg.com/en/docs/install) :
 ```
     Yarn build
 ```
@@ -48,6 +48,7 @@ MAILER_DSN=gmail://email:password@default
 ```
     php bin/console doctrine:migrations:migrate
 ```
+   
 8. (Optionnel) Installer les fixtures pour avoir une démo de données fictives :
 ```
     php bin/console doctrine:fixtures:load
