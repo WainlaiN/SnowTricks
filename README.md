@@ -35,9 +35,9 @@ MAILER_DSN=gmail://email:password@default
 ```
     php bin/console doctrine:database:create
 ```
-7. Créez les différentes tables de la base de données en appliquant les migrations :
+7. Créez les tables de la base de données :
 ```
-    php bin/console doctrine:migrations:migrate
+    php bin/console doctrine:schema:update --force
 ```
    
 8. (Optionnel) Installer les fixtures pour avoir une démo de données fictives :
