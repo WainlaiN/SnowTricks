@@ -22,13 +22,11 @@ Création d'un site communautaire de partage de figures de snowboard via le fram
 ```
     git clone https://github.com/WainlaiN/SnowTricks
 ```
-2. Configurez vos variables d'environnement tel que la connexion à la base de données ou votre serveur SMTP ou adresse mail dans le fichier `.env` :
+2. Configurez vos variables d'environnement tel que la connexion à la base de données /serveur SMTP/adresse mail dans le fichier `.env.local` (faire une copie du .env) :
 ```
 DATABASE_URL=mysql://LOGIN:PASSWORD@127.0.0.1:3306/Snowtricks?serverVersion=5.7
-```
-3. Configurez également l'envoi de mail dans le fichier `.env` :
-```
-DATABASE_URL=mysql://LOGIN:PASSWORD@127.0.0.1:3306/Snowtricks?serverVersion=5.7
+
+MAILER_DSN=gmail://email:password@default
 ```
 3. Téléchargez et installez les dépendances back-end du projet avec [Composer](https://getcomposer.org/download/) :
 ```
