@@ -38,7 +38,8 @@ MAILER_DSN=gmail://email:password@default
 ```
 5. Créer un build d'assets (grâce à Webpack Encore) avec [Yarn](https://classic.yarnpkg.com/en/docs/install) :
 ```
-    Yarn build
+    Yarn build (en prod)
+    Yarn watch (en dev)
 ```
 6. Créez la base de données si elle n'existe pas déjà, taper la commande ci-dessous en vous plaçant dans le répertoire du projet :
 ```
@@ -52,5 +53,9 @@ MAILER_DSN=gmail://email:password@default
 8. (Optionnel) Installer les fixtures pour avoir une démo de données fictives :
 ```
     php bin/console doctrine:fixtures:load
+```
+9. Lancement du serveur :
+```
+    php bin/console server:run
 ```
 9. Le projet est maintenant installé, vous pouvez tester l'application.
