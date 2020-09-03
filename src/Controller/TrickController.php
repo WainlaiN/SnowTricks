@@ -33,9 +33,9 @@ class TrickController extends AbstractController
      */
 
     /**public function checkUser(User $user)
-    {
-
-    }**/
+     * {
+     *
+     * }**/
 
     public function create(
         Request $request,
@@ -154,7 +154,7 @@ class TrickController extends AbstractController
             $trick->setUserId($this->getUser());
 
             $uploadedMain = $form->get('file')->getData();
-            
+
             if ($uploadedMain) {
                 $mainImage = $uploadHelper->saveMainFile($uploadedMain);
                 $trick->setMainImage($mainImage);

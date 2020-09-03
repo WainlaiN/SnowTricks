@@ -11,7 +11,7 @@ import '../css/app.css';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 import $ from 'jquery';
-global.$ = global.jQuery = $;
+//global.$ = global.jQuery = $;
 
 require('@fortawesome/fontawesome-free/css/all.css');
 require('@fortawesome/fontawesome-free/js/all.js');

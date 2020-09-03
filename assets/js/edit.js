@@ -1,11 +1,12 @@
 $(document).ready(function () {
     var links = $(".data-delete");
-
+    console.log("0");
     links.click(function (event) {
 
         event.preventDefault();
-        confirm("voulez-vous supprimer cette image");
+        confirm("voulez-vous vraiment supprimer ?");
         var a_href = $(this).attr('href');
+        console.log("1");
 
         // AJAX Request
         $.ajax({
@@ -13,9 +14,9 @@ $(document).ready(function () {
             url: a_href,
             type: 'DELETE',
             data: {path: a_href},
-            success: function (response) {
-                console.log(response);
-                if (response.success === 1) {
+            success: function (data) {
+                console.log("2");
+                if (data.success === 1) {
 
                     // Remove image from HTML
                     $(this).remove();

@@ -11,9 +11,9 @@ class HomeControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
-        self::assertEquals(200, $client->getResponse()->getStatusCode());
+        //self::assertEquals(200, $client->getResponse()->getStatusCode());
 
-        //$this->assertResponseIsSuccessful();
+        $this->assertResponseIsSuccessful();
 
     }
 
