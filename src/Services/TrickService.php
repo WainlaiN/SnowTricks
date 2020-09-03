@@ -79,14 +79,11 @@ class TrickService
                 'Votre article a bien été ajouté !'
             );
 
-            return $this->router->generate('trick_show', ['slug' => $trick->getSlug()]);
+            return ['success', 'Votre article a bien été ajouté !'];
 
         }
 
-        return $this->render(
-          'trick/create.html.twig',
-          ['formTrick' => $form->createView()]
-          );
+
 
 
     }

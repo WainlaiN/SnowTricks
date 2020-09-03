@@ -111,9 +111,19 @@ class TrickController extends AbstractController
 
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
-        $user= $this->getUser();
+        $user = $this->getUser();
 
-        $test = $trickService->createFormTrick($form, $trick, $user);
+        $trickAdded = $trickService->createFormTrick($form, $trick, $user);
+
+        if ($trickAdded[0] == "success") {
+            $this->addFlash(
+                '$trickAdded[0]',
+                '$trickAdded[1]'
+            );
+
+            return $this->redirectToRoute('trick_show', ['slug' => $trick->getSlug()]);
+
+        }
 
         return $this->render(
             'trick/create.html.twig',
