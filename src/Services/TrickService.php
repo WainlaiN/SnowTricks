@@ -3,29 +3,40 @@
 
 namespace App\Services;
 
-use App\Repository\TrickRepository;
-use App\Services\UploadHelper;
-use App\Services\VideoHelper;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Services\UploadHelper;
-use App\Services\VideoHelper;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\Router;
+use App\Entity\Trick;
 
 
-class Trick
+class TrickService
 {
+    private $manager;
+    private $uploadHelper;
+    private $videoHelper;
+    private $router;
+    private $session;
+
 
     public function __construct(
-        //Request $request,
         EntityManagerInterface $manager,
         UploadHelper $uploadHelper,
-        VideoHelper $videoHelper
+        VideoHelper $videoHelper,
+        Router $router,
+        Session $session
     ) {
+        $this->manager = $manager;
+        $this->uploadHelper = $uploadHelper;
+        $this->videoHelper = $videoHelper;
+        $this->router = $router;
+        $this->session = $session;
     }
 
     public function createFormTrick($form)
     {
-        $trick = new \App\Entity\Trick();
+        $trick = new Trick();
+        $user = new User();
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -43,13 +54,14 @@ class Trick
 
             foreach ($trick->getVideos() as $video) {
 
-                try{
+                try {
                     $user
                         ->setToken($token)
                         ->setPasswordRequestedAt(new \DateTime());
                     $entityManager->flush();
                 } catch (\Exception $e) {
                     $this->addFlash('warning', $e->getMessage());
+
                     return $this->redirectToRoute('security_login');
                 }
 
@@ -61,12 +73,14 @@ class Trick
 
                 } else {
 
-                    $this->addFlash(
+                    $this->session->getFlashBag()->add(
                         'danger',
                         "Problème lors de l'enregistrement des videos"
                     );
 
-                    return $this->redirectToRoute('trick_create');
+
+                    return $this->router->generate('trick_create');
+                    //redirectToRoute('trick_create');
                 }
             }
 

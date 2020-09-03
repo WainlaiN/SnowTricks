@@ -17,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Services\TrickService;
 
 use App\Repository\TrickRepository;
 use App\Entity\Trick;
@@ -99,11 +100,25 @@ class TrickController extends AbstractController
 
     }
 
+    public function createTest(EntityManagerInterface $manager, Request $request, TrickService $trickService)
+    {
+
+        //$trick = new Trick();
+
+        $form = $this->createForm(TrickType::class, $trick);
+        $form->handleRequest($request);
+
+        $test = $trickService->createFormTrick($form);
+
+
+    }
+
     /**
      * @Route("/trick/{slug}/edit", name="trick_edit")
      * @IsGranted("ROLE_USER")
      */
-    public function edit(
+    public
+    function edit(
         Request $request,
         EntityManagerInterface $manager,
         UploadHelper $uploadHelper,
@@ -185,8 +200,13 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/{slug}", name="trick_show")
      */
-    public function show(TrickRepository $repo, Request $request, EntityManagerInterface $manager, $slug)
-    {
+    public
+    function show(
+        TrickRepository $repo,
+        Request $request,
+        EntityManagerInterface $manager,
+        $slug
+    ) {
         $trick = $repo->findOneBySlug($slug);
         $comment = new Comment();
         $formComment = $this->createForm(CommentType::class, $comment);
@@ -219,8 +239,13 @@ class TrickController extends AbstractController
      * @Route("/trick/{slug}/delete", name="trick_delete")
      * @IsGranted("ROLE_USER")
      */
-    public function delete(TrickRepository $repo, Request $request, EntityManagerInterface $manager, $slug)
-    {
+    public
+    function delete(
+        TrickRepository $repo,
+        Request $request,
+        EntityManagerInterface $manager,
+        $slug
+    ) {
         $trick = $repo->findOneBySlug($slug);
         $manager->remove($trick);
         $manager->flush();
@@ -234,8 +259,12 @@ class TrickController extends AbstractController
      * @Route("/delete/image/{id}", name="image_delete", methods={"DELETE"})
      * @IsGranted("ROLE_USER")
      */
-    public function deleteImage(Image $image, Request $request, EntityManagerInterface $manager)
-    {
+    public
+    function deleteImage(
+        Image $image,
+        Request $request,
+        EntityManagerInterface $manager
+    ) {
         $data = json_decode($request->getContent(), true);
 
         //delete the image in directory
@@ -253,8 +282,12 @@ class TrickController extends AbstractController
      * @Route("/delete/video/{id}", name="video_delete", methods={"DELETE"})
      * @IsGranted("ROLE_USER")
      */
-    public function deleteVideo(Video $video, Request $request, EntityManagerInterface $manager)
-    {
+    public
+    function deleteVideo(
+        Video $video,
+        Request $request,
+        EntityManagerInterface $manager
+    ) {
         $data = json_decode($request->getContent(), true);
 
         //remove video from database

@@ -36,6 +36,11 @@ services:
         arguments:
             $adminEmail: 'nicodupblog@gmail.com'
 
+    # add service manage form with manager
+    App\Services\Trick:
+            arguments: ['@session', '@router', '@EntityManagerInterface', ]
+
+
     # add listener to check token activation
     App\EventListener\LoginListener:
         tags:
