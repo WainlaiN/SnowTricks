@@ -3,9 +3,7 @@
 
 namespace App\Services;
 
-use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Trick;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -56,7 +54,7 @@ class TrickService
 
             } else {
 
-                $this->session->getFlashBag()->add('danger', "Vérifier vos URLs de videos)");
+                $this->session->getFlashBag()->add('danger', "Vérifier vos URLs de videos");
 
                 return false;
             }

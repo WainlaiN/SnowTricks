@@ -9,8 +9,6 @@ use App\Entity\Video;
 use App\Form\CommentType;
 use App\Form\TrickType;
 
-use App\Services\UploadHelper;
-use App\Services\VideoHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +30,6 @@ class TrickController extends AbstractController
     public function trickCreate(Request $request, TrickService $trickService)
     {
         $trick = new Trick();
-
         $form = $this->createForm(TrickType::class, $trick);
         $user = $this->getUser();
         $form->handleRequest($request);
