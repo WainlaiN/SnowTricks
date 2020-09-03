@@ -18,7 +18,8 @@
 }
 
 .media .media-object {
-    max-width: 80px;
+    max-width: 75px;
+    max-height: 75px;
     padding-right: 5px;
 
 }
