@@ -15,7 +15,6 @@ class TrickService
     private $router;
     private $session;
 
-
     public function __construct(
         EntityManagerInterface $manager,
         UploadHelper $uploadHelper,
