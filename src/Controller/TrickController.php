@@ -24,104 +24,29 @@ use App\Entity\Trick;
 
 class TrickController extends AbstractController
 {
-    /**
-     * @Route("/trick/new2", name="trick_create2")
-     * @IsGranted("ROLE_USER")
-     * @param Request $request
-     * @param EntityManagerInterface $manager
-     * @param UploadHelper $uploadHelper
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-
-    /**public function checkUser(User $user)
-     * {
-     *
-     * }**/
-
-    public function create(
-        Request $request,
-        EntityManagerInterface $manager,
-        UploadHelper $uploadHelper,
-        VideoHelper $videoHelper
-    ) {
-
-        $trick = new Trick();
-
-        $form = $this->createForm(TrickType::class, $trick);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $trick->setCreatedAt(new \DateTime());
-            $UploadedMain = $form->get('file')->getData();
-            $mainImage = $uploadHelper->saveMainFile($UploadedMain);
-            $trick->setMainImage($mainImage);
-            $trick->setUserId($this->getUser());
-
-            foreach ($trick->getImages() as $image) {
-                $image = $uploadHelper->saveImage($image);
-                $image->setTrick($trick);
-            }
-
-            foreach ($trick->getVideos() as $video) {
-
-                if ($videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
-
-                    $video->setVideoURL($videoHelper->extractPlatformFromURL($video->getVideoURL()));
-                    $video->setTrick($trick);
-                    $manager->persist($video);
-
-                } else {
-
-                    $this->addFlash(
-                        'danger',
-                        "Problème lors de l'enregistrement des videos"
-                    );
-
-                    return $this->redirectToRoute('trick_create');
-                }
-            }
-
-            $manager->persist($trick);
-            $manager->flush();
-
-            $this->addFlash(
-                'success',
-                'Votre article a bien été ajouté !'
-            );
-
-            return $this->redirectToRoute('trick_show', ['slug' => $trick->getSlug()]);
-        }
-
-        return $this->render(
-            'trick/create.html.twig',
-            ['formTrick' => $form->createView()]
-        );
-
-    }
 
     /**
      * @Route("/trick/new", name="trick_create")
      * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @param TrickService $trickService
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function createTest(EntityManagerInterface $manager, Request $request, TrickService $trickService)
+    public function trickCreate(Request $request, TrickService $trickService)
     {
-
         $trick = new Trick();
 
         $form = $this->createForm(TrickType::class, $trick);
-        $form->handleRequest($request);
         $user = $this->getUser();
+        $form->handleRequest($request);
 
-        $trickAdded = $trickService->createFormTrick($form, $trick, $user);
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        if ($trickAdded[0] == "success") {
-            $this->addFlash(
-                '$trickAdded[0]',
-                '$trickAdded[1]'
-            );
+            //if form is valid, use service to persist value
+            if ($trickService->createFormTrick($form, $trick, $user)) {
 
-            return $this->redirectToRoute('trick_show', ['slug' => $trick->getSlug()]);
+                return $this->redirectToRoute('trick_show', ['slug' => $trick->getSlug()]);
+            }
 
         }
 
@@ -129,82 +54,32 @@ class TrickController extends AbstractController
             'trick/create.html.twig',
             ['formTrick' => $form->createView()]
         );
-
 
     }
 
     /**
      * @Route("/trick/{slug}/edit", name="trick_edit")
      * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @param TrickService $trickService
+     * @param TrickRepository $repo
+     * @param $slug
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public
-    function edit(
-        Request $request,
-        EntityManagerInterface $manager,
-        UploadHelper $uploadHelper,
-        TrickRepository $repo,
-        $slug,
-        VideoHelper $videoHelper
-    ) {
-
+    public function trickEdit(Request $request, TrickService $trickService, TrickRepository $repo, $slug)
+    {
         $trick = $repo->findOneBySlug($slug);
         $form = $this->createForm(TrickType::class, $trick);
+        $user = $this->getUser();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            foreach ($trick->getImages() as $image) {
+            //if form is valid, use service to persist value
+            if ($trickService->editFormTrick($form, $trick, $user)) {
 
-                //check if it's a new uploaded file
-                if ($image->getFile()) {
-                    $image = $uploadHelper->saveImage($image);
-                    $image->setTrick($trick);
-                    $manager->persist($image);
-                }
+                return $this->redirectToRoute('trick_show', ['slug' => $trick->getSlug()]);
             }
-
-            foreach ($trick->getVideos() as $video) {
-
-                if ($video->getVideoURL()) {
-
-                    if ($videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
-
-                        $video->setVideoURL($videoHelper->extractPlatformFromURL($video->getVideoURL()));
-                        $video->setTrick($trick);
-                        $manager->persist($video);
-
-                    } else {
-
-                        $this->addFlash(
-                            'danger',
-                            "Problème lors de l'enregistrement des videos"
-                        );
-
-                        return $this->redirectToRoute('trick_edit', ['slug' => $trick->getSlug()]);
-
-                    }
-                }
-            }
-
-            $trick->setUserId($this->getUser());
-
-            $uploadedMain = $form->get('file')->getData();
-
-            if ($uploadedMain) {
-                $mainImage = $uploadHelper->saveMainFile($uploadedMain);
-                $trick->setMainImage($mainImage);
-            }
-
-            $trick->setUpdatedAt(new \DateTime());
-            $manager->persist($trick);
-            $manager->flush();
-
-            $this->addFlash(
-                'success',
-                'Votre article a bien été modifié !'
-            );
-
-            return $this->redirectToRoute('trick_show', ['slug' => $trick->getSlug()]);
         }
 
         return $this->render(
@@ -212,21 +87,116 @@ class TrickController extends AbstractController
             [
                 'formTrick' => $form->createView(),
                 'trick' => $trick,
-
             ]
         );
     }
 
     /**
      * @Route("/trick/{slug}", name="trick_show")
+     * @param Request $request
+     * @param TrickService $trickService
+     * @param TrickRepository $repo
+     * @param $slug
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public
-    function show(
-        TrickRepository $repo,
-        Request $request,
-        EntityManagerInterface $manager,
-        $slug
-    ) {
+    public function trickShow(Request $request, TrickService $trickService, TrickRepository $repo, $slug)
+    {
+        $trick = $repo->findOneBySlug($slug);
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $user = $this->getUser();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            //if form is valid, use service to persist value
+            $trickService->createCommentTrick($trick, $user, $comment);
+        }
+
+        return $this->render(
+            'trick/show.html.twig',
+            [
+                'trick' => $trick,
+                'formComment' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/trick/{slug}/delete", name="trick_delete")
+     * @IsGranted("ROLE_USER")
+     * @param TrickRepository $repo
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param $slug
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function delete(TrickRepository $repo, Request $request, EntityManagerInterface $manager, $slug)
+    {
+        $trick = $repo->findOneBySlug($slug);
+        $manager->remove($trick);
+        $manager->flush();
+
+        $this->addFlash('success', "Le trick {$trick->getName()} a été supprimé avec succès !");
+
+        return $this->redirectToRoute('trick');
+    }
+
+    /**
+     * @Route("/delete/image/{id}", name="image_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_USER")
+     * @param Image $image
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return JsonResponse
+     */
+    public function deleteImage(Image $image, Request $request, EntityManagerInterface $manager)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        //delete the image in directory
+        unlink($this->getParameter('uploads-directory').'/'.$image->getImageFilename());
+
+        //remove image from database
+        $manager->remove($image);
+        $manager->flush();
+
+        //json response
+        return new JsonResponse(['success' => 1]);
+    }
+
+
+    /**
+     * @Route("/delete/video/{id}", name="video_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_USER")
+     * @param Video $video
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return JsonResponse
+     */
+    public function deleteVideo(Video $video, Request $request, EntityManagerInterface $manager)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        //remove video from database
+        $manager->remove($video);
+        $manager->flush();
+
+        //json response
+        return new JsonResponse(['success' => 1]);
+    }
+
+    /**
+     * @Route("/trick2/{slug}", name="trick_show2")
+     * @param TrickRepository $repo
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param $slug
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    /**public function show(TrickRepository $repo, Request $request, EntityManagerInterface $manager, $slug)
+    {
         $trick = $repo->findOneBySlug($slug);
         $comment = new Comment();
         $formComment = $this->createForm(CommentType::class, $comment);
@@ -253,69 +223,160 @@ class TrickController extends AbstractController
                 'formComment' => $formComment->createView(),
             ]
         );
-    }
+    }/**
+
+
+
 
     /**
-     * @Route("/trick/{slug}/delete", name="trick_delete")
+     * @Route("/trick/{slug}/edit2", name="trick_edit2")
      * @IsGranted("ROLE_USER")
      */
-    public
-    function delete(
-        TrickRepository $repo,
-        Request $request,
-        EntityManagerInterface $manager,
-        $slug
-    ) {
-        $trick = $repo->findOneBySlug($slug);
-        $manager->remove($trick);
-        $manager->flush();
-
-        $this->addFlash('success', "Le trick {$trick->getName()} a été supprimé avec succès !");
-
-        return $this->redirectToRoute('trick');
-    }
+    /**public
+     * function edit(
+     * Request $request,
+     * EntityManagerInterface $manager,
+     * UploadHelper $uploadHelper,
+     * TrickRepository $repo,
+     * $slug,
+     * VideoHelper $videoHelper
+     * ) {
+     *
+     * $trick = $repo->findOneBySlug($slug);
+     * $form = $this->createForm(TrickType::class, $trick);
+     * $form->handleRequest($request);
+     *
+     * if ($form->isSubmitted() && $form->isValid()) {
+     *
+     * foreach ($trick->getImages() as $image) {
+     *
+     * //check if it's a new uploaded file
+     * if ($image->getFile()) {
+     * $image = $uploadHelper->saveImage($image);
+     * $image->setTrick($trick);
+     * $manager->persist($image);
+     * }
+     * }
+     *
+     * foreach ($trick->getVideos() as $video) {
+     *
+     * if ($video->getVideoURL()) {
+     *
+     * if ($videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
+     *
+     * $video->setVideoURL($videoHelper->extractPlatformFromURL($video->getVideoURL()));
+     * $video->setTrick($trick);
+     * $manager->persist($video);
+     *
+     * } else {
+     *
+     * $this->addFlash(
+     * 'danger',
+     * "Problème lors de l'enregistrement des videos"
+     * );
+     *
+     * return $this->redirectToRoute('trick_edit', ['slug' => $trick->getSlug()]);
+     *
+     * }
+     * }
+     * }
+     *
+     * $trick->setUserId($this->getUser());
+     *
+     * $uploadedMain = $form->get('file')->getData();
+     *
+     * if ($uploadedMain) {
+     * $mainImage = $uploadHelper->saveMainFile($uploadedMain);
+     * $trick->setMainImage($mainImage);
+     * }
+     *
+     * $trick->setUpdatedAt(new \DateTime());
+     * $manager->persist($trick);
+     * $manager->flush();
+     *
+     * $this->addFlash(
+     * 'success',
+     * 'Votre article a bien été modifié !'
+     * );
+     *
+     * return $this->redirectToRoute('trick_show', ['slug' => $trick->getSlug()]);
+     * }
+     *
+     * return $this->render(
+     * 'trick/edit.html.twig',
+     * [
+     * 'formTrick' => $form->createView(),
+     * 'trick' => $trick,
+     *
+     * ]
+     * );
+     * }**/
 
     /**
-     * @Route("/delete/image/{id}", name="image_delete", methods={"DELETE"})
+     * @Route("/trick/new2", name="trick_create2")
      * @IsGranted("ROLE_USER")
      */
-    public
-    function deleteImage(
-        Image $image,
-        Request $request,
-        EntityManagerInterface $manager
-    ) {
-        $data = json_decode($request->getContent(), true);
 
-        //delete the image in directory
-        unlink($this->getParameter('uploads-directory').'/'.$image->getImageFilename());
-
-        //remove image from database
-        $manager->remove($image);
-        $manager->flush();
-
-        //json response
-        return new JsonResponse(['success' => 1]);
-    }
-
-    /**
-     * @Route("/delete/video/{id}", name="video_delete", methods={"DELETE"})
-     * @IsGranted("ROLE_USER")
-     */
-    public
-    function deleteVideo(
-        Video $video,
-        Request $request,
-        EntityManagerInterface $manager
-    ) {
-        $data = json_decode($request->getContent(), true);
-
-        //remove video from database
-        $manager->remove($video);
-        $manager->flush();
-
-        //json response
-        return new JsonResponse(['success' => 1]);
-    }
+    /**public function create(
+     * Request $request,
+     * EntityManagerInterface $manager,
+     * UploadHelper $uploadHelper,
+     * VideoHelper $videoHelper
+     * ) {
+     *
+     * $trick = new Trick();
+     *
+     * $form = $this->createForm(TrickType::class, $trick);
+     * $form->handleRequest($request);
+     *
+     * if ($form->isSubmitted() && $form->isValid()) {
+     *
+     * $trick->setCreatedAt(new \DateTime());
+     * $UploadedMain = $form->get('file')->getData();
+     * $mainImage = $uploadHelper->saveMainFile($UploadedMain);
+     * $trick->setMainImage($mainImage);
+     * $trick->setUserId($this->getUser());
+     *
+     * foreach ($trick->getImages() as $image) {
+     * $image = $uploadHelper->saveImage($image);
+     * $image->setTrick($trick);
+     * }
+     *
+     * foreach ($trick->getVideos() as $video) {
+     *
+     * if ($videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
+     *
+     * $video->setVideoURL($videoHelper->extractPlatformFromURL($video->getVideoURL()));
+     * $video->setTrick($trick);
+     * $manager->persist($video);
+     *
+     * } else {
+     *
+     * $this->addFlash(
+     * 'danger',
+     * "Problème lors de l'enregistrement des videos"
+     * );
+     *
+     * return $this->redirectToRoute('trick_create');
+     * }
+     * }
+     *
+     * $manager->persist($trick);
+     * $manager->flush();
+     *
+     * $this->addFlash(
+     * 'success',
+     * 'Votre article a bien été ajouté !'
+     * );
+     *
+     * return $this->redirectToRoute('trick_show', ['slug' => $trick->getSlug()]);
+     * }
+     *
+     * return $this->render(
+     * 'trick/create.html.twig',
+     * ['formTrick' => $form->createView()]
+     * );
+     *
+     * }**/
 
 }

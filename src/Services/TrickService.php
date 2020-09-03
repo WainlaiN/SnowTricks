@@ -35,22 +35,54 @@ class TrickService
 
     public function createFormTrick($form, $trick, $user)
     {
+        $trick->setCreatedAt(new \DateTime());
+        $UploadedMain = $form->get('file')->getData();
+        $mainImage = $this->uploadHelper->saveMainFile($UploadedMain);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $trick->setMainImage($mainImage);
+        $trick->setUserId($user);
 
-            $trick->setCreatedAt(new \DateTime());
-            $UploadedMain = $form->get('file')->getData();
-            $mainImage = $this->uploadHelper->saveMainFile($UploadedMain);
+        foreach ($trick->getImages() as $image) {
+            $image = $this->uploadHelper->saveImage($image);
+            $image->setTrick($trick);
+        }
 
-            $trick->setMainImage($mainImage);
-            $trick->setUserId($user);
+        foreach ($trick->getVideos() as $video) {
 
-            foreach ($trick->getImages() as $image) {
+            if ($this->videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
+                $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()));
+                $video->setTrick($trick);
+                $this->manager->persist($video);
+
+            } else {
+
+                $this->session->getFlashBag()->add('danger', "Vérifier vos URLs de videos)");
+
+                return false;
+            }
+        }
+
+        $this->manager->persist($trick);
+        $this->manager->flush();
+        $this->session->getFlashBag()->add('success', 'Votre article a bien été ajouté !');
+
+        return true;
+    }
+
+    public function editFormTrick($form, $trick, $user)
+    {
+        foreach ($trick->getImages() as $image) {
+
+            //check if it's a new uploaded file
+            if ($image->getFile()) {
                 $image = $this->uploadHelper->saveImage($image);
                 $image->setTrick($trick);
+                $this->manager->persist($image);
             }
+        }
+        foreach ($trick->getVideos() as $video) {
 
-            foreach ($trick->getVideos() as $video) {
+            if ($video->getVideoURL()) {
 
                 if ($this->videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
 
@@ -60,47 +92,42 @@ class TrickService
 
                 } else {
 
-                    $this->session->getFlashBag()->add(
-                        'danger',
-                        "Problème lors de l'enregistrement des videos"
-                    );
+                    $this->session->getFlashBag()->add('danger', "Vérifier vos URLs de videos");
 
-
-                    return $this->router->generate('trick_create');
-                    //redirectToRoute('trick_create');
+                    return false;
                 }
             }
-
-            $this->manager->persist($trick);
-            $this->manager->flush();
-
-            $this->session->getFlashBag()->add(
-                'success',
-                'Votre article a bien été ajouté !'
-            );
-
-            return ['success', 'Votre article a bien été ajouté !'];
-
         }
 
+        $trick->setUserId($user);
+        $uploadedMain = $form->get('file')->getData();
 
+        if ($uploadedMain) {
+            $mainImage = $this->uploadHelper->saveMainFile($uploadedMain);
+            $trick->setMainImage($mainImage);
+        }
 
+        $trick->setUpdatedAt(new \DateTime());
+        $this->manager->persist($trick);
+        $this->manager->flush();
 
+        $this->session->getFlashBag()->add('success', 'Votre article a bien été modifié !');
+
+        return true;
     }
 
-    public function editFormTrick($form)
+
+    public function createCommentTrick($trick, $user, $comment)
     {
 
+        $comment->setCreatedAt(new \DateTime());
+        $comment->setTrick($trick);
+        $comment->setUser($user);
+        $this->manager->persist($comment);
+        $this->manager->flush();
+
+        $this->session->getFlashBag()->add('success', 'Votre commentaire a bien été enregistré !');
+
+        return true;
     }
-
-    public function createCommentTrick($form)
-    {
-
-    }
-
-    public function deleteFormTrick($form)
-    {
-
-    }
-
 }
