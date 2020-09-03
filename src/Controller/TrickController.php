@@ -25,7 +25,7 @@ use App\Entity\Trick;
 class TrickController extends AbstractController
 {
     /**
-     * @Route("/trick/new", name="trick_create")
+     * @Route("/trick/new2", name="trick_create2")
      * @IsGranted("ROLE_USER")
      * @param Request $request
      * @param EntityManagerInterface $manager
@@ -100,15 +100,25 @@ class TrickController extends AbstractController
 
     }
 
+    /**
+     * @Route("/trick/new", name="trick_create")
+     * @IsGranted("ROLE_USER")
+     */
     public function createTest(EntityManagerInterface $manager, Request $request, TrickService $trickService)
     {
 
-        //$trick = new Trick();
+        $trick = new Trick();
 
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
+        $user= $this->getUser();
 
-        $test = $trickService->createFormTrick($form);
+        $test = $trickService->createFormTrick($form, $trick, $user);
+
+        return $this->render(
+            'trick/create.html.twig',
+            ['formTrick' => $form->createView()]
+        );
 
 
     }

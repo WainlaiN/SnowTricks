@@ -5,9 +5,9 @@ namespace App\Services;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Routing\Router;
 use App\Entity\Trick;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 
 class TrickService
@@ -23,8 +23,8 @@ class TrickService
         EntityManagerInterface $manager,
         UploadHelper $uploadHelper,
         VideoHelper $videoHelper,
-        Router $router,
-        Session $session
+        RouterInterface $router,
+        SessionInterface $session
     ) {
         $this->manager = $manager;
         $this->uploadHelper = $uploadHelper;
@@ -33,43 +33,30 @@ class TrickService
         $this->session = $session;
     }
 
-    public function createFormTrick($form)
+    public function createFormTrick($form, $trick, $user)
     {
-        $trick = new Trick();
-        $user = new User();
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $trick->setCreatedAt(new \DateTime());
             $UploadedMain = $form->get('file')->getData();
-            $mainImage = $uploadHelper->saveMainFile($UploadedMain);
+            $mainImage = $this->uploadHelper->saveMainFile($UploadedMain);
 
             $trick->setMainImage($mainImage);
-            $trick->setUserId($this->getUser());
+            $trick->setUserId($user);
 
             foreach ($trick->getImages() as $image) {
-                $image = $uploadHelper->saveImage($image);
+                $image = $this->uploadHelper->saveImage($image);
                 $image->setTrick($trick);
             }
 
             foreach ($trick->getVideos() as $video) {
 
-                try {
-                    $user
-                        ->setToken($token)
-                        ->setPasswordRequestedAt(new \DateTime());
-                    $entityManager->flush();
-                } catch (\Exception $e) {
-                    $this->addFlash('warning', $e->getMessage());
+                if ($this->videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
 
-                    return $this->redirectToRoute('security_login');
-                }
-
-                if ($videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
-
-                    $video->setVideoURL($videoHelper->extractPlatformFromURL($video->getVideoURL()));
+                    $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()));
                     $video->setTrick($trick);
-                    $manager->persist($video);
+                    $this->manager->persist($video);
 
                 } else {
 
@@ -84,21 +71,22 @@ class TrickService
                 }
             }
 
-            $manager->persist($trick);
-            $manager->flush();
+            $this->manager->persist($trick);
+            $this->manager->flush();
 
-            $this->addFlash(
+            $this->session->getFlashBag()->add(
                 'success',
                 'Votre article a bien été ajouté !'
             );
 
-            return $this->redirectToRoute('trick_show', ['slug' => $trick->getSlug()]);
+            return $this->router->generate('trick_show', ['slug' => $trick->getSlug()]);
+
         }
 
         return $this->render(
-            'trick/create.html.twig',
-            ['formTrick' => $form->createView()]
-        );
+          'trick/create.html.twig',
+          ['formTrick' => $form->createView()]
+          );
 
 
     }
