@@ -126,4 +126,24 @@ class TrickService
 
         return true;
     }
+
+    private function checkVideoURL($video)
+    {
+        if ($video->getVideoURL()) {
+
+            if ($this->videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
+
+                $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()));
+
+                return $video;
+
+            } else {
+
+                $this->session->getFlashBag()->add('danger', "Vérifier vos URLs de videos");
+
+                return false;
+            }
+        }
+
+    }
 }
