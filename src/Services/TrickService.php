@@ -7,9 +7,9 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 
-class TrickService
+class TrickService extends TrickManager
 {
-    private $manager;
+    protected $manager;
     private $uploadHelper;
     private $videoHelper;
     private $router;
@@ -22,6 +22,7 @@ class TrickService
         RouterInterface $router,
         SessionInterface $session
     ) {
+        parent::__construct($manager);
         $this->manager = $manager;
         $this->uploadHelper = $uploadHelper;
         $this->videoHelper = $videoHelper;
@@ -58,8 +59,9 @@ class TrickService
             }
         }
 
-        $this->manager->persist($trick);
-        $this->manager->flush();
+        $this->persistAndFlush($trick);
+        //$this->manager->persist($trick);
+        //$this->manager->flush();
         $this->session->getFlashBag()->add('success', 'Votre article a bien été ajouté !');
 
         return true;
