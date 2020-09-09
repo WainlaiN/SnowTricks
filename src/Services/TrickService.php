@@ -31,10 +31,6 @@ class TrickService
 
     public function createFormTrick($form, $trick, $user)
     {
-        $trick->setCreatedAt(new \DateTime())
-            ->setMainImage($this->uploadHelper->saveMainFile($form->get('file')->getData()))
-            ->setUserId($user);
-
         foreach ($trick->getImages() as $image) {
             $image = $this->uploadHelper->saveImage($image);
             $image->setTrick($trick);
@@ -46,6 +42,9 @@ class TrickService
 
         }
 
+        $trick->setCreatedAt(new \DateTime())
+            ->setMainImage($this->uploadHelper->saveMainFile($form->get('file')->getData()))
+            ->setUserId($user);
         $this->manager->persist($trick);
         $this->manager->flush();
         $this->session->getFlashBag()->add('success', 'Votre article a bien été ajouté !');
