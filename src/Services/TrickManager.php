@@ -16,7 +16,7 @@ class TrickManager
         $this->manager = $manager;
     }
 
-    protected function persistAndFlush($data)
+    public function persistAndFlush($data)
     {
         $this->manager->persist($data);
         $this->manager->flush();

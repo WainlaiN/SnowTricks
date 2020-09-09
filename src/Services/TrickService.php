@@ -7,9 +7,9 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 
-class TrickService extends TrickManager
+class TrickService
 {
-    protected $manager;
+    private $trickManager;
     private $uploadHelper;
     private $videoHelper;
     private $router;
@@ -17,17 +17,21 @@ class TrickService extends TrickManager
 
     public function __construct(
         EntityManagerInterface $manager,
+        //TrickManager $trickManager,
         UploadHelper $uploadHelper,
         VideoHelper $videoHelper,
         RouterInterface $router,
         SessionInterface $session
     ) {
-        parent::__construct($manager);
+        //parent::__construct($manager);
+        //$this->trickManager = $trickManager;
         $this->manager = $manager;
         $this->uploadHelper = $uploadHelper;
         $this->videoHelper = $videoHelper;
         $this->router = $router;
         $this->session = $session;
+
+
     }
 
     public function createFormTrick($form, $trick, $user)
@@ -47,8 +51,8 @@ class TrickService extends TrickManager
         foreach ($trick->getVideos() as $video) {
 
             if ($this->videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
-                $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()));
-                $video->setTrick($trick);
+                $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()))
+                    ->setTrick($trick);
                 $this->manager->persist($video);
 
             } else {
@@ -59,9 +63,9 @@ class TrickService extends TrickManager
             }
         }
 
-        $this->persistAndFlush($trick);
-        //$this->manager->persist($trick);
-        //$this->manager->flush();
+        //$this->trickManager->persistAndFlush($trick);
+        $this->manager->persist($trick);
+        $this->manager->flush();
         $this->session->getFlashBag()->add('success', 'Votre article a bien été ajouté !');
 
         return true;
@@ -84,8 +88,8 @@ class TrickService extends TrickManager
 
                 if ($this->videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
 
-                    $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()));
-                    $video->setTrick($trick);
+                    $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()))
+                        ->setTrick($trick);
                     $this->manager->persist($video);
 
                 } else {
@@ -118,9 +122,9 @@ class TrickService extends TrickManager
     public function createCommentTrick($trick, $user, $comment)
     {
 
-        $comment->setCreatedAt(new \DateTime());
-        $comment->setTrick($trick);
-        $comment->setUser($user);
+        $comment->setCreatedAt(new \DateTime())
+            ->setTrick($trick)
+            ->setUser($user);
         $this->manager->persist($comment);
         $this->manager->flush();
 

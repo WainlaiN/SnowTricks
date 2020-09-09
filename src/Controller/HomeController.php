@@ -8,8 +8,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+
     /**
      * @Route("/", name="trick")
+     *
+     * @param TrickRepository $repo
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(TrickRepository $repo)
     {
@@ -24,8 +28,11 @@ class HomeController extends AbstractController
         );
     }
 
+
     /**
      * @Route("/mentions-legales", name="mentions")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function mentions()
     {
