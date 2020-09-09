@@ -94,7 +94,6 @@ class TrickService
         return true;
     }
 
-
     public function createCommentTrick($trick, $user, $comment)
     {
 
