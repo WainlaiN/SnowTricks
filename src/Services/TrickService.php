@@ -84,20 +84,16 @@ class TrickService
         }
         foreach ($trick->getVideos() as $video) {
 
-            if ($video->getVideoURL()) {
+            if ($this->videoHelper->extractPlatformFromURL($video->getVideoURL())) {
+                $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()))
+                    ->setTrick($trick);
+                $this->manager->persist($video);
 
-                if ($this->videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
+            } else {
 
-                    $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()))
-                        ->setTrick($trick);
-                    $this->manager->persist($video);
+                $this->session->getFlashBag()->add('danger', "Vérifier vos URLs de videos");
 
-                } else {
-
-                    $this->session->getFlashBag()->add('danger', "Vérifier vos URLs de videos");
-
-                    return false;
-                }
+                return false;
             }
         }
 

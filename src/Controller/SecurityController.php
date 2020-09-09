@@ -181,7 +181,6 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $email = $form->get('email')->getData();
-
             $user = $userRepository->findOneBy(['email' => $email]);
 
             if (!$user) {
@@ -232,7 +231,7 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('security_login');
         }
 
-        return $this->render('security/forgottenPassword.html.twig', ['resetForm' => $form->createView()]);
+        return $this->render('security/forgotten_password.html.twig', ['resetForm' => $form->createView()]);
     }
 
 
@@ -286,7 +285,7 @@ class SecurityController extends AbstractController
         }
 
         return $this->render(
-            'security/resetPassword.html.twig',
+            'security/reset_password.html.twig',
             ['resetForm' => $form->createView(), 'resetToken' => $resetToken]
         );
 
