@@ -56,7 +56,6 @@ class TrickController extends AbstractController
 
     }
 
-
     /**
      * @Route("/trick/{slug}/edit", name="trick_edit")
      * @IsGranted("ROLE_USER")
@@ -92,7 +91,6 @@ class TrickController extends AbstractController
         );
     }
 
-
     /**
      * @Route("/trick/{slug}", name="trick_show")
      *
@@ -126,7 +124,6 @@ class TrickController extends AbstractController
         );
     }
 
-
     /**
      * @Route("/trick/{slug}/delete", name="trick_delete")
      * @IsGranted("ROLE_USER")
@@ -147,7 +144,6 @@ class TrickController extends AbstractController
 
         return $this->redirectToRoute('trick');
     }
-
 
     /**
      * @Route("/delete/image/{id}", name="image_delete", methods={"DELETE"})
@@ -172,7 +168,6 @@ class TrickController extends AbstractController
         //json response
         return new JsonResponse(['success' => 1]);
     }
-
 
     /**
      * @Route("/delete/video/{id}", name="video_delete", methods={"DELETE"})
