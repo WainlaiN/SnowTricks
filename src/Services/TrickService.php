@@ -79,14 +79,12 @@ class TrickService
 
         }
 
-        $trick->setUserId($user);
-        $uploadedMain = $form->get('file')->getData();
+        if ($form->get('file')->getData()) {
 
-        if ($uploadedMain) {
-            $mainImage = $this->uploadHelper->saveMainFile($uploadedMain);
-            $trick->setMainImage($mainImage);
+            $trick->setMainImage($this->uploadHelper->saveMainFile($form->get('file')->getData()));
         }
 
+        $trick->setUserId($user);
         $trick->setUpdatedAt(new \DateTime());
         $this->manager->persist($trick);
         $this->manager->flush();
