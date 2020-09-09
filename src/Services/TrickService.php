@@ -50,17 +50,8 @@ class TrickService
 
         foreach ($trick->getVideos() as $video) {
 
-            if ($this->videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
-                $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()))
-                    ->setTrick($trick);
-                $this->manager->persist($video);
+            $this->verifyURL($video, $trick);
 
-            } else {
-
-                $this->session->getFlashBag()->add('danger', "Verifier vos URLs de videos");
-
-                return false;
-            }
         }
 
         //$this->trickManager->persistAndFlush($trick);
@@ -84,17 +75,8 @@ class TrickService
         }
         foreach ($trick->getVideos() as $video) {
 
-            if ($this->videoHelper->extractPlatformFromURL($video->getVideoURL())) {
-                $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()))
-                    ->setTrick($trick);
-                $this->manager->persist($video);
+            $this->verifyURL($video, $trick);
 
-            } else {
-
-                $this->session->getFlashBag()->add('danger', "Vérifier vos URLs de videos");
-
-                return false;
-            }
         }
 
         $trick->setUserId($user);
@@ -129,23 +111,18 @@ class TrickService
         return true;
     }
 
-    private function checkVideoURL($video)
+    private function verifyURL($data, $trick)
     {
-        if ($video->getVideoURL()) {
+        if ($this->videoHelper->extractPlatformFromURL($data->getVideoURL())) {
+            $data->setVideoURL($this->videoHelper->extractPlatformFromURL($data->getVideoURL()))
+                ->setTrick($trick);
+            $this->manager->persist($data);
 
-            if ($this->videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
+        } else {
 
-                $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()));
+            $this->session->getFlashBag()->add('danger', "Vérifier vos URLs de videos");
 
-                return $video;
-
-            } else {
-
-                $this->session->getFlashBag()->add('danger', "Vérifier vos URLs de videos");
-
-                return false;
-            }
+            return false;
         }
-
     }
 }
