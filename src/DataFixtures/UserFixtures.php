@@ -8,6 +8,8 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends BaseFixture
 {
@@ -25,10 +27,12 @@ class UserFixtures extends BaseFixture
     ];
 
     private $uploadHelper;
+    private $encoder;
 
-    public function __construct(UploadHelper $uploadHelper)
+    public function __construct(UploadHelper $uploadHelper, UserPasswordEncoderInterface $encoder)
     {
         $this->uploadHelper = $uploadHelper;
+        $this->encoder = $encoder;
     }
 
     public function loadData(ObjectManager $manager)
@@ -55,6 +59,20 @@ class UserFixtures extends BaseFixture
             //store for usage later as App\Entity\ClassName_#COUNT#
             $this->addReference(User::class.'_'.$i, $user);
         }
+
+        $role_user= new User();
+        $role_user->setEmail("user@gmail.com")
+            ->setUsername("User")
+            ->setPassword($this->encoder->encodePassword($role_user, "user"))
+            ->setRoles();
+        $this->manager->persist($role_user);
+
+        $role_admin= new User();
+        $role_admin->setEmail("admin@gmail.com")
+            ->setUsername("Admin")
+            ->setPassword($this->encoder->encodePassword($role_admin, "admin"))
+            ->setAdminRoles();
+        $this->manager->persist($role_admin);
 
         $manager->flush();
     }
