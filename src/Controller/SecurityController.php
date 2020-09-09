@@ -24,8 +24,8 @@ class SecurityController extends AbstractController
 
 
     /**
-     *
      * @Route("/registration", name="security_registration")
+     *
      * @param Request $request
      * @param EntityManagerInterface $manager
      * @param UserPasswordEncoderInterface $encoder
@@ -91,9 +91,12 @@ class SecurityController extends AbstractController
         );
     }
 
+
     /**
      * @Route("/login", name="security_login")
      *
+     * @param AuthenticationUtils $authenticationUtils
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
@@ -112,16 +115,20 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/logout", name="security_logout")
-     *
      */
     public function logout()
     {
 
     }
 
+
     /**
      * @Route("/activate/{token}", name="security_activate")
      *
+     * @param $token
+     * @param UserRepository $userRepository
+     * @param EntityManagerInterface $manager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function activate($token, UserRepository $userRepository, EntityManagerInterface $manager)
     {
@@ -149,9 +156,16 @@ class SecurityController extends AbstractController
 
     }
 
+
     /**
      * @Route("/forgotten-password", name="security_forgotten_password")
      *
+     * @param Request $request
+     * @param UserRepository $userRepository
+     * @param EntityManagerInterface $manager
+     * @param Mailer $mailer
+     * @param TokenGeneratorInterface $tokenGenerator
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function forgottenPassword(
         Request $request,
@@ -167,7 +181,6 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $email = $form->get('email')->getData();
-
             $user = $userRepository->findOneBy(['email' => $email]);
 
             if (!$user) {
@@ -218,12 +231,19 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('security_login');
         }
 
-        return $this->render('security/forgottenPassword.html.twig', ['resetForm' => $form->createView()]);
+        return $this->render('security/forgotten_password.html.twig', ['resetForm' => $form->createView()]);
     }
+
 
     /**
      * @Route("/reset-pass/{resetToken}/", name="security_reset_password")
      *
+     * @param Request $request
+     * @param $resetToken
+     * @param UserPasswordEncoderInterface $encoder
+     * @param EntityManagerInterface $manager
+     * @param UserRepository $userRepository
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function resetPassword(
         Request $request,
@@ -265,18 +285,10 @@ class SecurityController extends AbstractController
         }
 
         return $this->render(
-            'security/resetPassword.html.twig',
+            'security/reset_password.html.twig',
             ['resetForm' => $form->createView(), 'resetToken' => $resetToken]
         );
 
     }
 
-    /**
-     * @Route("/error404", name="security_404")
-     *
-     */
-    public function error404()
-    {
-        return $this->render('security/404.html.twig');
-    }
 }

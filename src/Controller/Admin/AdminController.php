@@ -15,8 +15,11 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AdminController  extends AbstractController
 {
+
     /**
      * @Route("/", name="admin_index", methods={"GET"})
+     *
+     * @return Response
      */
     public function index(): Response
     {

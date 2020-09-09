@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class TrickService
 {
-    private $manager;
+    private $trickManager;
     private $uploadHelper;
     private $videoHelper;
     private $router;
@@ -17,16 +17,21 @@ class TrickService
 
     public function __construct(
         EntityManagerInterface $manager,
+        //TrickManager $trickManager,
         UploadHelper $uploadHelper,
         VideoHelper $videoHelper,
         RouterInterface $router,
         SessionInterface $session
     ) {
+        //parent::__construct($manager);
+        //$this->trickManager = $trickManager;
         $this->manager = $manager;
         $this->uploadHelper = $uploadHelper;
         $this->videoHelper = $videoHelper;
         $this->router = $router;
         $this->session = $session;
+
+
     }
 
     public function createFormTrick($form, $trick, $user)
@@ -46,18 +51,19 @@ class TrickService
         foreach ($trick->getVideos() as $video) {
 
             if ($this->videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
-                $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()));
-                $video->setTrick($trick);
+                $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()))
+                    ->setTrick($trick);
                 $this->manager->persist($video);
 
             } else {
 
-                $this->session->getFlashBag()->add('danger', "Vérifier vos URLs de videos");
+                $this->session->getFlashBag()->add('danger', "Verifier vos URLs de videos");
 
                 return false;
             }
         }
 
+        //$this->trickManager->persistAndFlush($trick);
         $this->manager->persist($trick);
         $this->manager->flush();
         $this->session->getFlashBag()->add('success', 'Votre article a bien été ajouté !');
@@ -78,20 +84,16 @@ class TrickService
         }
         foreach ($trick->getVideos() as $video) {
 
-            if ($video->getVideoURL()) {
+            if ($this->videoHelper->extractPlatformFromURL($video->getVideoURL())) {
+                $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()))
+                    ->setTrick($trick);
+                $this->manager->persist($video);
 
-                if ($this->videoHelper->extractPlatformFromURL($video->getVideoURL()) !== false) {
+            } else {
 
-                    $video->setVideoURL($this->videoHelper->extractPlatformFromURL($video->getVideoURL()));
-                    $video->setTrick($trick);
-                    $this->manager->persist($video);
+                $this->session->getFlashBag()->add('danger', "Vérifier vos URLs de videos");
 
-                } else {
-
-                    $this->session->getFlashBag()->add('danger', "Vérifier vos URLs de videos");
-
-                    return false;
-                }
+                return false;
             }
         }
 
@@ -116,9 +118,9 @@ class TrickService
     public function createCommentTrick($trick, $user, $comment)
     {
 
-        $comment->setCreatedAt(new \DateTime());
-        $comment->setTrick($trick);
-        $comment->setUser($user);
+        $comment->setCreatedAt(new \DateTime())
+            ->setTrick($trick)
+            ->setUser($user);
         $this->manager->persist($comment);
         $this->manager->flush();
 

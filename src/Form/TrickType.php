@@ -54,7 +54,6 @@ class TrickType extends AbstractType
                 ]
             );
 
-
         $imageConstraints = [
             new Image(
                 [
