@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class TrickService
 {
-    private $trickManager;
     private $uploadHelper;
     private $videoHelper;
     private $router;
@@ -17,31 +16,24 @@ class TrickService
 
     public function __construct(
         EntityManagerInterface $manager,
-        //TrickManager $trickManager,
         UploadHelper $uploadHelper,
         VideoHelper $videoHelper,
         RouterInterface $router,
         SessionInterface $session
     ) {
-        //parent::__construct($manager);
-        //$this->trickManager = $trickManager;
         $this->manager = $manager;
         $this->uploadHelper = $uploadHelper;
         $this->videoHelper = $videoHelper;
         $this->router = $router;
         $this->session = $session;
 
-
     }
 
     public function createFormTrick($form, $trick, $user)
     {
-        $trick->setCreatedAt(new \DateTime());
-        $UploadedMain = $form->get('file')->getData();
-        $mainImage = $this->uploadHelper->saveMainFile($UploadedMain);
-
-        $trick->setMainImage($mainImage);
-        $trick->setUserId($user);
+        $trick->setCreatedAt(new \DateTime())
+            ->setMainImage($this->uploadHelper->saveMainFile($form->get('file')->getData()))
+            ->setUserId($user);
 
         foreach ($trick->getImages() as $image) {
             $image = $this->uploadHelper->saveImage($image);
@@ -54,7 +46,6 @@ class TrickService
 
         }
 
-        //$this->trickManager->persistAndFlush($trick);
         $this->manager->persist($trick);
         $this->manager->flush();
         $this->session->getFlashBag()->add('success', 'Votre article a bien été ajouté !');
@@ -76,7 +67,6 @@ class TrickService
         foreach ($trick->getVideos() as $video) {
 
             $this->verifyURL($video, $trick);
-
         }
 
         if ($form->get('file')->getData()) {
@@ -84,11 +74,10 @@ class TrickService
             $trick->setMainImage($this->uploadHelper->saveMainFile($form->get('file')->getData()));
         }
 
-        $trick->setUserId($user);
-        $trick->setUpdatedAt(new \DateTime());
+        $trick->setUserId($user)
+            ->setUpdatedAt(new \DateTime());
         $this->manager->persist($trick);
         $this->manager->flush();
-
         $this->session->getFlashBag()->add('success', 'Votre article a bien été modifié !');
 
         return true;
