@@ -57,7 +57,7 @@ class TrickService
 
             } else {
 
-                $this->session->getFlashBag()->add('danger', "Vérifier vos URLs de videos");
+                $this->session->getFlashBag()->add('danger', "Verifier vos URLs de videos");
 
                 return false;
             }
