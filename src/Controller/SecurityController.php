@@ -192,20 +192,9 @@ class SecurityController extends AbstractController
                 return $this->redirectToRoute('security_login');
             }
 
-            $token = $tokenGenerator->generateToken();
-
-            try {
-                $user->setResetToken($token);
-                $manager->persist($user);
-                $manager->flush();
-            } catch (\Exception $e) {
-                $this->addFlash(
-                    'danger',
-                    'Une erreur est survenue :' / $e->getMessage()
-                );
-
-                return $this->redirectToRoute('security_login');
-            }
+            $user->setResetToken($tokenGenerator->generateToken());
+            $manager->persist($user);
+            $manager->flush();
 
             $url = $this->generateUrl(
                 'security_reset_password',
@@ -269,10 +258,9 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $user->setResetToken(null);
+            $user->setResetToken(null)
+                ->setPassword($encoder->encodePassword($user, $user->getPassword()));
 
-            $hash = $encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($hash);
             $manager->persist($user);
             $manager->flush();
 
