@@ -184,10 +184,7 @@ class SecurityController extends AbstractController
             $user = $userRepository->findOneBy(['email' => $email]);
 
             if (!$user) {
-                $this->addFlash(
-                    'danger',
-                    'Cet email n\'existe pas!'
-                );
+                $this->addFlash('danger', 'Cet email n\'existe pas!');
 
                 return $this->redirectToRoute('security_login');
             }
