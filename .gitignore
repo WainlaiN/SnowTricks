@@ -28,6 +28,7 @@
 /public/build/
 /public/uploads/images
 /public/uploads/pictures
+!/public/uploads/pictures/unknown_person.jpg
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###

@@ -52,18 +52,14 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $hash = $encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($hash);
-            $user->setActivationToken($tokenGenerator->generateToken());
+            $user->setPassword($hash)
+                ->setActivationToken($tokenGenerator->generateToken())
+                ->setRoles();
 
             if ($pictureFile = $user->getFile()) {
 
-                //$PictureImage = $uploadHelper->savePicture($pictureFile);
-                //$user->setPhoto($PictureImage);
                 $user->setPhoto($uploadHelper->savePicture($user->getFile()));
             }
-
-            //set ROLE_USER to user
-            $user->setRoles();
 
             $manager->persist($user);
             $manager->flush();
