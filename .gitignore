@@ -27,7 +27,7 @@
 /node_modules/
 /public/build/
 /public/uploads/images
-/public/uploads/pictures
+/public/uploads/pictures/*
 !/public/uploads/pictures/unknown_person.jpg
 npm-debug.log
 yarn-error.log
