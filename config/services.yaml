@@ -6,8 +6,6 @@
 
 parameters:
     uploads-directory: '%kernel.project_dir%/public/uploads/images'
-    #unknown-user: '%kernel.project_dir%/public/uploads/pictures/unknown_person.jpg'
-
 
 services:
     # default configuration for services in *this* file
@@ -31,8 +29,6 @@ services:
     App\Services\UploadHelper:
         arguments:
             $uploadPath: '%kernel.project_dir%/public/uploads'
-        #file: '%kernel.project_dir%/public/uploads/pictures/unknown_person.jpg'
-
 
     # add service to send mail using main email
     App\Services\Mailer:
