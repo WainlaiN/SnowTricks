@@ -55,9 +55,12 @@ class SecurityController extends AbstractController
             $user->setPassword($hash);
             $user->setActivationToken($tokenGenerator->generateToken());
 
-            $pictureFile = $user->getFile();
-            $PictureImage = $uploadHelper->savePicture($pictureFile);
-            $user->setPhoto($PictureImage);
+            if ($pictureFile = $user->getFile()) {
+
+                //$PictureImage = $uploadHelper->savePicture($pictureFile);
+                //$user->setPhoto($PictureImage);
+                $user->setPhoto($uploadHelper->savePicture($user->getFile()));
+            }
 
             //set ROLE_USER to user
             $user->setRoles();
