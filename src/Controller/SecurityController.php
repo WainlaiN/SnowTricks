@@ -175,8 +175,7 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $email = $form->get('email')->getData();
-            $user = $userRepository->findOneBy(['email' => $email]);
+            $user = $userRepository->findOneBy(['email' => $form->get('email')->getData()]);
 
             if (!$user) {
                 $this->addFlash('danger', 'Cet email n\'existe pas!');
