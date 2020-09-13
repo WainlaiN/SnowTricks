@@ -73,10 +73,7 @@ class SecurityController extends AbstractController
                 true
             );
 
-            $this->addFlash(
-                'success',
-                'Votre compte a été enregistré, vérifiez vos emails pour l\'activation !'
-            );
+            $this->addFlash('success', 'Votre compte a été enregistré, vérifiez vos emails pour l\'activation !');
 
             return $this->redirectToRoute('security_login');
         }
