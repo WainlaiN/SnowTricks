@@ -86,7 +86,6 @@ class TrickService
 
     public function createCommentTrick($trick, $user, $comment)
     {
-
         $comment->setCreatedAt(new \DateTime())
             ->setTrick($trick)
             ->setUser($user);
