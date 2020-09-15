@@ -14,7 +14,7 @@
         {{ form_errors(formTrick.category) }}
         <a href="{{ path('category_new') }}" class="btn btn-primary m-2">Créer une categorie</a>
         <div class="m-3">
-            <img src="{{ UploadMainPicture ~ trick.mainImage }}" alt="" width="150">
+            <img src="{{ UploadPicture ~ trick.mainImage }}" alt="" width="150">
         </div>
         {{ form_widget(formTrick.file) }}
         {{ form_errors(formTrick.file) }}

@@ -54,7 +54,7 @@ class ImageFixtures extends BaseFixture implements DependentFixtureInterface
         //publish many tricks
         for ($i = 0; $i <= 25; $i++) {
             $image = new Image();
-            $image->setTrick($this->getRandomReference(Trick::class));
+            $image->setTrick($this->getRandomReference( Trick::class));
 
             $imageFile = self::$mainImages[$i];
 
