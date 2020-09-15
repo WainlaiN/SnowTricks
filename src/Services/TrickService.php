@@ -42,7 +42,6 @@ class TrickService
                 return false;
             }
 
-            //$this->verifyURL($video, $trick);
         }
 
         $trick->setCreatedAt(new \DateTime())
