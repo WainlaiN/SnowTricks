@@ -134,7 +134,7 @@ class TrickController extends AbstractController
      * @param $slug
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function trickDelete(TrickRepository $repo, Request $request, EntityManagerInterface $manager, $slug)
+    public function trickDelete(TrickRepository $repo, EntityManagerInterface $manager, $slug)
     {
         $trick = $repo->findOneBySlug($slug);
         $manager->remove($trick);

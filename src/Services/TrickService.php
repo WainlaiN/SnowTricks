@@ -39,7 +39,6 @@ class TrickService
         foreach ($trick->getVideos() as $video) {
 
             $this->verifyURL($video, $trick);
-
         }
 
         $trick->setCreatedAt(new \DateTime())

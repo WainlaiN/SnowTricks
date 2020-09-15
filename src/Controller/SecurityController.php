@@ -203,10 +203,7 @@ class SecurityController extends AbstractController
                 true
             );
 
-            $this->addFlash(
-                'success',
-                'Un email de réinitialisation du mot de passe vous a été envoyé'
-            );
+            $this->addFlash('success', 'Un email de réinitialisation vous a été envoyé');
 
             return $this->redirectToRoute('security_login');
         }
@@ -235,10 +232,7 @@ class SecurityController extends AbstractController
         $user = $userRepository->findOneBy(['resetToken' => $resetToken]);
 
         if (!$user) {
-            $this->addFlash(
-                'danger',
-                'Token inconnu'
-            );
+            $this->addFlash('danger', 'Token inconnu');
 
             return $this->redirectToRoute('security_login');
         }
@@ -255,10 +249,7 @@ class SecurityController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            $this->addFlash(
-                'success',
-                'Mot de passe modifié avec succès !'
-            );
+            $this->addFlash('success', 'Mot de passe modifié avec succès !');
 
             return $this->redirectToRoute('security_login');
         }

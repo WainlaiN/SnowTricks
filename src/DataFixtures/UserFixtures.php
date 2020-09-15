@@ -60,6 +60,7 @@ class UserFixtures extends BaseFixture
             $this->addReference(User::class.'_'.$i, $user);
         }
 
+        //Add user and admin access to test
         $role_user= new User();
         $role_user->setEmail("user@gmail.com")
             ->setUsername("User")
