@@ -31,68 +31,84 @@ class TrickService
 
     public function createFormTrick($form, $trick, $user)
     {
-        foreach ($trick->getImages() as $image) {
-            $image = $this->uploadHelper->saveImage($image);
-            $image->setTrick($trick);
+        if ($form && $trick && $user) {
+
+            foreach ($trick->getImages() as $image) {
+                $image = $this->uploadHelper->saveImage($image);
+                $image->setTrick($trick);
+            }
+
+            foreach ($trick->getVideos() as $video) {
+                if (!$this->verifyURL($video, $trick)) {
+
+                    return false;
+                }
+            }
+
+            $trick->setCreatedAt(new \DateTime())
+                ->setMainImage($this->uploadHelper->saveMainFile($form->get('file')->getData()))
+                ->setUserId($user);
+            $this->manager->persist($trick);
+            $this->manager->flush();
+            $this->session->getFlashBag()->add('success', 'Votre article a bien été ajouté !');
+
+            return true;
         }
 
-        foreach ($trick->getVideos() as $video) {
-
-            $this->verifyURL($video, $trick);
-        }
-
-        $trick->setCreatedAt(new \DateTime())
-            ->setMainImage($this->uploadHelper->saveMainFile($form->get('file')->getData()))
-            ->setUserId($user);
-        $this->manager->persist($trick);
-        $this->manager->flush();
-        $this->session->getFlashBag()->add('success', 'Votre article a bien été ajouté !');
-
-        return true;
+        return false;
     }
 
     public function editFormTrick($form, $trick, $user)
     {
-        foreach ($trick->getImages() as $image) {
+        if ($form && $trick && $user) {
 
-            //check if it's a new uploaded file
-            if ($image->getFile()) {
-                $image = $this->uploadHelper->saveImage($image);
-                $image->setTrick($trick);
-                $this->manager->persist($image);
+            foreach ($trick->getImages() as $image) {
+
+                //check if it's a new uploaded file
+                if ($image->getFile()) {
+                    $image = $this->uploadHelper->saveImage($image);
+                    $image->setTrick($trick);
+                    $this->manager->persist($image);
+                }
             }
+            foreach ($trick->getVideos() as $video) {
+
+                $this->verifyURL($video, $trick);
+            }
+
+            if ($form->get('file')->getData()) {
+
+                $trick->setMainImage($this->uploadHelper->saveMainFile($form->get('file')->getData()));
+            }
+
+            $trick->setUserId($user)
+                ->setUpdatedAt(new \DateTime());
+            $this->manager->persist($trick);
+            $this->manager->flush();
+            $this->session->getFlashBag()->add('success', 'Votre article a bien été modifié !');
+
+            return true;
         }
-        foreach ($trick->getVideos() as $video) {
 
-            $this->verifyURL($video, $trick);
-        }
+        return false;
 
-        if ($form->get('file')->getData()) {
-
-            $trick->setMainImage($this->uploadHelper->saveMainFile($form->get('file')->getData()));
-        }
-
-        $trick->setUserId($user)
-            ->setUpdatedAt(new \DateTime());
-        $this->manager->persist($trick);
-        $this->manager->flush();
-        $this->session->getFlashBag()->add('success', 'Votre article a bien été modifié !');
-
-        return true;
     }
 
     public function createCommentTrick($trick, $user, $comment)
     {
+        if ($trick && $user && $comment) {
+            $comment->setCreatedAt(new \DateTime())
+                ->setTrick($trick)
+                ->setUser($user);
+            $this->manager->persist($comment);
+            $this->manager->flush();
 
-        $comment->setCreatedAt(new \DateTime())
-            ->setTrick($trick)
-            ->setUser($user);
-        $this->manager->persist($comment);
-        $this->manager->flush();
+            $this->session->getFlashBag()->add('success', 'Votre commentaire a bien été enregistré !');
 
-        $this->session->getFlashBag()->add('success', 'Votre commentaire a bien été enregistré !');
+            return true;
+        }
 
-        return true;
+        return false;
     }
 
     private function verifyURL($data, $trick)
@@ -101,6 +117,8 @@ class TrickService
             $data->setVideoURL($this->videoHelper->extractPlatformFromURL($data->getVideoURL()))
                 ->setTrick($trick);
             $this->manager->persist($data);
+
+            return true;
 
         } else {
 
