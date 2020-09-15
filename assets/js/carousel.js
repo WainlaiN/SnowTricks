@@ -1,10 +1,9 @@
 $(document).ready(function () {
-    var currentImg = $('.active');
 
     if ($(window).width() > 992) {
 
         $('.next').on('click', function () {
-
+            var currentImg = $('.active');
             var nextImg = currentImg.next();
             if (nextImg.length) {
                 currentImg.removeClass('active').css('z-index', -10);
@@ -12,7 +11,7 @@ $(document).ready(function () {
             }
         });
         $('.prev').on('click', function () {
-
+            var currentImg = $('.active');
             var prevImg = currentImg.prev();
             if (prevImg.length) {
                 currentImg.removeClass('active').css('z-index', -10);
