@@ -40,7 +40,7 @@ services:
     #        arguments: ['@session', '@router', '@EntityManagerInterface', ]
 
 
-    # add listener to check token activation
+    # add listener to check if token activation is still present
     App\EventListener\LoginListener:
         tags:
             - { name: 'kernel.event_listener', event: 'security.interactive_login' }

@@ -4,11 +4,12 @@ namespace App\Services;
 
 use App\Entity\Image;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 
 class UploadHelper
 {
     const IMAGE_DIR = '/images/';
+    const IMAGE_DIR_MAIN = '/images/main/';
     const PICTURE_DIR = '/pictures/';
     /**
      * @var string
@@ -18,20 +19,11 @@ class UploadHelper
     public function __construct(string $uploadPath)
     {
         $this->uploadPath = $uploadPath;
-
     }
 
     public function saveImage($image): Image
     {
-
-        $destination = $this->uploadPath.self::IMAGE_DIR;
-        $file = $image->getFile();
-        $filename = md5(uniqid()).'.'.$file->guessExtension();
-        $file->move(
-            $destination,
-            $filename
-        );
-
+        $filename = $this->moveFile($this->uploadPath.self::IMAGE_DIR, $image->getFile());
         $image->setImageFilename($filename);
 
         return $image;
@@ -39,24 +31,23 @@ class UploadHelper
 
     public function saveMainFile(File $file)
     {
-        $destination = $this->uploadPath.self::IMAGE_DIR;
-        $filename = md5(uniqid()).'.'.$file->guessExtension();
-        $file->move(
-            $destination,
-            $filename
-        );
-
-        return $filename;
+        return $this->moveFile($this->uploadPath.self::IMAGE_DIR_MAIN, $file);
     }
 
     public function savePicture(File $file)
     {
-        $destination = $this->uploadPath.self::PICTURE_DIR;
-        $filename = md5(uniqid()).'.'.$file->guessExtension();
-        $file->move(
-            $destination,
-            $filename
-        );
+        return $this->moveFile($this->uploadPath.self::PICTURE_DIR, $file);
+    }
+
+    private function renameFile($file)
+    {
+        return md5(uniqid()).'.'.$file->guessExtension();
+    }
+
+    private function moveFile($destination, File $file)
+    {
+        $filename = $this->renameFile($file);
+        $file->move($destination, $filename);
 
         return $filename;
     }
