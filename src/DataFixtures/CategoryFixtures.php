@@ -8,9 +8,8 @@ use Doctrine\Persistence\ObjectManager;
 
 class CategoryFixtures extends BaseFixture
 {
-    //private $categories = [];
-    private $categoriesDemoName = ['Grabs', 'Rotations', 'Flips', 'Slides', 'One foot'];
-    private $categoriesDemoDescription = [
+    private static $categoriesDemoName = ['Grabs', 'Rotations', 'Flips', 'Slides', 'One foot'];
+    private static $categoriesDemoDescription = [
         'Un grab consiste à attraper la planche avec la main pendant le saut',
         'On désigne par le mot rotation uniquement des rotations horizontales',
         'Un flip est une rotation verticale',
@@ -24,8 +23,8 @@ class CategoryFixtures extends BaseFixture
         //publish many categories
         for ($i = 0; $i <= 4; $i++) {
             $category = new Category();
-            $category->setTitle($this->categoriesDemoName[$i]);
-            $category->setDescription($this->categoriesDemoDescription[$i]);
+            $category->setTitle(self::$categoriesDemoName[$i]);
+            $category->setDescription(self::$categoriesDemoDescription[$i]);
             $this->manager->persist($category);
             //store for usage later as App\Entity\ClassName_#COUNT#
             $this->addReference(Category::class.'_'.$i, $category);
