@@ -41,7 +41,6 @@ class TrickService
 
                 return false;
             }
-
         }
 
         $trick->setCreatedAt(new \DateTime())
@@ -67,7 +66,10 @@ class TrickService
         }
         foreach ($trick->getVideos() as $video) {
 
-            $this->verifyURL($video, $trick);
+            if (!$this->verifyURL($video, $trick)) {
+
+                return false;
+            }
         }
 
         if ($form->get('file')->getData()) {
@@ -94,7 +96,6 @@ class TrickService
 
         $this->session->getFlashBag()->add('success', 'Votre commentaire a bien été enregistré !');
 
-        return true;
     }
 
     private function verifyURL($data, $trick)

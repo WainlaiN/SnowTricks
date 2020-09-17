@@ -40,7 +40,9 @@ class ImageFixtures extends BaseFixture implements DependentFixtureInterface
         '25.jpg',
         '26.jpg',
     ];
-
+    /*
+     *
+     */
     private $uploadHelper;
 
     public function __construct(UploadHelper $uploadHelper)

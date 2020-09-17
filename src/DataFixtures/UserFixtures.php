@@ -24,7 +24,10 @@ class UserFixtures extends BaseFixture
         '10.jpg',
     ];
 
+    /** @var UploadHelper */
     private $uploadHelper;
+
+    /** @var UserPasswordEncoderInterface */
     private $encoder;
 
     public function __construct(UploadHelper $uploadHelper, UserPasswordEncoderInterface $encoder)

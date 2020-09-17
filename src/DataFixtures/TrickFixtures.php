@@ -52,6 +52,7 @@ class TrickFixtures extends BaseFixture implements DependentFixtureInterface
         'Saisie du carre avant et carre arrière avec chaque main (comme tenir un volant de voiture)',
     ];
 
+    /** @var UploadHelper */
     private $uploadHelper;
 
     public function __construct(UploadHelper $uploadHelper)
