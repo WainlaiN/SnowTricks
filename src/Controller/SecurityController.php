@@ -21,6 +21,16 @@ use App\Services\Mailer;
 
 class SecurityController extends AbstractController
 {
+    private $uploadHelper;
+    private $mailer;
+    private $manager;
+
+    public function __construct(UploadHelper $uploadHelper, Mailer $mailer, EntityManagerInterface $manager)
+    {
+        $this->uploadHelper = $uploadHelper;
+        $this->mailer = $mailer;
+        $this->manager = $manager;
+    }
 
 
     /**
@@ -36,10 +46,8 @@ class SecurityController extends AbstractController
      */
     public function registration(
         Request $request,
-        EntityManagerInterface $manager,
+        //EntityManagerInterface $manager,
         UserPasswordEncoderInterface $encoder,
-        UploadHelper $uploadHelper,
-        Mailer $mailer,
         TokenGeneratorInterface $tokenGenerator
     ) {
 
@@ -57,13 +65,13 @@ class SecurityController extends AbstractController
 
             if ($user->getFile()) {
 
-                $user->setPhoto($uploadHelper->savePicture($user->getFile()));
+                $user->setPhoto($this->uploadHelper->savePicture($user->getFile()));
             }
 
-            $manager->persist($user);
-            $manager->flush();
+            $this->manager->persist($user);
+            $this->manager->flush();
 
-            $mailer->setMessage(
+            $this->mailer->setMessage(
                 'Activation de votre compte!',
                 $user->getEmail(),
                 $this->renderView(
@@ -125,7 +133,7 @@ class SecurityController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function activate($token, UserRepository $userRepository, EntityManagerInterface $manager)
+    public function activate($token, UserRepository $userRepository)
     {
         $user = $userRepository->findOneBy(['activationToken' => $token]);
 
@@ -139,8 +147,8 @@ class SecurityController extends AbstractController
         }
 
         $user->setActivationToken(null);
-        $manager->persist($user);
-        $manager->flush();
+        $this->manager->persist($user);
+        $this->manager->flush();
 
         $this->addFlash(
             'success',
@@ -165,8 +173,8 @@ class SecurityController extends AbstractController
     public function forgottenPassword(
         Request $request,
         UserRepository $userRepository,
-        EntityManagerInterface $manager,
-        Mailer $mailer,
+        //EntityManagerInterface $manager,
+        //Mailer $mailer,
         TokenGeneratorInterface $tokenGenerator
     ) {
         $form = $this->createForm(ForgotPasswordType::class);
@@ -183,9 +191,10 @@ class SecurityController extends AbstractController
                 return $this->redirectToRoute('security_login');
             }
 
-            $user->setResetToken($tokenGenerator->generateToken());
-            $manager->persist($user);
-            $manager->flush();
+            $token = $tokenGenerator->generateToken();
+            $user->setResetToken($token);
+            $this->manager->persist($user);
+            $this->manager->flush();
 
             $url = $this->generateUrl(
                 'security_reset_password',
@@ -226,7 +235,7 @@ class SecurityController extends AbstractController
         Request $request,
         $resetToken,
         UserPasswordEncoderInterface $encoder,
-        EntityManagerInterface $manager,
+        //EntityManagerInterface $manager,
         UserRepository $userRepository
     ) {
         $user = $userRepository->findOneBy(['resetToken' => $resetToken]);
@@ -246,8 +255,8 @@ class SecurityController extends AbstractController
             $user->setResetToken(null)
                 ->setPassword($encoder->encodePassword($user, $user->getPassword()));
 
-            $manager->persist($user);
-            $manager->flush();
+            $this->manager->persist($user);
+            $this->manager->flush();
 
             $this->addFlash('success', 'Mot de passe modifié avec succès !');
 
