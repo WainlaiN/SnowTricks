@@ -21,28 +21,39 @@ use App\Services\Mailer;
 
 class SecurityController extends AbstractController
 {
+    /**
+     * @var UploadHelper
+     */
+    private $uploadHelper;
+    /**
+     * @var Mailer
+     */
+    private $mailer;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $manager;
 
+    public function __construct(UploadHelper $uploadHelper, Mailer $mailer, EntityManagerInterface $manager)
+    {
+        $this->uploadHelper = $uploadHelper;
+        $this->mailer = $mailer;
+        $this->manager = $manager;
+    }
 
     /**
      * @Route("/registration", name="security_registration")
      *
      * @param Request $request
-     * @param EntityManagerInterface $manager
      * @param UserPasswordEncoderInterface $encoder
-     * @param UploadHelper $uploadHelper
-     * @param Mailer $mailer
      * @param TokenGeneratorInterface $tokenGenerator
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function registration(
         Request $request,
-        EntityManagerInterface $manager,
         UserPasswordEncoderInterface $encoder,
-        UploadHelper $uploadHelper,
-        Mailer $mailer,
         TokenGeneratorInterface $tokenGenerator
     ) {
-
         $user = new User();
 
         $form = $this->createForm(RegistrationType::class, $user);
@@ -57,13 +68,13 @@ class SecurityController extends AbstractController
 
             if ($user->getFile()) {
 
-                $user->setPhoto($uploadHelper->savePicture($user->getFile()));
+                $user->setPhoto($this->uploadHelper->savePicture($user->getFile()));
             }
 
-            $manager->persist($user);
-            $manager->flush();
+            $this->manager->persist($user);
+            $this->manager->flush();
 
-            $mailer->setMessage(
+            $this->mailer->setMessage(
                 'Activation de votre compte!',
                 $user->getEmail(),
                 $this->renderView(
@@ -95,7 +106,6 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
-
         $lastUsername = $authenticationUtils->getLastUsername();
         $error = $authenticationUtils->getLastAuthenticationError();
 
@@ -122,10 +132,9 @@ class SecurityController extends AbstractController
      *
      * @param $token
      * @param UserRepository $userRepository
-     * @param EntityManagerInterface $manager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function activate($token, UserRepository $userRepository, EntityManagerInterface $manager)
+    public function activate($token, UserRepository $userRepository)
     {
         $user = $userRepository->findOneBy(['activationToken' => $token]);
 
@@ -139,8 +148,8 @@ class SecurityController extends AbstractController
         }
 
         $user->setActivationToken(null);
-        $manager->persist($user);
-        $manager->flush();
+        $this->manager->persist($user);
+        $this->manager->flush();
 
         $this->addFlash(
             'success',
@@ -157,16 +166,12 @@ class SecurityController extends AbstractController
      *
      * @param Request $request
      * @param UserRepository $userRepository
-     * @param EntityManagerInterface $manager
-     * @param Mailer $mailer
      * @param TokenGeneratorInterface $tokenGenerator
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function forgottenPassword(
         Request $request,
         UserRepository $userRepository,
-        EntityManagerInterface $manager,
-        Mailer $mailer,
         TokenGeneratorInterface $tokenGenerator
     ) {
         $form = $this->createForm(ForgotPasswordType::class);
@@ -183,9 +188,10 @@ class SecurityController extends AbstractController
                 return $this->redirectToRoute('security_login');
             }
 
-            $user->setResetToken($tokenGenerator->generateToken());
-            $manager->persist($user);
-            $manager->flush();
+            $token = $tokenGenerator->generateToken();
+            $user->setResetToken($token);
+            $this->manager->persist($user);
+            $this->manager->flush();
 
             $url = $this->generateUrl(
                 'security_reset_password',
@@ -193,7 +199,7 @@ class SecurityController extends AbstractController
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
 
-            $mailer->setMessage(
+            $this->mailer->setMessage(
                 'Reinitialisation de votre mot de passe',
                 $user->getEmail(),
                 $this->renderView(
@@ -218,7 +224,6 @@ class SecurityController extends AbstractController
      * @param Request $request
      * @param $resetToken
      * @param UserPasswordEncoderInterface $encoder
-     * @param EntityManagerInterface $manager
      * @param UserRepository $userRepository
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -226,7 +231,6 @@ class SecurityController extends AbstractController
         Request $request,
         $resetToken,
         UserPasswordEncoderInterface $encoder,
-        EntityManagerInterface $manager,
         UserRepository $userRepository
     ) {
         $user = $userRepository->findOneBy(['resetToken' => $resetToken]);
@@ -246,8 +250,8 @@ class SecurityController extends AbstractController
             $user->setResetToken(null)
                 ->setPassword($encoder->encodePassword($user, $user->getPassword()));
 
-            $manager->persist($user);
-            $manager->flush();
+            $this->manager->persist($user);
+            $this->manager->flush();
 
             $this->addFlash('success', 'Mot de passe modifié avec succès !');
 

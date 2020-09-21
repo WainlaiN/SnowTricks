@@ -9,9 +9,21 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class TrickService
 {
+    /**
+     * @var UploadHelper
+     */
     private $uploadHelper;
+    /**
+     * @var VideoHelper
+     */
     private $videoHelper;
+    /**
+     * @var RouterInterface
+     */
     private $router;
+    /**
+     * @var SessionInterface
+     */
     private $session;
 
     public function __construct(
