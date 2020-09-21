@@ -41,7 +41,6 @@ class SecurityController extends AbstractController
         $this->manager = $manager;
     }
 
-
     /**
      * @Route("/registration", name="security_registration")
      *
@@ -55,7 +54,6 @@ class SecurityController extends AbstractController
         UserPasswordEncoderInterface $encoder,
         TokenGeneratorInterface $tokenGenerator
     ) {
-
         $user = new User();
 
         $form = $this->createForm(RegistrationType::class, $user);
@@ -108,7 +106,6 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
-
         $lastUsername = $authenticationUtils->getLastUsername();
         $error = $authenticationUtils->getLastAuthenticationError();
 
@@ -169,16 +166,12 @@ class SecurityController extends AbstractController
      *
      * @param Request $request
      * @param UserRepository $userRepository
-     * @param EntityManagerInterface $manager
-     * @param Mailer $mailer
      * @param TokenGeneratorInterface $tokenGenerator
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function forgottenPassword(
         Request $request,
         UserRepository $userRepository,
-        //EntityManagerInterface $manager,
-        //Mailer $mailer,
         TokenGeneratorInterface $tokenGenerator
     ) {
         $form = $this->createForm(ForgotPasswordType::class);
@@ -206,7 +199,7 @@ class SecurityController extends AbstractController
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
 
-            $mailer->setMessage(
+            $this->mailer->setMessage(
                 'Reinitialisation de votre mot de passe',
                 $user->getEmail(),
                 $this->renderView(
@@ -231,7 +224,6 @@ class SecurityController extends AbstractController
      * @param Request $request
      * @param $resetToken
      * @param UserPasswordEncoderInterface $encoder
-     * @param EntityManagerInterface $manager
      * @param UserRepository $userRepository
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -239,7 +231,6 @@ class SecurityController extends AbstractController
         Request $request,
         $resetToken,
         UserPasswordEncoderInterface $encoder,
-        //EntityManagerInterface $manager,
         UserRepository $userRepository
     ) {
         $user = $userRepository->findOneBy(['resetToken' => $resetToken]);
