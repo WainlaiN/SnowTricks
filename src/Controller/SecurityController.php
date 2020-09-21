@@ -21,8 +21,17 @@ use App\Services\Mailer;
 
 class SecurityController extends AbstractController
 {
+    /**
+     * @var UploadHelper
+     */
     private $uploadHelper;
+    /**
+     * @var Mailer
+     */
     private $mailer;
+    /**
+     * @var EntityManagerInterface
+     */
     private $manager;
 
     public function __construct(UploadHelper $uploadHelper, Mailer $mailer, EntityManagerInterface $manager)
@@ -37,16 +46,12 @@ class SecurityController extends AbstractController
      * @Route("/registration", name="security_registration")
      *
      * @param Request $request
-     * @param EntityManagerInterface $manager
      * @param UserPasswordEncoderInterface $encoder
-     * @param UploadHelper $uploadHelper
-     * @param Mailer $mailer
      * @param TokenGeneratorInterface $tokenGenerator
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function registration(
         Request $request,
-        //EntityManagerInterface $manager,
         UserPasswordEncoderInterface $encoder,
         TokenGeneratorInterface $tokenGenerator
     ) {
@@ -130,7 +135,6 @@ class SecurityController extends AbstractController
      *
      * @param $token
      * @param UserRepository $userRepository
-     * @param EntityManagerInterface $manager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function activate($token, UserRepository $userRepository)
