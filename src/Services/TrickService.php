@@ -67,40 +67,35 @@ class TrickService
 
     public function editFormTrick($form, $trick, $user)
     {
-        if ($form && $trick && $user) {
-            foreach ($trick->getImages() as $image) {
+        foreach ($trick->getImages() as $image) {
 
-                //check if it's a new uploaded file
-                if ($image->getFile()) {
-                    $image = $this->uploadHelper->saveImage($image);
-                    $image->setTrick($trick);
-                    $this->manager->persist($image);
-                }
+            //check if it's a new uploaded file
+            if ($image->getFile()) {
+                $image = $this->uploadHelper->saveImage($image);
+                $image->setTrick($trick);
+                $this->manager->persist($image);
             }
-            foreach ($trick->getVideos() as $video) {
+        }
+        foreach ($trick->getVideos() as $video) {
 
-                if (!$this->verifyURL($video, $trick)) {
+            if (!$this->verifyURL($video, $trick)) {
 
-                    return false;
-                }
+                return false;
             }
-
-            if ($form->get('file')->getData()) {
-
-                $trick->setMainImage($this->uploadHelper->saveMainFile($form->get('file')->getData()));
-            }
-
-            $trick->setUserId($user)
-                ->setUpdatedAt(new \DateTime());
-            $this->manager->persist($trick);
-            $this->manager->flush();
-            $this->session->getFlashBag()->add('success', 'Votre article a bien été modifié !');
-
-            return true;
-
         }
 
-        return false;
+        if ($form->get('file')->getData()) {
+
+            $trick->setMainImage($this->uploadHelper->saveMainFile($form->get('file')->getData()));
+        }
+
+        $trick->setUserId($user)
+            ->setUpdatedAt(new \DateTime());
+        $this->manager->persist($trick);
+        $this->manager->flush();
+        $this->session->getFlashBag()->add('success', 'Votre article a bien été modifié !');
+
+        return true;
     }
 
     public function createCommentTrick($trick, $user, $comment)
