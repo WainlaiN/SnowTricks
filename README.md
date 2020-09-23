@@ -6,17 +6,34 @@
 
 Création d'un site communautaire de partage de figures de snowboard via le framework Symfony.
 
+## Description
+
+Vous êtes chargé de développer le site répondant aux besoins de Jimmy.
+Vous devez ainsi implémenter les fonctionnalités suivantes : 
+```
+* un annuaire des figures de snowboard, vous pouvez vous inspirer de la liste des figures sur Wikipédia.
+  Contentez-vous d'intégrer 10 figures, le reste sera saisi par les internautes ;
+* la gestion des figures (création, modification, consultation) ;
+* un espace de discussion commun à toutes les figures.
+```
+Pour implémenter ces fonctionnalités, vous devez créer les pages suivantes :
+```
+* la page d’accueil où figurera la liste des figures ; 
+* la page de création d'une nouvelle figure ;
+* la page de modification d'une figure ;
+* la page de présentation d’une figure (contenant l’espace de discussion commun autour d’une figure).
+```
 
 ## Installation
 1. Clonez ou téléchargez le repository GitHub dans le dossier voulu :
 ```
     git clone https://github.com/WainlaiN/SnowTricks
 ```
-2. Configurez vos variables d'environnement tel que la connexion à la base de données /serveur SMTP/adresse mail dans le fichier `.env.local` (faire une copie du .env) :
+2. Configurez vos variables d'environnement tel que la connexion à la base de données/serveur SMTP/adresse mail dans le fichier `.env.local` (faire une copie du .env.test) :
 ```
-DATABASE_URL=mysql://LOGIN:PASSWORD@127.0.0.1:3306/Snowtricks?serverVersion=5.7
+    DATABASE_URL=mysql://DB_LOGIN:DB_PASSWORD@127.0.0.1:3306/Snowtricks?serverVersion=5.7
 
-MAILER_DSN=gmail://email:password@default
+    MAILER_DSN=gmail://email:password@default
 ```
 3. Téléchargez et installez les dépendances back-end du projet avec [Composer](https://getcomposer.org/download/) :
 ```
@@ -49,3 +66,9 @@ MAILER_DSN=gmail://email:password@default
     php bin/console server:run
 ```
 9. Le projet est maintenant installé, vous pouvez tester l'application.
+
+## Librairies utilisées
+
+## Auteur
+
+**Dupriez Nicolas** - Étudiant à Openclassrooms Parcours suivi Développeur d'application PHP/Symfony
