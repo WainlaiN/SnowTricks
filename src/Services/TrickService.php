@@ -67,22 +67,28 @@ class TrickService
 
     public function editFormTrick($form, $trick, $user)
     {
-        foreach ($trick->getImages() as $image) {
+        if ($form && $trick && $user) {
+            foreach ($trick->getImages() as $image) {
 
-            //check if it's a new uploaded file
-            if ($image->getFile()) {
-                $image = $this->uploadHelper->saveImage($image);
-                $image->setTrick($trick);
-                $this->manager->persist($image);
+                //check if it's a new uploaded file
+                if ($image->getFile()) {
+                    $image = $this->uploadHelper->saveImage($image);
+                    $image->setTrick($trick);
+                    $this->manager->persist($image);
+                }
             }
-        }
-        foreach ($trick->getVideos() as $video) {
+            foreach ($trick->getVideos() as $video) {
 
-            if (!$this->verifyURL($video, $trick)) {
+                if (!$this->verifyURL($video, $trick)) {
 
-                return false;
+                    return false;
+                }
             }
+
+            return true;
         }
+
+        return false;
 
         if ($form->get('file')->getData()) {
 
