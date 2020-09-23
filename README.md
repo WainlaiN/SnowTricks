@@ -24,6 +24,15 @@ Pour implémenter ces fonctionnalités, vous devez créer les pages suivantes :
 * la page de présentation d’une figure (contenant l’espace de discussion commun autour d’une figure).
 ```
 
+## Prérequis
+
+Choisissez votre serveur en fonction de votre système d'exploitation:
+
+    - Windows : WAMP (http://www.wampserver.com/)
+    - MAC : MAMP (https://www.mamp.info/en/mamp/)
+    - Linux : LAMP (https://doc.ubuntu-fr.org/lamp)
+    - XAMP (https://www.apachefriends.org/fr/index.html)
+
 ## Installation
 1. Clonez ou téléchargez le repository GitHub dans le dossier voulu :
 ```
@@ -65,9 +74,10 @@ Pour implémenter ces fonctionnalités, vous devez créer les pages suivantes :
 ```
     php bin/console server:run
 ```
-9. Le projet est maintenant installé, vous pouvez tester l'application.
-
-## Librairies utilisées
+9. Le projet est maintenant installé, vous pouvez tester l'application sur cette URL:
+```
+    http://127.0.0.1:8000
+```
 
 ## Auteur
 
