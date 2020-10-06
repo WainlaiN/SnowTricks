@@ -10,9 +10,11 @@ use App\Form\CommentType;
 use App\Form\TrickType;
 
 use Doctrine\ORM\EntityManagerInterface;
+use http\Client\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -122,16 +124,16 @@ class TrickController extends AbstractController
             }
 
 
-        return $this->render(
-            'trick/show.html.twig',
-            [
-                'trick' => $trick,
-                'formComment' => $form->createView(),
-            ]
-        );
+            return $this->render(
+                'trick/show.html.twig',
+                [
+                    'trick' => $trick,
+                    'formComment' => $form->createView(),
+                ]
+            );
         }
 
-        return new HttpException(500);
+        throw $this->createNotFoundException('Le trick n\'existe pas');
     }
 
     /**
