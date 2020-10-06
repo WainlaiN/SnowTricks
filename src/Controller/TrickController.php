@@ -113,6 +113,9 @@ class TrickController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $trickService->createCommentTrick($trick, $user, $comment);
+
+            return $this->redirectToRoute('trick_show',
+            ['slug' => $trick->getSlug()]);
         }
 
         return $this->render(
