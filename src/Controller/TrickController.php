@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Services\TrickService;
 
@@ -102,21 +103,24 @@ class TrickController extends AbstractController
      */
     public function trickShow(Request $request, TrickService $trickService, TrickRepository $repo, $slug)
     {
-        $trick = $repo->findOneBySlug($slug);
-        $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
-        $user = $this->getUser();
+        if ($trick = $repo->findOneBySlug($slug)) {
+            $comment = new Comment();
+            $form = $this->createForm(CommentType::class, $comment);
+            $user = $this->getUser();
 
-        $form->handleRequest($request);
+            $form->handleRequest($request);
 
-        //if form is valid, use service to persist value
-        if ($form->isSubmitted() && $form->isValid()) {
+            //if form is valid, use service to persist value
+            if ($form->isSubmitted() && $form->isValid()) {
 
-            $trickService->createCommentTrick($trick, $user, $comment);
+                $trickService->createCommentTrick($trick, $user, $comment);
 
-            return $this->redirectToRoute('trick_show',
-            ['slug' => $trick->getSlug()]);
-        }
+                return $this->redirectToRoute(
+                    'trick_show',
+                    ['slug' => $trick->getSlug()]
+                );
+            }
+
 
         return $this->render(
             'trick/show.html.twig',
@@ -125,6 +129,9 @@ class TrickController extends AbstractController
                 'formComment' => $form->createView(),
             ]
         );
+        }
+
+        return new HttpException(500);
     }
 
     /**
