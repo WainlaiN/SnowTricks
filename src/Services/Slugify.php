@@ -2,8 +2,18 @@
 
 namespace App\Services;
 
+/**
+ * Class Slugify
+ *
+ * @package App\Services
+ */
 class Slugify
 {
+    /**
+     * @param $str
+     * @param string $delimiter
+     * @return string
+     */
     public static function slugify($str, $delimiter = '-')
     {
         $accents = '/&([A-Za-z]{1,2})(grave|acute|circ|cedil|uml|lig);/';

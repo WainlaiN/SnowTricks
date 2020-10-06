@@ -19,8 +19,17 @@ use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\NotNull;
 
 
+/**
+ * Class TrickType
+ *
+ * @package App\Form
+ */
 class TrickType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $trick = $options['data'] ?? null;
@@ -106,6 +115,9 @@ class TrickType extends AbstractType
 
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(

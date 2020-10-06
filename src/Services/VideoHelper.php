@@ -4,11 +4,20 @@
 namespace App\Services;
 
 
+/**
+ * Class VideoHelper
+ *
+ * @package App\Services
+ */
 class VideoHelper
 {
     const YOUTUBE_URL = "https://www.youtube.com/embed/";
     const DAILYMOTION_URL = "https://www.dailymotion.com/embed/video/";
 
+    /**
+     * @param $url
+     * @return false|string
+     */
     public function extractPlatformFromURL($url)
     {
         if (strpos($url, "youtu") !== false) {
@@ -26,6 +35,10 @@ class VideoHelper
 
     }
 
+    /**
+     * @param $url
+     * @return string
+     */
     private function encodeYoutube($url)
     {
         if (strpos($url, "v=") !== false) {
@@ -45,6 +58,10 @@ class VideoHelper
         return self::YOUTUBE_URL.$id;
     }
 
+    /**
+     * @param $url
+     * @return string
+     */
     private function encodeDailymotion($url)
     {
         if (strpos($url, "video/")) {

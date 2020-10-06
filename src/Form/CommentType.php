@@ -15,8 +15,17 @@ use App\Entity\User;
 use App\Entity\Comment;
 
 
+/**
+ * Class CommentType
+ *
+ * @package App\Form
+ */
 class CommentType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -35,6 +44,9 @@ class CommentType extends AbstractType
                 SubmitType::class);
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(

@@ -7,6 +7,11 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 
+/**
+ * Class TrickService
+ *
+ * @package App\Services
+ */
 class TrickService
 {
     /**
@@ -26,6 +31,15 @@ class TrickService
      */
     private $session;
 
+    /**
+     * TrickService constructor.
+     *
+     * @param EntityManagerInterface $manager
+     * @param UploadHelper $uploadHelper
+     * @param VideoHelper $videoHelper
+     * @param RouterInterface $router
+     * @param SessionInterface $session
+     */
     public function __construct(
         EntityManagerInterface $manager,
         UploadHelper $uploadHelper,
@@ -41,6 +55,12 @@ class TrickService
 
     }
 
+    /**
+     * @param $form
+     * @param $trick
+     * @param $user
+     * @return bool
+     */
     public function createFormTrick($form, $trick, $user)
     {
         foreach ($trick->getImages() as $image) {
@@ -65,6 +85,12 @@ class TrickService
         return true;
     }
 
+    /**
+     * @param $form
+     * @param $trick
+     * @param $user
+     * @return bool
+     */
     public function editFormTrick($form, $trick, $user)
     {
         foreach ($trick->getImages() as $image) {
@@ -98,6 +124,11 @@ class TrickService
         return true;
     }
 
+    /**
+     * @param $trick
+     * @param $user
+     * @param $comment
+     */
     public function createCommentTrick($trick, $user, $comment)
     {
         $comment->setCreatedAt(new \DateTime())
@@ -110,6 +141,11 @@ class TrickService
 
     }
 
+    /**
+     * @param $data
+     * @param $trick
+     * @return bool
+     */
     private function verifyURL($data, $trick)
     {
         if ($this->videoHelper->extractPlatformFromURL($data->getVideoURL())) {

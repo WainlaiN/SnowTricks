@@ -34,6 +34,13 @@ class SecurityController extends AbstractController
      */
     private $manager;
 
+    /**
+     * SecurityController constructor.
+     *
+     * @param UploadHelper $uploadHelper
+     * @param Mailer $mailer
+     * @param EntityManagerInterface $manager
+     */
     public function __construct(UploadHelper $uploadHelper, Mailer $mailer, EntityManagerInterface $manager)
     {
         $this->uploadHelper = $uploadHelper;
